@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://csf3ipv0mkjx6"]
+
+[ext_resource type="Texture2D" uid="uid://bloqc01g2sy4d" path="res://Levels/Jtad/Countdown/1.png" id="1_122yn"]
+[ext_resource type="Texture2D" uid="uid://blxwowxcogjx7" path="res://Levels/Jtad/Countdown/2.png" id="2_0odqw"]
+[ext_resource type="Texture2D" uid="uid://djveriklja378" path="res://Levels/Jtad/Countdown/3.png" id="3_dfook"]
+[ext_resource type="Texture2D" uid="uid://gq72r4o4vweu" path="res://Levels/Jtad/Countdown/4.png" id="4_s7sc5"]
+[ext_resource type="Texture2D" uid="uid://b5mrdalmy526g" path="res://Levels/Jtad/Countdown/5.png" id="5_6vcgd"]
+[ext_resource type="Texture2D" uid="uid://drut2kod2d5jp" path="res://Levels/Jtad/Countdown/6.png" id="6_n22si"]
+[ext_resource type="Texture2D" uid="uid://cs1vrob7lrpja" path="res://Levels/Jtad/Countdown/7.png" id="7_fladj"]
+[ext_resource type="Texture2D" uid="uid://3edshicmca14" path="res://Levels/Jtad/Countdown/8.png" id="8_urxg4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_122yn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0odqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dfook")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s7sc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6vcgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n22si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fladj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_urxg4")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://by252r1um8onb"]
+
+[ext_resource type="Script" path="res://Templates/Game/microgame.gd" id="1_vbo5u"]
+[ext_resource type="SpriteFrames" uid="uid://csf3ipv0mkjx6" path="res://Levels/Jtad/countdown.tres" id="2_2b1ki"]
+
+[node name="Microgame" type="Node2D"]
+script = ExtResource("1_vbo5u")
+ticks = 8
+
+[node name="Countdown" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 99
+position = Vector2(128, 96)
+sprite_frames = ExtResource("2_2b1ki")
+frame = 7
+frame_progress = 1.0

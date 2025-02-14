@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cucdlrepvhu3i"]
+
+[ext_resource type="Script" path="res://Templates/Game/gamepack.gd" id="1_5ndyg"]
+
+[node name="Gamepack" type="Node2D" node_paths=PackedStringArray("music_player")]
+script = ExtResource("1_5ndyg")
+music_player = NodePath("Subscript/AudioStreamPlayer")
+microgame_music = 0
+
+[node name="Subscript" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Subscript"]
+
+[node name="ActiveMicrogameContainer" type="Node2D" parent="Subscript"]
+z_index = -100

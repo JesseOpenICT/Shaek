@@ -1,0 +1,39 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Sheak"
+run/main_scene="res://Menus/OpeningScreen/home.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalFunctions="*res://Globals/global_functions.gd"
+loadcover="res://Menus/loader.tscn"
+
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=192
+window/stretch/mode="viewport"
+
+[file_customization]
+
+folder_colors={
+"res://Globals/": "orange",
+"res://Levels/": "gray",
+"res://Levels/Jtad/": "red",
+"res://Levels/Jtad/Countdown/": "gray",
+"res://Levels/Magneter/": "orange",
+"res://Menus/": "yellow",
+"res://Templates/": "blue"
+}
