@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalFunctions="*res://Globals/global_functions.gd"
-loadcover="res://Menus/loader.tscn"
+loadcover="*res://Menus/loader.tscn"
+List="*res://Levels/gamepack_list.tscn"
 
 [display]
 

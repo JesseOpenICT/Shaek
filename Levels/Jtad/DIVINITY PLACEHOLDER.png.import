@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://35v6h0mbeejh"
-path.s3tc="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.ctex"
+uid="uid://dvs68ck50i2pt"
+path="res://.godot/imported/DIVINITY PLACEHOLDER.png-2821e16307985b434d811d72e38f0c2b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.ctex"]
+source_file="res://Levels/Jtad/DIVINITY PLACEHOLDER.png"
+dest_files=["res://.godot/imported/DIVINITY PLACEHOLDER.png-2821e16307985b434d811d72e38f0c2b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

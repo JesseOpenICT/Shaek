@@ -2,14 +2,13 @@
 
 [ext_resource type="Shader" path="res://Menus/OpeningScreen/ColorWave.gdshader" id="1_5eqed"]
 [ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="2_aoru1"]
+[ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="3_ccqfc"]
 [ext_resource type="Script" path="res://Templates/Menus/button.gd" id="3_irjop"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgjwu"]
 shader = ExtResource("1_5eqed")
 shader_parameter/scale = 0.05
 shader_parameter/image = ExtResource("2_aoru1")
-
-[sub_resource type="Theme" id="Theme_vvuyc"]
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -39,11 +38,13 @@ offset_left = 100.0
 offset_top = 145.0
 offset_right = 156.0
 offset_bottom = 176.0
-theme = SubResource("Theme_vvuyc")
+theme = ExtResource("3_ccqfc")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
 text = "START"
 script = ExtResource("3_irjop")
 target_global = true
 function = "load_scene"
-parameters = ["res://Menus/OpeningScreen/main.tscn"]
+parameters = ["res://Menus/LevelSelect/main.tscn"]
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkg3bjtslpcdg"]
+
+[ext_resource type="Script" path="res://Templates/Game/level_list.gd" id="1_jdu6o"]
+
+[node name="LevelList" type="Node"]
+script = ExtResource("1_jdu6o")
+gamepacks = Array[String](["res://Levels/gamepack.tscn"])

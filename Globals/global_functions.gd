@@ -7,6 +7,16 @@ signal close
 var reverse_responsive : bool = true
 
 
+func load_gamepack(scene : Gamepack):
+	close.emit(false)
+	await get_tree().create_timer(LOADING_TIME).timeout
+	await scene.preload_levels()
+	
+	get_tree().current_scene.queue_free()
+	get_tree().root.add_child(scene)
+	close.emit(true)
+
+
 func load_scene(scene:String):
 	close.emit(false)
 	await get_tree().create_timer(LOADING_TIME).timeout

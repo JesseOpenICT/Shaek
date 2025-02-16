@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=3 uid="uid://b73pgdselqt6c"]
+
+[ext_resource type="Shader" path="res://Menus/OpeningScreen/ColorWave.gdshader" id="1_oil4m"]
+[ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="2_iuo5i"]
+[ext_resource type="Texture2D" uid="uid://dvs68ck50i2pt" path="res://Levels/Jtad/DIVINITY PLACEHOLDER.png" id="3_3g3fm"]
+[ext_resource type="Script" path="res://Menus/LevelSelect/spinningcover.gd" id="4_a648h"]
+[ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="5_202qf"]
+[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="5_mpomx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5t85j"]
+shader = ExtResource("1_oil4m")
+shader_parameter/scale = 0.05
+shader_parameter/image = ExtResource("2_iuo5i")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bhmlg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_os7u3"]
+shading_mode = 0
+albedo_texture = ExtResource("3_3g3fm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfgiw"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0, 0.517647, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b04hg"]
+cull_mode = 2
+shading_mode = 0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_a648h")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5t85j")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.662745)
+
+[node name="LevelStarter" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AlbumCover" type="SubViewportContainer" parent="LevelStarter"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 216.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="LevelStarter/AlbumCover"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 192)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="LevelStarter/AlbumCover/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.21, 3.015, 0)
+fov = 69.2
+
+[node name="Cover" type="MeshInstance3D" parent="LevelStarter/AlbumCover/SubViewport"]
+transform = Transform3D(0.392337, 0.919822, 0, -0.919822, 0.392337, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_bhmlg")
+skeleton = NodePath("../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_os7u3")
+
+[node name="Shadow" type="MeshInstance3D" parent="LevelStarter/AlbumCover/SubViewport/Cover"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21, 0)
+mesh = SubResource("PlaneMesh_bhmlg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_rfgiw")
+
+[node name="Shadow" type="MeshInstance3D" parent="LevelStarter/AlbumCover/SubViewport/Cover/Shadow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.185, 0)
+mesh = SubResource("PlaneMesh_bhmlg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_b04hg")
+
+[node name="VBoxContainer" type="MarginContainer" parent="LevelStarter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelStarter/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="NegativeMargin" type="MarginContainer" parent="LevelStarter/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = -3
+
+[node name="LevelName" type="Label" parent="LevelStarter/VBoxContainer/VBoxContainer/NegativeMargin"]
+layout_mode = 2
+theme = ExtResource("5_202qf")
+text = "Stargazing Down"
+autowrap_mode = 2
+
+[node name="Author" type="Label" parent="LevelStarter/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_202qf")
+text = "By Jtad"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="LevelStarter/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_202qf")
+text = "Classic"
+script = ExtResource("5_mpomx")
+target_global = true
+function = "load_gamepack"
+parameters = [""]
+
+[node name="Button2" type="Button" parent="LevelStarter/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_202qf")
+text = "Endless"
+script = ExtResource("5_mpomx")
+target_global = true
+function = "load_gamepack"
+parameters = [""]
+
+[node name="LevelList" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="LevelStarter/VBoxContainer/VBoxContainer/Button" to="LevelStarter/VBoxContainer/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="LevelStarter/VBoxContainer/VBoxContainer/Button2" to="LevelStarter/VBoxContainer/VBoxContainer/Button2" method="_on_pressed"]

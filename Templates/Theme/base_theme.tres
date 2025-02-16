@@ -1,0 +1,49 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://blcoum186br5p"]
+
+[ext_resource type="FontFile" uid="uid://c1equdgqllbkq" path="res://Templates/Theme/nokiafc22.ttf" id="1_ia2p3"]
+[ext_resource type="Texture2D" uid="uid://cgtfpphe0ndn2" path="res://Templates/Theme/bars.png" id="2_0tofw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbbn1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fub5s"]
+texture = ExtResource("2_0tofw")
+expand_margin_left = 2048.0
+expand_margin_top = 4.0
+expand_margin_right = 2048.0
+expand_margin_bottom = 8.0
+modulate_color = Color(0.247059, 0.67451, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfb2h"]
+texture = ExtResource("2_0tofw")
+expand_margin_left = 2048.0
+expand_margin_top = 8.0
+expand_margin_right = 2048.0
+expand_margin_bottom = 12.0
+modulate_color = Color(0.374535, 0.853217, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sc6ft"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6m5nc"]
+texture = ExtResource("2_0tofw")
+expand_margin_left = 2048.0
+expand_margin_top = 4.0
+expand_margin_right = 2048.0
+expand_margin_bottom = 8.0
+modulate_color = Color(0.374535, 0.853217, 1, 1)
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("1_ia2p3")
+Button/styles/focus = SubResource("StyleBoxEmpty_lbbn1")
+Button/styles/hover = SubResource("StyleBoxTexture_fub5s")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_cfb2h")
+Button/styles/normal = SubResource("StyleBoxEmpty_sc6ft")
+Button/styles/pressed = SubResource("StyleBoxTexture_6m5nc")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 3
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_ia2p3")

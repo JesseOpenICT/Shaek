@@ -4,14 +4,14 @@ HOW TO CREATE LEVELPACK
 -	Add a folder under this folder named "Microgames"
 
 -	Create a new scene. Simply use the + at the top of the editor.
--	From the "res://Templates/Game/" folder, drag the gamepack.tscn into the 2D editor. 
+-	From the "res://Levels/" folder, drag the gamepack.tscn into the 2D editor. 
 	This is the base for a levelpack.
 
 
 MICROGAMES
 -	Each microgame will be its own scene. It will operate almost entirely just fine on its own.
 -	To create a microgame, simply create a new scene, (just press + at the top)
--	Then add the microgame.tscn from the "res://Templates/Game/" into the 2D editor.
+-	Then add the microgame.tscn from the "res://Levels/" into the 2D editor.
 -	Create a folder within your Microgames folder to save this scene to. Keeping your microgames in seperate folders helps keep you organized.
 -	Each microgame has a "won" boolean. Set this to true or false during the game to indicate success or failure.
 	-	Example: A game where you balance an object could be true, then become false if the object falls.
