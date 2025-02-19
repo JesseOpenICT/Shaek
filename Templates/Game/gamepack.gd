@@ -14,12 +14,12 @@ class_name Gamepack
 @export var cover_art : CompressedTexture2D
 
 
-@export_group("Microgame")
+@export_group("Game Functionality")
 
 ## Add all Microgames as [b]reference links[/b]
 @export_file("*.tscn") var microgames : Array[String] 
 ## List of microgames as packed scenes. We can instantiate these right away.
-var loaded_microgames : Array[Microgame]
+var loaded_microgames : Array[PackedScene]
 ## For the bag system 
 var rolled_levels : Array[int] 
 ## The next selected microgame
@@ -28,8 +28,36 @@ var next_microgame : Microgame
 var levels_cleared : int
 ## These are the nodes that will represent your lives. 
 ## They get removed from this array as they disappear, and once it's empty, your run will end. 
-## Before being removed though they will receive a signal, allowing you to play an animation for them.
-@export var lives : Array[Node] 
+## Before being removed though the game will attempt to run the dismiss() function on them, 
+## allowing you to play an animation for them.
+@export var lives : Array[Node]
+## The points at which the game will speed up. X represents the amount of cleared microgames. 
+## Y represents the scale of the speed (1 being default, 2 being double). I can't recommend going above 2.
+@export var speedup_scale : Array[Dictionary] = [
+			{"level":6, "speed":1.05},
+			{"level":12, "speed":1.1},
+			{"level":18, "speed":1.2},
+			{"level":24, "speed":1.3},
+			{"level":30, "speed":1.4},
+			{"level":36, "speed":1.5},
+			{"level":42, "speed":1.6},
+			{"level":48, "speed":1.8},
+			{"level":54, "speed":1.9},
+			{"level":60, "speed":2},
+		]
+
+
+@export_subgroup("Downtime")
+## The amount of additional beats until the microgames start flowing in, adding
+## a little extra breather before the game starts after picking a gamepack.
+@export var beats_until_start : int = 8
+## The amount of beats until the hint appears. This plus the beats after hint is the amount of time
+## between microgames.
+@export var beats_until_hint : int = 4
+## The amount of beats after the hint appears until the microgame starts and the open signal is sent.
+@export var beats_after_hint : int = 4
+## The amount of beats added when speedup happens. You can use this for a special animation.
+@export var beats_upon_speedup : int = 4
 
 
 @export_group("Music")
@@ -45,48 +73,121 @@ var levels_cleared : int
 @export var microgame_music_volume : float
 ## The BPM of your background music. The microgame's speed varies based on this value, and the increasing speed variable. 
 @export var music_BPM : int = 120
-var passed_ticks : float
+var passed_beats : int
 
 var speed : float = 1
 
 ## Send a signal that if true, open a curtain. If false, close it.
 ## You should connect other nodes to this signal to unhide them. 
+## This signal is sent just before and after a microgame.
 signal open(open:bool)
+## Send a signal with an interger indicating your current amount of levels cleared. Connect this to
+## nodes that will change to indicate your score, typically a Label but it could be a sprite or anything.
+## This signal is sent after a microgame is cleared. 
+signal set_score(value:int)
+## Send a signal to shows a hint for the next microgame, such as "dodge!" or "jump!", and an image that
+## shows what controls are used, specifically arrows, space, and/or mouse. Connect this signal to a label 
+## and a sprite to show them.
+signal show_microgame_preparation_hint(preparation_text : String, preparation_image : CompressedTexture2D)
+
+## Sends another signal when a microgame ends that informs other nodes whether a microgame was won (true) or lost (false).
+signal microgame_end(won:bool)
+
+## Sends a signal when the game speeds up, allowing for a special animation to play.
+signal speed_up
+
+## Sends a signal when you run out of lives.
+signal game_over
 
 
-func _process(delta: float) -> void:
-	var modified_delta = delta * (music_BPM/60.) * speed
-	passed_ticks += modified_delta
-	print(passed_ticks)
+####################################################################################################
 
 
 func preload_levels() -> void:
 	for game in microgames:
-		loaded_microgames.append(load(game))
+		var microgame = load(game)
+		loaded_microgames.append (microgame)
+
+
+func await_beats(beats:int) -> void:
+	for beat in beats:
+		await $Subscript/RhythmNotifier.beat
+		print_rich("[color=#BBFFFF]beat")
 	return
 
 
+func _ready() -> void:
+	preload_levels()
+	await get_tree().process_frame
+	await await_beats(beats_until_start)
+	await_next_microgame()
+
+
+## The stuff that happens between microgames. This is mostly a matter of waiting, sending signals,
+## and calling the choose_microgame() and instantiate_microgame() script.
 func await_next_microgame():
 	choose_microgame()
-	# NEED MORE CODE STARTING HERE FOR THE INBETWEEN MICROGAMES STUFF
+	await await_beats(beats_until_hint)
+	show_microgame_preparation_hint.emit(next_microgame.preparation_text, next_microgame.preparation_image)
+	await await_beats(beats_after_hint)
+	instatiate_microgame(next_microgame)
+	open.emit(true)
 
+
+## Selects a random microgame using a bag system. Reloads the microgames when you run out.
 func choose_microgame():
-	if rolled_levels.size() == 0:
-		for index in loaded_microgames.size():
+	if rolled_levels.size() < 1:
+		var index = 0
+		for microgame in loaded_microgames:
 			rolled_levels.append(index)
-	var microgame_picked_index = rolled_levels[randi_range(1, rolled_levels.size())-1]
-	var next_microgame = loaded_microgames[microgame_picked_index]
+			index+=1
+	var microgame_picked_index = rolled_levels[randi_range(0, rolled_levels.size()-1)]
+	next_microgame = loaded_microgames[microgame_picked_index].instantiate()
 
 
+## Instantiates the microgame just before opening it
 func instatiate_microgame(microgame:Microgame):
-	microgame.instantiate()
-	microgame.speed = speed
-	microgame.music_BPM = music_BPM
+	microgame.speed = (music_BPM/60.) * speed
 	microgame.end.connect(completed_microgame)
+	$Subscript/RhythmNotifier.beat.connect(microgame.tick_down)
 	$Subscript/ActiveMicrogameContainer.add_child(microgame)
 
 
-func completed_microgame(won:bool):
+## Gets called when a microgame ends, increases your score, handles speedup,
+## Heart loss, and Game Over.
+func completed_microgame(won:bool) -> void:
+	open.emit(false)
+	microgame_end.emit(won)
 	print_rich("[color=green]win" if won else "[color=red]lose")
-	passed_ticks = fmod(passed_ticks, 1)
+	passed_beats = 0
+	
+	if !won:
+		var life : Node = lives[0]
+		lives.erase(life)
+		if life.has_method("dismiss"):
+			life.dismiss()
+		else:
+			life.queue_free()
+		if lives.size() == 0:
+			game_over.emit()
+			return
+	else:
+		levels_cleared += 1
+	set_score.emit(levels_cleared)
+	
+	for speed_scale in speedup_scale:
+		if speed_scale["level"] == levels_cleared:
+			speed_up.emit()
+			await_beats(beats_upon_speedup)
+			$Subscript/AudioStreamPlayer.pitch_scale = speed_scale["speed"]
+			speed = speed_scale["speed"]
+	
 	await_next_microgame()
+	
+	await await_beats(1)
+	$Subscript/ActiveMicrogameContainer.get_children()[0].queue_free()
+
+
+## Sends a signal to the microgame whenever a beat passes.
+func _on_rhythm_notifier_beat(_current_beat: int) -> void:
+	passed_beats += 1

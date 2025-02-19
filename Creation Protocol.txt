@@ -5,7 +5,11 @@ HOW TO CREATE LEVELPACK
 
 -	Create a new scene. Simply use the + at the top of the editor.
 -	From the "res://Levels/" folder, drag the gamepack.tscn into the 2D editor. 
-	This is the base for a levelpack.
+-	This is the base for a levelpack. Save it to your folder.
+-	Add this levelpack to the variable of the gamepack_list.tscn under the same Levels folder.
+
+After you add your levelpack to the folder, you should no longer need to do anything outside your
+personal folder.
 
 
 MICROGAMES

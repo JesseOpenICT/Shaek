@@ -1,0 +1,180 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpjg8502x4e82"]
+
+[ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="1_3e1lx"]
+[ext_resource type="Script" path="res://Menus/Settings/settings.gd" id="1_hf2hm"]
+[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="2_0mw3k"]
+[ext_resource type="Script" path="res://Templates/Menus/toggle.gd" id="2_eqqgn"]
+[ext_resource type="Script" path="res://Templates/Menus/slider.gd" id="4_sslnd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h620y"]
+
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("focus")]
+process_mode = 3
+z_index = 300
+script = ExtResource("1_hf2hm")
+focus = NodePath("Panel/MarginContainer/ScrollContainer/GridContainer/Fullscreen")
+
+[node name="Panel" type="Panel" parent="."]
+clip_contents = true
+offset_right = 256.0
+offset_bottom = 192.0
+theme = ExtResource("1_3e1lx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 4
+follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(216, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="Fullscreen" type="CheckButton" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Responsiveness")
+focus_next = NodePath("../Responsiveness")
+focus_previous = NodePath("../Exit")
+theme_override_constants/outline_size = 0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h620y")
+text = "Fullscreen"
+script = ExtResource("2_eqqgn")
+target_global = true
+function = "set_setting"
+parameters = ["fullscreen"]
+attached_global_variable = "fullscreen"
+
+[node name="Responsiveness" type="CheckButton" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../Fullscreen")
+focus_neighbor_bottom = NodePath("../Music")
+focus_next = NodePath("../Music")
+focus_previous = NodePath("../Fullscreen")
+theme_override_constants/outline_size = 0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h620y")
+text = "Reverse Responsive Window"
+script = ExtResource("2_eqqgn")
+target_global = true
+function = "set_setting"
+parameters = ["reverse_responsive"]
+attached_global_variable = "reverse_responsive"
+
+[node name="Music" type="CheckButton" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../Responsiveness")
+focus_neighbor_bottom = NodePath("../MarginContainer/MusicSlider2")
+focus_next = NodePath("../MarginContainer/MusicSlider2")
+focus_previous = NodePath("../Responsiveness")
+theme_override_constants/outline_size = 0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h620y")
+text = "Music"
+script = ExtResource("2_eqqgn")
+target_global = true
+function = "set_setting"
+parameters = ["music_on"]
+attached_global_variable = "music_on"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -6
+theme_override_constants/margin_bottom = 8
+
+[node name="MusicSlider2" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/GridContainer/MarginContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Music")
+focus_neighbor_bottom = NodePath("../../Effects")
+focus_next = NodePath("../../Effects")
+focus_previous = NodePath("../../Music")
+step = 5.0
+value = 100.0
+tick_count = 2
+ticks_on_borders = true
+script = ExtResource("4_sslnd")
+target_global = true
+function = "set_setting"
+parameters = ["music_volume"]
+attached_global_variable = "music_volume"
+
+[node name="Effects" type="CheckButton" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../MarginContainer/MusicSlider2")
+focus_neighbor_bottom = NodePath("../MarginContainer2/EffectSlider")
+focus_next = NodePath("../MarginContainer2/EffectSlider")
+focus_previous = NodePath("../MarginContainer/MusicSlider2")
+theme_override_constants/outline_size = 0
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h620y")
+text = "Effects"
+script = ExtResource("2_eqqgn")
+target_global = true
+function = "set_setting"
+parameters = ["effects_on"]
+attached_global_variable = "effects_on"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -6
+theme_override_constants/margin_bottom = 18
+
+[node name="EffectSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/GridContainer/MarginContainer2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Effects")
+focus_neighbor_bottom = NodePath("../../Exit")
+focus_next = NodePath("../../Exit")
+focus_previous = NodePath("../../Effects")
+step = 5.0
+value = 100.0
+tick_count = 2
+ticks_on_borders = true
+script = ExtResource("4_sslnd")
+target_global = true
+function = "set_setting"
+parameters = ["effects_volume"]
+attached_global_variable = "effects_volume"
+
+[node name="Exit" type="Button" parent="Panel/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MarginContainer2/EffectSlider")
+focus_neighbor_bottom = NodePath("../Fullscreen")
+focus_next = NodePath("../Fullscreen")
+focus_previous = NodePath("../MarginContainer2/EffectSlider")
+theme = ExtResource("1_3e1lx")
+theme_override_constants/outline_size = 0
+text = "Exit"
+alignment = 0
+autowrap_mode = 2
+script = ExtResource("2_0mw3k")
+target_global = true
+function = "exit_settings"
+
+[connection signal="toggled" from="Panel/MarginContainer/ScrollContainer/GridContainer/Fullscreen" to="Panel/MarginContainer/ScrollContainer/GridContainer/Fullscreen" method="_on_toggled"]
+[connection signal="toggled" from="Panel/MarginContainer/ScrollContainer/GridContainer/Responsiveness" to="Panel/MarginContainer/ScrollContainer/GridContainer/Responsiveness" method="_on_toggled"]
+[connection signal="toggled" from="Panel/MarginContainer/ScrollContainer/GridContainer/Music" to="Panel/MarginContainer/ScrollContainer/GridContainer/Music" method="_on_toggled"]
+[connection signal="value_changed" from="Panel/MarginContainer/ScrollContainer/GridContainer/MarginContainer/MusicSlider2" to="Panel/MarginContainer/ScrollContainer/GridContainer/MarginContainer/MusicSlider2" method="_on_value_changed"]
+[connection signal="toggled" from="Panel/MarginContainer/ScrollContainer/GridContainer/Effects" to="Panel/MarginContainer/ScrollContainer/GridContainer/Effects" method="_on_toggled"]
+[connection signal="value_changed" from="Panel/MarginContainer/ScrollContainer/GridContainer/MarginContainer2/EffectSlider" to="Panel/MarginContainer/ScrollContainer/GridContainer/MarginContainer2/EffectSlider" method="_on_value_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/GridContainer/Exit" to="Panel/MarginContainer/ScrollContainer/GridContainer/Exit" method="_on_pressed"]

@@ -4,4 +4,4 @@
 
 [node name="LevelList" type="Node"]
 script = ExtResource("1_jdu6o")
-gamepacks = Array[String](["res://Levels/gamepack.tscn"])
+gamepacks = Array[String](["res://Levels/Jtad/stargazing_down.tscn"])

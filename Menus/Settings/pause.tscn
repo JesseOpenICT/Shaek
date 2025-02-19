@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://hm5foxhh74i"]
+
+[ext_resource type="Script" path="res://Menus/Settings/settings.gd" id="1_4onsg"]
+[ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="2_bxujc"]
+[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="5_n5r6x"]
+
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("focus")]
+process_mode = 3
+z_index = 300
+script = ExtResource("1_4onsg")
+focus = NodePath("Panel/MarginContainer/VBoxContainer/Continue")
+
+[node name="Panel" type="Panel" parent="."]
+clip_contents = true
+offset_right = 256.0
+offset_bottom = 192.0
+theme = ExtResource("2_bxujc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bxujc")
+theme_override_constants/outline_size = 0
+text = "Continue"
+autowrap_mode = 2
+script = ExtResource("5_n5r6x")
+target_global = true
+function = "pause"
+
+[node name="Settings" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bxujc")
+theme_override_constants/outline_size = 0
+text = "Settings"
+autowrap_mode = 2
+script = ExtResource("5_n5r6x")
+target_global = true
+function = "settings"
+
+[node name="Exit" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bxujc")
+theme_override_constants/outline_size = 0
+text = "Exit"
+autowrap_mode = 2
+script = ExtResource("5_n5r6x")
+target_global = true
+function = "load_scene"
+parameters = ["res://Menus/LevelSelect/main.tscn"]
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Continue" to="Panel/MarginContainer/VBoxContainer/Continue" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Settings" to="Panel/MarginContainer/VBoxContainer/Settings" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Exit" to="Panel/MarginContainer/VBoxContainer/Exit" method="_on_pressed"]

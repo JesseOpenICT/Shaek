@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://ntois38neb2i"]
+[gd_scene load_steps=7 format=3 uid="uid://ntois38neb2i"]
 
+[ext_resource type="Script" path="res://Menus/OpeningScreen/home.gd" id="1_2ag3n"]
 [ext_resource type="Shader" path="res://Menus/OpeningScreen/ColorWave.gdshader" id="1_5eqed"]
 [ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="2_aoru1"]
 [ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="3_ccqfc"]
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2ag3n")
 
 [node name="Backdrop" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_mgjwu")

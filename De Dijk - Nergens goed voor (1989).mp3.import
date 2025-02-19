@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cq3y4o1l0u10r"
+path="res://.godot/imported/De Dijk - Nergens goed voor (1989).mp3-e5c5a123cc1e34d9e6fe89fef926fc7e.mp3str"
+
+[deps]
+
+source_file="res://De Dijk - Nergens goed voor (1989).mp3"
+dest_files=["res://.godot/imported/De Dijk - Nergens goed voor (1989).mp3-e5c5a123cc1e34d9e6fe89fef926fc7e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

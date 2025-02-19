@@ -13,4 +13,4 @@ func progress(unhide:bool) -> void:
 	await tween.finished
 	
 	visible = !unhide
-	GlobalFunctions
+	#GlobalFunctions

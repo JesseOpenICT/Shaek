@@ -10,10 +10,15 @@ var tween : Tween
 ]
 
 var selected_pack : PackedScene
+var previous_button : Control
 
 
-func rewrite_album(gamepack:Gamepack):
-
+func rewrite_album(gamepack:Gamepack, return_button:Control):
+	previous_button = return_button
+	
+	$LevelList.visible = false
+	$LevelStarter.visible = true
+	
 	for button in buttons:
 		button.parameters[0] = gamepack
 	
@@ -25,10 +30,30 @@ func rewrite_album(gamepack:Gamepack):
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(cover, "rotation", Vector3(0,0,deg_to_rad(-50)), 0.8).set_trans(9).set_ease(1) # TRANS BOUNCE EASE OUT
+	tween.tween_property(cover, "rotation", Vector3(0,0,deg_to_rad(-50)), 0.8).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	await tween.finished
+	buttons[0].grab_focus()
 
 
 func _ready() -> void:
-	await get_tree().create_timer(0).timeout
-	rewrite_album( load(List.gamepacks[0]).instantiate() )
+	var level_container = $LevelList/ScrollContainer/VBoxContainer
+	
+	for gamepack in List.gamepacks:
+		var loaded_gamepack : Gamepack = load(gamepack).instantiate()
+		var label = load("res://Templates/Menus/gamepack_label.tscn").instantiate()
+		label.set_label(loaded_gamepack)
+		level_container.add_child(label)
+	
+	await get_tree().process_frame
+	level_container.get_children()[1].get_child(1).grab_focus()
+	
+	GlobalFunctions.close_settings.connect(reopen_levels)
+
+
+func reopen_levels():
+	$LevelList.visible=true
+	$LevelStarter.visible=false
+	if previous_button:
+		previous_button.grab_focus()
+	else:
+		$LevelList/ScrollContainer/VBoxContainer.get_children()[0].find_child("Button").grab_focus()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b73pgdselqt6c"]
+[gd_scene load_steps=14 format=3 uid="uid://b73pgdselqt6c"]
 
 [ext_resource type="Shader" path="res://Menus/OpeningScreen/ColorWave.gdshader" id="1_oil4m"]
 [ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="2_iuo5i"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Menus/LevelSelect/spinningcover.gd" id="4_a648h"]
 [ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="5_202qf"]
 [ext_resource type="Script" path="res://Templates/Menus/button.gd" id="5_mpomx"]
+[ext_resource type="PackedScene" uid="uid://pf6fkd4h6qip" path="res://Templates/Menus/gamepack_label.tscn" id="7_sq4a6"]
+[ext_resource type="Texture2D" uid="uid://y5ykrkg5meic" path="res://game.png" id="8_elwqc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5t85j"]
 shader = ExtResource("1_oil4m")
@@ -55,6 +57,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.662745)
 
 [node name="LevelStarter" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,7 +80,7 @@ grow_vertical = 2
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(256, 192)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="LevelStarter/AlbumCover/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.21, 3.015, 0)
@@ -95,8 +98,8 @@ mesh = SubResource("PlaneMesh_bhmlg")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_rfgiw")
 
-[node name="Shadow" type="MeshInstance3D" parent="LevelStarter/AlbumCover/SubViewport/Cover/Shadow"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.185, 0)
+[node name="Shadow2" type="MeshInstance3D" parent="LevelStarter/AlbumCover/SubViewport/Cover"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.395, 0)
 mesh = SubResource("PlaneMesh_bhmlg")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_b04hg")
@@ -156,8 +159,21 @@ target_global = true
 function = "load_gamepack"
 parameters = [""]
 
+[node name="Button3" type="Button" parent="LevelStarter"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+offset_left = 26.0
+offset_top = 170.0
+offset_right = 76.0
+offset_bottom = 180.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_202qf")
+text = "Go back"
+script = ExtResource("5_mpomx")
+function = "reopen_levels"
+
 [node name="LevelList" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,5 +181,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelList"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelList/ScrollContainer"]
+layout_mode = 2
+
+[node name="GamepackLabel" parent="LevelList/ScrollContainer/VBoxContainer" instance=ExtResource("7_sq4a6")]
+layout_mode = 2
+
+[node name="Sprite2D" parent="LevelList/ScrollContainer/VBoxContainer/GamepackLabel" index="0"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_elwqc")
+
+[node name="Button" parent="LevelList/ScrollContainer/VBoxContainer/GamepackLabel" index="1"]
+text = "Settings"
+target_global = true
+function = "settings"
+parameters = []
+
 [connection signal="pressed" from="LevelStarter/VBoxContainer/VBoxContainer/Button" to="LevelStarter/VBoxContainer/VBoxContainer/Button" method="_on_pressed"]
 [connection signal="pressed" from="LevelStarter/VBoxContainer/VBoxContainer/Button2" to="LevelStarter/VBoxContainer/VBoxContainer/Button2" method="_on_pressed"]
+[connection signal="pressed" from="LevelStarter/Button3" to="LevelStarter/Button3" method="_on_pressed"]
+
+[editable path="LevelList/ScrollContainer/VBoxContainer/GamepackLabel"]

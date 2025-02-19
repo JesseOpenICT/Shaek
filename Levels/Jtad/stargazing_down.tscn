@@ -1,0 +1,197 @@
+[gd_scene load_steps=21 format=3 uid="uid://gksxtvqe3pfc"]
+
+[ext_resource type="PackedScene" uid="uid://cucdlrepvhu3i" path="res://Levels/gamepack.tscn" id="1_raby0"]
+[ext_resource type="Texture2D" uid="uid://dvs68ck50i2pt" path="res://Levels/Jtad/DIVINITY PLACEHOLDER.png" id="2_t01vi"]
+[ext_resource type="Texture2D" uid="uid://cjmrd52k3frhs" path="res://Levels/Jtad/MainStuff/BG1.png" id="3_3s2t6"]
+[ext_resource type="Script" path="res://Levels/Jtad/MainStuff/gamepack_script.gd" id="3_uq4fa"]
+[ext_resource type="Shader" path="res://Levels/Jtad/MainStuff/FishCam.gdshader" id="3_xr55d"]
+[ext_resource type="Texture2D" uid="uid://b8mo2wqf3etbt" path="res://Levels/Jtad/MainStuff/BG2.png" id="4_faaeq"]
+[ext_resource type="AudioStream" uid="uid://biv741qetjqr6" path="res://Levels/Jtad/In Thy Arms v1.mp3" id="4_h47r4"]
+[ext_resource type="Texture2D" uid="uid://dteepsm4fxpuu" path="res://Levels/Jtad/MainStuff/waveblack.png" id="4_mcoo2"]
+[ext_resource type="Texture2D" uid="uid://n033rsgxu63k" path="res://Levels/Jtad/MainStuff/wave.png" id="5_2nvi1"]
+[ext_resource type="Texture2D" uid="uid://dtwdgv0t2tr7x" path="res://Levels/Jtad/MainStuff/Lose1.png" id="5_8rcvu"]
+[ext_resource type="Texture2D" uid="uid://cytwmtg6j806n" path="res://Levels/Jtad/MainStuff/Lose2.png" id="6_477qv"]
+[ext_resource type="Texture2D" uid="uid://cfbbr7pwfqsrw" path="res://Levels/Jtad/MainStuff/Normal1.png" id="7_by1ei"]
+[ext_resource type="Texture2D" uid="uid://4pugbryruod8" path="res://Levels/Jtad/MainStuff/Normal2.png" id="8_mhbqu"]
+[ext_resource type="FontFile" uid="uid://c1equdgqllbkq" path="res://Templates/Theme/nokiafc22.ttf" id="14_7g7bs"]
+[ext_resource type="Texture2D" uid="uid://xoqpu4bilnu4" path="res://Levels/Jtad/MainStuff/Love1.png" id="14_cfkvo"]
+[ext_resource type="Texture2D" uid="uid://crobyn0vb5y3j" path="res://Levels/Jtad/MainStuff/Love2.png" id="15_82srx"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_de70q"]
+viewport_path = NodePath("Subscript/FishViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agkgm"]
+resource_local_to_scene = true
+shader = ExtResource("3_xr55d")
+shader_parameter/fishcam = SubResource("ViewportTexture_de70q")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tnefi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3s2t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_faaeq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbk3v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_by1ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mhbqu")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8rcvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_477qv")
+}],
+"loop": true,
+"name": &"Lose",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_cfkvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_82srx")
+}],
+"loop": true,
+"name": &"Love",
+"speed": 5.0
+}]
+
+[node name="Gamepack" node_paths=PackedStringArray("lives") instance=ExtResource("1_raby0")]
+process_mode = 1
+title = "Stargazing Down"
+author = "Jtad"
+cover_art = ExtResource("2_t01vi")
+microgames = Array[String](["res://Levels/microgame.tscn"])
+lives = [NodePath("Subscript/FishCam/Life1"), NodePath("Subscript/FishCam/Life2"), NodePath("Subscript/FishCam/Life3"), NodePath("Subscript/FishCam/Life4")]
+
+[node name="Subscript" parent="." index="0" node_paths=PackedStringArray("guys_sprite", "score")]
+script = ExtResource("3_uq4fa")
+guys_sprite = NodePath("FishCam/FishGuys")
+score = NodePath("FishCam/Score")
+
+[node name="RhythmNotifier" parent="Subscript" index="0"]
+bpm = 120.0
+beat_length = 0.5
+
+[node name="AudioStreamPlayer" parent="Subscript" index="1"]
+stream = ExtResource("4_h47r4")
+
+[node name="Wave" type="NinePatchRect" parent="Subscript" index="3"]
+clip_children = 2
+material = SubResource("ShaderMaterial_agkgm")
+custom_minimum_size = Vector2(512, 384)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -120.0
+offset_right = 384.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_mcoo2")
+region_rect = Rect2(0, 0, 512, 192)
+patch_margin_bottom = 335
+
+[node name="Wave" type="Sprite2D" parent="Subscript/Wave" index="0"]
+z_index = 10
+position = Vector2(256, 288)
+texture = ExtResource("5_2nvi1")
+
+[node name="FishCam" type="Camera2D" parent="Subscript" index="4"]
+position = Vector2(128, 96)
+
+[node name="Backdrop" type="AnimatedSprite2D" parent="Subscript/FishCam" index="0"]
+sprite_frames = SubResource("SpriteFrames_tnefi")
+autoplay = "default"
+frame_progress = 0.505601
+
+[node name="FishGuys" type="AnimatedSprite2D" parent="Subscript/FishCam" index="1"]
+sprite_frames = SubResource("SpriteFrames_cbk3v")
+animation = &"Love"
+autoplay = "Default"
+frame_progress = 0.496533
+
+[node name="Life1" type="Panel" parent="Subscript/FishCam" index="2"]
+offset_left = 70.0
+offset_top = -25.0
+offset_right = 93.0
+offset_bottom = -2.0
+
+[node name="Life2" type="Panel" parent="Subscript/FishCam" index="3"]
+offset_left = 73.0
+offset_top = -61.0
+offset_right = 96.0
+offset_bottom = -38.0
+
+[node name="Life3" type="Panel" parent="Subscript/FishCam" index="4"]
+offset_left = 39.0
+offset_top = -72.0
+offset_right = 62.0
+offset_bottom = -49.0
+
+[node name="Life4" type="Panel" parent="Subscript/FishCam" index="5"]
+offset_left = 39.0
+offset_top = -43.0
+offset_right = 62.0
+offset_bottom = -20.0
+
+[node name="Score" type="RichTextLabel" parent="Subscript/FishCam" index="6"]
+clip_contents = false
+offset_left = -109.0
+offset_top = -84.0
+offset_right = -18.0
+offset_bottom = -9.0
+theme_override_fonts/normal_font = ExtResource("14_7g7bs")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[tornado radius=4 freq=2] 00"
+
+[node name="SpeedUpLabel" type="RichTextLabel" parent="Subscript/FishCam" index="7"]
+visible = false
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -20.0
+offset_right = 128.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0.00784314, 0.278431, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/normal_font = ExtResource("14_7g7bs")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center][tornado radius=5 freq=5] SPEED UP!"
+
+[node name="FishViewport" type="SubViewport" parent="Subscript" index="5"]
+size = Vector2i(256, 192)
+
+[connection signal="microgame_end" from="." to="Subscript" method="_on_gamepack_microgame_end"]
+[connection signal="open" from="." to="Subscript" method="_on_gamepack_open"]
+[connection signal="set_score" from="." to="Subscript" method="_on_gamepack_set_score"]
+[connection signal="speed_up" from="." to="Subscript" method="_on_gamepack_speed_up"]

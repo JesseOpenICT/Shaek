@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://wb7hvtndlw1t"]
+
+[ext_resource type="Script" path="res://audiotest.gd" id="1_sejku"]
+[ext_resource type="Script" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="2_i6kcs"]
+[ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="3_uggt8"]
+[ext_resource type="AudioStream" uid="uid://cq3y4o1l0u10r" path="res://De Dijk - Nergens goed voor (1989).mp3" id="3_xrqi8"]
+
+[node name="Audiotest" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_sejku")
+
+[node name="RhythmNotifier" type="Node" parent="." node_paths=PackedStringArray("audio_stream_player")]
+script = ExtResource("2_i6kcs")
+bpm = 102.0
+beat_length = 0.588235
+audio_stream_player = NodePath("../AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xrqi8")
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(62.5, 46)
+scale = Vector2(2, 1)
+texture = ExtResource("3_uggt8")
+
+[connection signal="beat" from="RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]

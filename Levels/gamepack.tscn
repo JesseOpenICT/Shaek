@@ -1,24 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cucdlrepvhu3i"]
+[gd_scene load_steps=3 format=3 uid="uid://cucdlrepvhu3i"]
 
 [ext_resource type="Script" path="res://Templates/Game/gamepack.gd" id="1_akc42"]
-[ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="2_6rqv5"]
 [ext_resource type="Script" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_ld3go"]
 
 [node name="Gamepack" type="Node2D"]
 script = ExtResource("1_akc42")
-cover_art = ExtResource("2_6rqv5")
 
 [node name="Subscript" type="Node2D" parent="."]
 
 [node name="RhythmNotifier" type="Node" parent="Subscript" node_paths=PackedStringArray("audio_stream_player")]
 script = ExtResource("3_ld3go")
 audio_stream_player = NodePath("../AudioStreamPlayer")
+running = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Subscript"]
+autoplay = true
+bus = &"Music"
 
 [node name="ActiveMicrogameContainer" type="Node2D" parent="Subscript"]
 z_index = -100
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[connection signal="beat" from="Subscript/RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]
