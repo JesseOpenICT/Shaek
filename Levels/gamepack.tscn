@@ -24,6 +24,7 @@ z_index = -100
 
 [node name="EndScreen" type="Panel" parent="Subscript"]
 visible = false
+z_index = 200
 clip_contents = true
 offset_right = 256.0
 offset_bottom = 192.0
