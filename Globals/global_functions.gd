@@ -14,6 +14,10 @@ var music_volume : int = 50
 var effects_on : bool = true
 var effects_volume : int = 90
 
+enum Gamemode {CLASSIC=0, ENDLESS=1}
+var gamemode : int = Gamemode.CLASSIC
+
+
 const SAVEABLE = [
 	"setting_objects",
 	"reverse_responsive",
@@ -66,9 +70,12 @@ func pause():
 		get_tree().current_scene.add_child(pause_object)
 
 
-func load_gamepack(scene : Gamepack):
+func load_gamepack(scene : Gamepack, mode = Gamemode):
 	if loading:
 		return
+	
+	gamemode = mode
+	print(gamemode)
 	loading = true
 	close.emit(false)
 	await get_tree().create_timer(LOADING_TIME).timeout

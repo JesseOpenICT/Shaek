@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cucdlrepvhu3i"]
+[gd_scene load_steps=5 format=3 uid="uid://cucdlrepvhu3i"]
 
 [ext_resource type="Script" path="res://Templates/Game/gamepack.gd" id="1_akc42"]
+[ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="3_bu25b"]
 [ext_resource type="Script" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_ld3go"]
+[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="4_6f3xs"]
 
 [node name="Gamepack" type="Node2D"]
 script = ExtResource("1_akc42")
@@ -20,4 +22,58 @@ bus = &"Music"
 [node name="ActiveMicrogameContainer" type="Node2D" parent="Subscript"]
 z_index = -100
 
+[node name="EndScreen" type="Panel" parent="Subscript"]
+visible = false
+clip_contents = true
+offset_right = 256.0
+offset_bottom = 192.0
+theme = ExtResource("3_bu25b")
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscript/EndScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscript/EndScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Subscript/EndScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="LabelYourScore" type="Label" parent="Subscript/EndScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Your score:"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="Subscript/EndScreen/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+
+[node name="Exit" type="Button" parent="Subscript/EndScreen/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_bu25b")
+theme_override_constants/outline_size = 0
+text = "Exit"
+autowrap_mode = 2
+script = ExtResource("4_6f3xs")
+target_global = true
+function = "load_scene"
+parameters = ["res://Menus/LevelSelect/main.tscn"]
+
 [connection signal="beat" from="Subscript/RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]
+[connection signal="pressed" from="Subscript/EndScreen/MarginContainer/VBoxContainer/Exit" to="Subscript/EndScreen/MarginContainer/VBoxContainer/Exit" method="_on_pressed"]

@@ -53,7 +53,10 @@ func _ready() -> void:
 func reopen_levels():
 	$LevelList.visible=true
 	$LevelStarter.visible=false
+	await get_tree().process_frame
 	if previous_button:
 		previous_button.grab_focus()
+		previous_button = null
 	else:
+		await get_tree().process_frame
 		$LevelList/ScrollContainer/VBoxContainer.get_children()[0].find_child("Button").grab_focus()

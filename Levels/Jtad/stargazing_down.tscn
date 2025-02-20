@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://gksxtvqe3pfc"]
+[gd_scene load_steps=30 format=3 uid="uid://gksxtvqe3pfc"]
 
 [ext_resource type="PackedScene" uid="uid://cucdlrepvhu3i" path="res://Levels/gamepack.tscn" id="1_raby0"]
-[ext_resource type="Texture2D" uid="uid://dvs68ck50i2pt" path="res://Levels/Jtad/DIVINITY PLACEHOLDER.png" id="2_t01vi"]
+[ext_resource type="Texture2D" uid="uid://btd0nd5c0xqna" path="res://Levels/Jtad/Stargazing_Down.png" id="2_kx0ge"]
 [ext_resource type="Texture2D" uid="uid://cjmrd52k3frhs" path="res://Levels/Jtad/MainStuff/BG1.png" id="3_3s2t6"]
 [ext_resource type="Script" path="res://Levels/Jtad/MainStuff/gamepack_script.gd" id="3_uq4fa"]
 [ext_resource type="Shader" path="res://Levels/Jtad/MainStuff/FishCam.gdshader" id="3_xr55d"]
@@ -16,6 +16,14 @@
 [ext_resource type="FontFile" uid="uid://c1equdgqllbkq" path="res://Templates/Theme/nokiafc22.ttf" id="14_7g7bs"]
 [ext_resource type="Texture2D" uid="uid://xoqpu4bilnu4" path="res://Levels/Jtad/MainStuff/Love1.png" id="14_cfkvo"]
 [ext_resource type="Texture2D" uid="uid://crobyn0vb5y3j" path="res://Levels/Jtad/MainStuff/Love2.png" id="15_82srx"]
+[ext_resource type="Texture2D" uid="uid://d4bo26d5p3oln" path="res://Levels/Jtad/MainStuff/Fn1.png" id="17_rd2n5"]
+[ext_resource type="Texture2D" uid="uid://di1ddsjbaeyjt" path="res://Levels/Jtad/MainStuff/Fn2.png" id="18_wv8h6"]
+[ext_resource type="Texture2D" uid="uid://d2gyqgmfwgpds" path="res://Levels/Jtad/MainStuff/Fl1.png" id="19_siocc"]
+[ext_resource type="Texture2D" uid="uid://3pwycko1gsvy" path="res://Levels/Jtad/MainStuff/Fl3.png" id="20_riwhl"]
+[ext_resource type="Texture2D" uid="uid://xya2mbtad3k8" path="res://Levels/Jtad/MainStuff/Fw1.png" id="21_inax7"]
+[ext_resource type="Texture2D" uid="uid://bhbl3q1vsngx0" path="res://Levels/Jtad/MainStuff/Fw2.png" id="22_d5fdb"]
+[ext_resource type="Script" path="res://Levels/Jtad/MainStuff/life.gd" id="23_ioutj"]
+[ext_resource type="Texture2D" uid="uid://c2g6n05b25or0" path="res://Levels/Jtad/movement.png" id="24_tpaxy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_de70q"]
 viewport_path = NodePath("Subscript/FishViewport")
@@ -75,18 +83,56 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jws2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_rd2n5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_wv8h6")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_siocc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_riwhl")
+}],
+"loop": true,
+"name": &"Lose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_inax7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_d5fdb")
+}],
+"loop": true,
+"name": &"Win",
+"speed": 5.0
+}]
+
 [node name="Gamepack" node_paths=PackedStringArray("lives") instance=ExtResource("1_raby0")]
 process_mode = 1
 title = "Stargazing Down"
 author = "Jtad"
-cover_art = ExtResource("2_t01vi")
+cover_art = ExtResource("2_kx0ge")
 microgames = Array[String](["res://Levels/microgame.tscn"])
 lives = [NodePath("Subscript/FishCam/Life1"), NodePath("Subscript/FishCam/Life2"), NodePath("Subscript/FishCam/Life3"), NodePath("Subscript/FishCam/Life4")]
 
-[node name="Subscript" parent="." index="0" node_paths=PackedStringArray("guys_sprite", "score")]
+[node name="Subscript" parent="." index="0" node_paths=PackedStringArray("guys_sprite", "score", "hint_image", "hint_text")]
 script = ExtResource("3_uq4fa")
 guys_sprite = NodePath("FishCam/FishGuys")
 score = NodePath("FishCam/Score")
+hint_image = NodePath("FishCam/Hint/Inputs")
+hint_text = NodePath("FishCam/Hint/HintLabel")
 
 [node name="RhythmNotifier" parent="Subscript" index="0"]
 bpm = 120.0
@@ -131,31 +177,7 @@ animation = &"Love"
 autoplay = "Default"
 frame_progress = 0.496533
 
-[node name="Life1" type="Panel" parent="Subscript/FishCam" index="2"]
-offset_left = 70.0
-offset_top = -25.0
-offset_right = 93.0
-offset_bottom = -2.0
-
-[node name="Life2" type="Panel" parent="Subscript/FishCam" index="3"]
-offset_left = 73.0
-offset_top = -61.0
-offset_right = 96.0
-offset_bottom = -38.0
-
-[node name="Life3" type="Panel" parent="Subscript/FishCam" index="4"]
-offset_left = 39.0
-offset_top = -72.0
-offset_right = 62.0
-offset_bottom = -49.0
-
-[node name="Life4" type="Panel" parent="Subscript/FishCam" index="5"]
-offset_left = 39.0
-offset_top = -43.0
-offset_right = 62.0
-offset_bottom = -20.0
-
-[node name="Score" type="RichTextLabel" parent="Subscript/FishCam" index="6"]
+[node name="Score" type="RichTextLabel" parent="Subscript/FishCam" index="2"]
 clip_contents = false
 offset_left = -109.0
 offset_top = -84.0
@@ -166,7 +188,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[tornado radius=4 freq=2] 00"
 
-[node name="SpeedUpLabel" type="RichTextLabel" parent="Subscript/FishCam" index="7"]
+[node name="SpeedUpLabel" type="RichTextLabel" parent="Subscript/FishCam" index="3"]
 visible = false
 clip_contents = false
 anchors_preset = 8
@@ -188,10 +210,75 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center][tornado radius=5 freq=5] SPEED UP!"
 
+[node name="Life1" type="AnimatedSprite2D" parent="Subscript/FishCam" index="4" node_paths=PackedStringArray("gamepack")]
+position = Vector2(-98, 66)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_jws2d")
+animation = &"Default"
+autoplay = "Default"
+script = ExtResource("23_ioutj")
+gamepack = NodePath("../../..")
+
+[node name="Life2" type="AnimatedSprite2D" parent="Subscript/FishCam" index="5" node_paths=PackedStringArray("gamepack")]
+position = Vector2(-38, 66)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_jws2d")
+animation = &"Default"
+autoplay = "Default"
+script = ExtResource("23_ioutj")
+gamepack = NodePath("../../..")
+
+[node name="Life3" type="AnimatedSprite2D" parent="Subscript/FishCam" index="6" node_paths=PackedStringArray("gamepack")]
+position = Vector2(22, 66)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_jws2d")
+animation = &"Default"
+autoplay = "Default"
+script = ExtResource("23_ioutj")
+gamepack = NodePath("../../..")
+
+[node name="Life4" type="AnimatedSprite2D" parent="Subscript/FishCam" index="7" node_paths=PackedStringArray("gamepack")]
+position = Vector2(82, 66)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_jws2d")
+animation = &"Default"
+autoplay = "Default"
+script = ExtResource("23_ioutj")
+gamepack = NodePath("../../..")
+
+[node name="Hint" type="Node2D" parent="Subscript/FishCam" index="8"]
+
+[node name="Inputs" type="Sprite2D" parent="Subscript/FishCam/Hint" index="0"]
+position = Vector2(0, 30)
+texture = ExtResource("24_tpaxy")
+
+[node name="HintLabel" type="RichTextLabel" parent="Subscript/FishCam/Hint" index="1"]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -50.0
+offset_right = 130.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/normal_font = ExtResource("14_7g7bs")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center][shake=5 rate=4] Avoid!"
+
 [node name="FishViewport" type="SubViewport" parent="Subscript" index="5"]
 size = Vector2i(256, 192)
 
+[connection signal="game_over" from="." to="." method="_on_game_over"]
 [connection signal="microgame_end" from="." to="Subscript" method="_on_gamepack_microgame_end"]
 [connection signal="open" from="." to="Subscript" method="_on_gamepack_open"]
 [connection signal="set_score" from="." to="Subscript" method="_on_gamepack_set_score"]
+[connection signal="show_microgame_preparation_hint" from="." to="Subscript" method="_on_gamepack_show_microgame_preparation_hint"]
 [connection signal="speed_up" from="." to="Subscript" method="_on_gamepack_speed_up"]

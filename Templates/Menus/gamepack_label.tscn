@@ -18,10 +18,16 @@ grow_vertical = 2
 theme_override_constants/margin_left = 55
 script = ExtResource("1_ivc8r")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Decenter" type="Node2D" parent="."]
 z_index = 1
-position = Vector2(27.5, 21)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.31, 0.31)
+
+[node name="TextureRect" type="TextureRect" parent="Decenter"]
+custom_minimum_size = Vector2(38, 38)
+offset_left = 26.6667
+offset_top = 6.66667
+offset_right = 154.667
+offset_bottom = 134.667
 texture = ExtResource("1_3c7uj")
 
 [node name="Button" type="Button" parent="."]

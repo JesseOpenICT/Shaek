@@ -10,7 +10,8 @@ class_name Gamepack
 @export var title : String 
 ## That's you! Put your username here. It will be displayed for players to see.
 @export var author : String 
-## Use a square image as cover art to represent your levelpack.
+## Use a square image as cover art to represent your levelpack. I recommend using a 128*128 px 
+## texture but other dimensions should work just fine.
 @export var cover_art : CompressedTexture2D
 
 
@@ -18,6 +19,13 @@ class_name Gamepack
 
 ## Add all Microgames as [b]reference links[/b]
 @export_file("*.tscn") var microgames : Array[String] 
+## The boss microgame. Is optional.
+@export_file("*.tscn") var boss_microgame_each : String 
+## Once your score reaches this number minus one, you'll face the boss microgame. So if the number is
+## 20, after beating 19 microgames, the 20th will be the boss. You'll win classic mode after beating it.
+## If no boss microgame is set, you'll still win classic once you succesfully get this score, but a normal.
+## microgame will play.
+@export var boss_level : int = 20
 ## List of microgames as packed scenes. We can instantiate these right away.
 var loaded_microgames : Array[PackedScene]
 ## For the bag system 
@@ -56,6 +64,10 @@ var levels_cleared : int
 @export var beats_until_hint : int = 4
 ## The amount of beats after the hint appears until the microgame starts and the open signal is sent.
 @export var beats_after_hint : int = 4
+## When you run out of lives or beat the boss in classic, you wait this many beats until you show the
+## game over (or game won) screen. No other signals will be sent after this and no other beat counters.
+## will be waited for. So when the microgame ends, it's just this many more beats until the end screen shows.
+@export var beats_upon_game_over : int = 8
 ## The amount of beats added when speedup happens. You can use this for a special animation.
 @export var beats_upon_speedup : int = 4
 
@@ -97,7 +109,7 @@ signal microgame_end(won:bool)
 signal speed_up
 
 ## Sends a signal when you run out of lives.
-signal game_over
+signal game_over(score:int)
 
 
 ####################################################################################################
@@ -112,7 +124,7 @@ func preload_levels() -> void:
 func await_beats(beats:int) -> void:
 	for beat in beats:
 		await $Subscript/RhythmNotifier.beat
-		print_rich("[color=#BBFFFF]beat")
+		# print_rich("[color=#BBFFFF]beat")
 	return
 
 
@@ -169,10 +181,14 @@ func completed_microgame(won:bool) -> void:
 		else:
 			life.queue_free()
 		if lives.size() == 0:
-			game_over.emit()
+			game_over.emit(levels_cleared)
 			return
 	else:
 		levels_cleared += 1
+		
+		if GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC:
+			game_over.emit(levels_cleared)
+		
 	set_score.emit(levels_cleared)
 	
 	for speed_scale in speedup_scale:
@@ -191,3 +207,16 @@ func completed_microgame(won:bool) -> void:
 ## Sends a signal to the microgame whenever a beat passes.
 func _on_rhythm_notifier_beat(_current_beat: int) -> void:
 	passed_beats += 1
+
+
+func _on_game_over(score: int) -> void:
+	if GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC and boss_level == levels_cleared:
+		$Subscript/EndScreen/MarginContainer/VBoxContainer/Label.text = "you won!"
+	$Subscript/EndScreen/MarginContainer/VBoxContainer/Score.text = str(levels_cleared)
+	await await_beats(beats_upon_game_over)
+	$Subscript/EndScreen.visible = true
+	await await_beats(4)
+	$Subscript/EndScreen/MarginContainer/VBoxContainer/Score.visible = true
+	await await_beats(2)
+	$Subscript/EndScreen/MarginContainer/VBoxContainer/Exit.visible = true
+	$Subscript/EndScreen/MarginContainer/VBoxContainer/Exit.grab_focus()

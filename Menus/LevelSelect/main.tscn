@@ -145,7 +145,7 @@ text = "Classic"
 script = ExtResource("5_mpomx")
 target_global = true
 function = "load_gamepack"
-parameters = [""]
+parameters = ["", 0]
 
 [node name="Button2" type="Button" parent="LevelStarter/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
@@ -157,7 +157,7 @@ text = "Endless"
 script = ExtResource("5_mpomx")
 target_global = true
 function = "load_gamepack"
-parameters = [""]
+parameters = ["", 1]
 
 [node name="Button3" type="Button" parent="LevelStarter"]
 custom_minimum_size = Vector2(50, 0)
@@ -202,8 +202,7 @@ layout_mode = 2
 [node name="GamepackLabel" parent="LevelList/ScrollContainer/VBoxContainer" instance=ExtResource("7_sq4a6")]
 layout_mode = 2
 
-[node name="Sprite2D" parent="LevelList/ScrollContainer/VBoxContainer/GamepackLabel" index="0"]
-scale = Vector2(0.8, 0.8)
+[node name="TextureRect" parent="LevelList/ScrollContainer/VBoxContainer/GamepackLabel/Decenter" index="0"]
 texture = ExtResource("8_elwqc")
 
 [node name="Button" parent="LevelList/ScrollContainer/VBoxContainer/GamepackLabel" index="1"]
