@@ -20,7 +20,7 @@ class_name Gamepack
 ## Add all Microgames as [b]reference links[/b]
 @export_file("*.tscn") var microgames : Array[String] 
 ## The boss microgame. Is optional.
-@export_file("*.tscn") var boss_microgame_each : String 
+@export_file("*.tscn") var boss_microgame : String 
 ## Once your score reaches this number minus one, you'll face the boss microgame. So if the number is
 ## 20, after beating 19 microgames, the 20th will be the boss. You'll win classic mode after beating it.
 ## If no boss microgame is set, you'll still win classic once you succesfully get this score, but a normal.
@@ -28,6 +28,8 @@ class_name Gamepack
 @export var boss_level : int = 20
 ## List of microgames as packed scenes. We can instantiate these right away.
 var loaded_microgames : Array[PackedScene]
+## Just the boss, as a packed scene, so again it can be instantiated sooner than when necessary.
+var loaded_boss : PackedScene
 ## For the bag system 
 var rolled_levels : Array[int] 
 ## The next selected microgame
@@ -119,6 +121,8 @@ func preload_levels() -> void:
 	for game in microgames:
 		var microgame = load(game)
 		loaded_microgames.append (microgame)
+	if boss_microgame:
+		loaded_boss = load(boss_microgame)
 
 
 func await_beats(beats:int) -> void:
@@ -148,6 +152,13 @@ func await_next_microgame():
 
 ## Selects a random microgame using a bag system. Reloads the microgames when you run out.
 func choose_microgame():
+	if (19+1)%20 == 0:
+		print(true)
+	if boss_microgame and GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC:
+		if (levels_cleared+1)%boss_level == 0 and levels_cleared > 0:
+			next_microgame = loaded_boss.instantiate()
+			return
+	## If you don't have a boss coming up:
 	if rolled_levels.size() < 1:
 		var index = 0
 		for microgame in loaded_microgames:
@@ -209,7 +220,7 @@ func _on_rhythm_notifier_beat(_current_beat: int) -> void:
 	passed_beats += 1
 
 
-func _on_game_over(score: int) -> void:
+func _on_game_over(_score: int) -> void:
 	if GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC and boss_level == levels_cleared:
 		$Subscript/EndScreen/MarginContainer/VBoxContainer/Label.text = "you won!"
 	$Subscript/EndScreen/MarginContainer/VBoxContainer/Score.text = str(levels_cleared)
