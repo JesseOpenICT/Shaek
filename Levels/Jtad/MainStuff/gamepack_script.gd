@@ -41,11 +41,12 @@ func _on_gamepack_microgame_end(won: bool) -> void:
 func _on_gamepack_set_score(value: int) -> void:
 	score.text = "[tornado radius=4 freq=2] " + ("0"+str(value)).right(2)
 
+@export var speedup_label : Node 
 
 func _on_gamepack_speed_up() -> void:
-	$FishCam/SpeedUpLabel.visible = true
+	speedup_label.visible = true
 	await $"..".await_beats($"..".beats_upon_speedup)
-	$FishCam/SpeedUpLabel.visible = false
+	speedup_label.visible = false
 
 
 func _on_gamepack_show_microgame_preparation_hint(preparation_text: String, preparation_image: CompressedTexture2D) -> void:

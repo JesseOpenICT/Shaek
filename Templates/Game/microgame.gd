@@ -10,8 +10,8 @@ class_name Microgame
 @export var preparation_image : CompressedTexture2D
 
 ## amount of beats the microgame takes. Oughtta be a multiple of 4.
-@export var beats : int 
-var remaining_ticks : float
+@export var beats : int = 8
+var remaining_ticks : float 
 var remaining_beats : int
 
 ## Multiply your delta by this. That means that a speed of 2 results in double speed microgames.

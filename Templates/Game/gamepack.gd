@@ -128,7 +128,6 @@ func preload_levels() -> void:
 func await_beats(beats:int) -> void:
 	for beat in beats:
 		await $Subscript/RhythmNotifier.beat
-		# print_rich("[color=#BBFFFF]beat")
 	return
 
 
@@ -152,8 +151,6 @@ func await_next_microgame():
 
 ## Selects a random microgame using a bag system. Reloads the microgames when you run out.
 func choose_microgame():
-	if (19+1)%20 == 0:
-		print(true)
 	if boss_microgame and GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC:
 		if (levels_cleared+1)%boss_level == 0 and levels_cleared > 0:
 			next_microgame = loaded_boss.instantiate()
@@ -164,8 +161,10 @@ func choose_microgame():
 		for microgame in loaded_microgames:
 			rolled_levels.append(index)
 			index+=1
+		print("Levels : "+ str(rolled_levels))
 	var microgame_picked_index = rolled_levels[randi_range(0, rolled_levels.size()-1)]
 	next_microgame = loaded_microgames[microgame_picked_index].instantiate()
+	rolled_levels.erase(microgame_picked_index)
 
 
 ## Instantiates the microgame just before opening it
@@ -196,16 +195,18 @@ func completed_microgame(won:bool) -> void:
 			return
 	else:
 		levels_cleared += 1
+		set_score.emit(levels_cleared)
 		
-		if GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC:
+		if GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC and levels_cleared == boss_level:
 			game_over.emit(levels_cleared)
+			return
 		
-	set_score.emit(levels_cleared)
+	
 	
 	for speed_scale in speedup_scale:
 		if speed_scale["level"] == levels_cleared:
 			speed_up.emit()
-			await_beats(beats_upon_speedup)
+			await await_beats(beats_upon_speedup)
 			$Subscript/AudioStreamPlayer.pitch_scale = speed_scale["speed"]
 			speed = speed_scale["speed"]
 	

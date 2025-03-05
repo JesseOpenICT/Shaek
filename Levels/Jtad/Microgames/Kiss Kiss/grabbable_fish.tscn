@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://c712guhbqpoho"]
+
+[ext_resource type="Texture2D" uid="uid://d4bo26d5p3oln" path="res://Levels/Jtad/MainStuff/Fn1.png" id="1_7m7h7"]
+[ext_resource type="Texture2D" uid="uid://di1ddsjbaeyjt" path="res://Levels/Jtad/MainStuff/Fn2.png" id="2_omrh5"]
+[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Kiss Kiss/grabbable_fish.gd" id="3_6va0m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdxqe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7m7h7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_omrh5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wo5oa"]
+radius = 24.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2w2pp"]
+radius = 4.0
+
+[node name="GrabbableFish" type="AnimatedSprite2D"]
+position = Vector2(181, 94)
+sprite_frames = SubResource("SpriteFrames_bdxqe")
+autoplay = "default"
+frame_progress = 0.452835
+script = ExtResource("3_6va0m")
+
+[node name="Grab" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
+position = Vector2(4, -3)
+shape = SubResource("CircleShape2D_wo5oa")
+
+[node name="Snoot" type="Area2D" parent="." groups=["snoot"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snoot"]
+position = Vector2(-17, 9)
+shape = SubResource("CircleShape2D_2w2pp")
+debug_color = Color(0.853041, 0.000823613, 0.892728, 0.42)
+
+[connection signal="mouse_entered" from="Grab" to="." method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Grab" to="." method="_on_grab_mouse_exited"]
+[connection signal="area_entered" from="Snoot" to="." method="_on_snoot_area_entered"]

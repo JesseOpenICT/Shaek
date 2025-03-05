@@ -1,0 +1,194 @@
+[gd_scene load_steps=24 format=3 uid="uid://81b65x5qbdek"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jxf8b"]
+[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Pool Maker/Script.gd" id="2_p8v50"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_etiqf"]
+[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Pool Maker/pour.gd" id="4_3hfvl"]
+[ext_resource type="Texture2D" uid="uid://cbqsv35tliid0" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/can.png" id="5_02x5l"]
+[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Pool Maker/roof_pivot.gd" id="6_virpl"]
+[ext_resource type="Texture2D" uid="uid://bw6d2pjcvh7n4" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/roof.png" id="7_fc0e1"]
+[ext_resource type="Texture2D" uid="uid://c7j8ui03cplc2" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/sparkindicator1.png" id="7_i67qb"]
+[ext_resource type="Texture2D" uid="uid://clblvdbxwatdw" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/building.png" id="8_iraa8"]
+[ext_resource type="Texture2D" uid="uid://bg0hp2wjltw8m" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/sparkindicator2.png" id="8_t6af3"]
+[ext_resource type="Texture2D" uid="uid://bhiuklwx4jewx" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/backdrop.png" id="9_v2r3b"]
+[ext_resource type="Texture2D" uid="uid://glhdc3vnqo5n" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/w1.png" id="10_plcen"]
+[ext_resource type="Texture2D" uid="uid://d1o2765uo7t5g" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/w2.png" id="11_ybxep"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w2s6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_i67qb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_t6af3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_4cq1y"]
+offsets = PackedFloat32Array(0, 0.139535, 0.293023)
+colors = PackedColorArray(0.659202, 0.854098, 1, 1, 0.768743, 0.838785, 1, 1, 0.352292, 0.647988, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_btqjb"]
+gradient = SubResource("Gradient_4cq1y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_06ci6"]
+particle_flag_disable_z = true
+spread = 20.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 980, 0)
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_btqjb")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pjt1v"]
+polygon = PackedVector2Array(24, 24, 24, -24, 12, 12, -12, 12, -24, -24, -24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vxcn"]
+size = Vector2(67.01, 60.47)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5t7sr"]
+polygon = PackedVector2Array(0, 0, 48, 0, 48, 48, 0, 48)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2085p"]
+points = PackedVector2Array(15, -36.25, 25, -36.25, 65, 33.75, 55, 43.75, -15, 43.75, -25, 33.75)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hqyv3"]
+polygon = PackedVector2Array(15, -36.25, 25, -36.25, 65, 33.75, 55, 43.75, -15, 43.75, -25, 33.75)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hiem5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_plcen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ybxep")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Microgame" instance=ExtResource("1_jxf8b")]
+script = ExtResource("2_p8v50")
+preparation_text = "Fill!"
+preparation_image = ExtResource("3_etiqf")
+
+[node name="Pour" type="Marker2D" parent="." index="1" node_paths=PackedStringArray("spark")]
+position = Vector2(47, 52)
+script = ExtResource("6_virpl")
+spark = NodePath("Spark2")
+rotate_max = 0.994838
+
+[node name="Spark2" type="AnimatedSprite2D" parent="Pour" index="0"]
+z_index = 4
+position = Vector2(21.5, -21.5)
+sprite_frames = SubResource("SpriteFrames_w2s6d")
+autoplay = "default"
+frame_progress = 0.41655
+
+[node name="CPUParticles2D" type="GPUParticles2D" parent="Pour" index="1"]
+z_index = -1
+position = Vector2(21, -24)
+rotation = -0.933529
+amount = 384
+process_material = SubResource("ParticleProcessMaterial_06ci6")
+lifetime = 3.0
+fixed_fps = 0
+draw_order = 0
+script = ExtResource("4_3hfvl")
+
+[node name="Cup" type="LightOccluder2D" parent="Pour" index="2"]
+occluder = SubResource("OccluderPolygon2D_pjt1v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pour" index="3"]
+position = Vector2(81, 44)
+texture = ExtResource("5_02x5l")
+
+[node name="Grab" type="Area2D" parent="Pour" index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pour/Grab" index="0"]
+z_index = 2
+position = Vector2(-4, -0.5)
+shape = SubResource("RectangleShape2D_1vxcn")
+debug_color = Color(0.000296534, 0, 0.445241, 0.6)
+
+[node name="WallL" type="LightOccluder2D" parent="." index="2"]
+position = Vector2(85, 96)
+scale = Vector2(0.2, 5)
+occluder = SubResource("OccluderPolygon2D_5t7sr")
+
+[node name="WallR" type="LightOccluder2D" parent="." index="3"]
+position = Vector2(128, 96)
+scale = Vector2(0.2, 5)
+occluder = SubResource("OccluderPolygon2D_5t7sr")
+
+[node name="RoofPivot" type="Marker2D" parent="." index="4" node_paths=PackedStringArray("spark")]
+z_index = 2
+position = Vector2(137, 96)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("6_virpl")
+spark = NodePath("Spark")
+rotate_max = 2.0944
+
+[node name="Spark" type="AnimatedSprite2D" parent="RoofPivot" index="0"]
+z_index = 4
+position = Vector2(-68, -8)
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_w2s6d")
+autoplay = "default"
+frame_progress = 0.350024
+
+[node name="Grab" type="Area2D" parent="RoofPivot" index="1"]
+position = Vector2(-51.25, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoofPivot/Grab" index="0"]
+z_index = 2
+position = Vector2(-1.11, -0.96)
+scale = Vector2(1.075, 1.075)
+shape = SubResource("ConvexPolygonShape2D_2085p")
+debug_color = Color(0.121569, 0.133333, 0.133333, 0.6)
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="RoofPivot" index="2"]
+position = Vector2(-51.25, -40)
+occluder = SubResource("OccluderPolygon2D_hqyv3")
+
+[node name="Roof" type="Sprite2D" parent="RoofPivot" index="3"]
+position = Vector2(-11.25, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("7_fc0e1")
+
+[node name="Building" type="Sprite2D" parent="." index="5"]
+z_index = 1
+position = Vector2(128, 96)
+texture = ExtResource("8_iraa8")
+
+[node name="Backdrop" type="Sprite2D" parent="." index="6"]
+z_index = -10
+position = Vector2(128, 96)
+texture = ExtResource("9_v2r3b")
+
+[node name="WinScreen" type="AnimatedSprite2D" parent="." index="7"]
+z_index = 5
+position = Vector2(128, 96)
+scale = Vector2(1.15, 1e-05)
+sprite_frames = SubResource("SpriteFrames_hiem5")
+autoplay = "default"
+frame_progress = 0.227365
+
+[node name="Timer" type="Timer" parent="." index="8"]
+one_shot = true
+
+[connection signal="mouse_entered" from="Pour/Grab" to="Pour" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Pour/Grab" to="Pour" method="_on_grab_mouse_exited"]
+[connection signal="mouse_entered" from="RoofPivot/Grab" to="RoofPivot" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="RoofPivot/Grab" to="RoofPivot" method="_on_grab_mouse_exited"]

@@ -11,9 +11,9 @@ void fragment() {
     float PI23 = 2.*PI/3.;
     float quicktime = TIME*1. + 0.3*(wave1.x - .5*wave1.y);
     vec3 quirk = (vec3(sin(quicktime),sin(quicktime-PI23),sin(quicktime+PI23))+1.)*.5;
-    
+
     COLOR = vec4(vec3(0.), 1.);
     COLOR.rgb += texture(image, wave1).rgb * quirk;
-    
+
     COLOR.rgb += texture(image, wave1+ 3.*sin(TIME*.5)).rgb *  0.5*quirk*( -sin(TIME*1.) +1.);
     }

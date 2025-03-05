@@ -5,7 +5,6 @@
 
 [node name="Microgame" type="Node2D"]
 script = ExtResource("1_vbo5u")
-beats = 8
 
 [node name="Countdown" type="AnimatedSprite2D" parent="."]
 visible = false
