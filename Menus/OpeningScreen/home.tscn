@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://ntois38neb2i"]
 
-[ext_resource type="Script" path="res://Menus/OpeningScreen/home.gd" id="1_2ag3n"]
-[ext_resource type="Shader" path="res://Menus/OpeningScreen/ColorWave.gdshader" id="1_5eqed"]
+[ext_resource type="Script" uid="uid://ct4xiakqy212n" path="res://Menus/OpeningScreen/home.gd" id="1_2ag3n"]
+[ext_resource type="Shader" uid="uid://cu05norpduyi3" path="res://Menus/OpeningScreen/ColorWave.gdshader" id="1_5eqed"]
 [ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="2_aoru1"]
 [ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="3_ccqfc"]
-[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="3_irjop"]
+[ext_resource type="Script" uid="uid://bap78s4fqkbpa" path="res://Templates/Menus/button.gd" id="3_irjop"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgjwu"]
 shader = ExtResource("1_5eqed")
-shader_parameter/scale = 0.05
 shader_parameter/image = ExtResource("2_aoru1")
+shader_parameter/scale = 0.05
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3

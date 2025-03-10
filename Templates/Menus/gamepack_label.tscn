@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://pf6fkd4h6qip"]
 
 [ext_resource type="Texture2D" uid="uid://dvs68ck50i2pt" path="res://Levels/Jtad/DIVINITY PLACEHOLDER.png" id="1_3c7uj"]
-[ext_resource type="Script" path="res://Templates/Menus/gamepack_label.gd" id="1_ivc8r"]
+[ext_resource type="Script" uid="uid://etavce1r8tq5" path="res://Templates/Menus/gamepack_label.gd" id="1_ivc8r"]
 [ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="2_i2xpn"]
-[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="3_b5pjx"]
+[ext_resource type="Script" uid="uid://bap78s4fqkbpa" path="res://Templates/Menus/button.gd" id="3_b5pjx"]
 
 [node name="GamepackLabel" type="MarginContainer"]
 custom_minimum_size = Vector2(256, 42)

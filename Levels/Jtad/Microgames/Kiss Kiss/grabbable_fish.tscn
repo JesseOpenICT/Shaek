@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://flnxehy4ikm2" path="res://Levels/Jtad/Microgames/Kiss Kiss/sprite1.png" id="1_6cmv6"]
 [ext_resource type="Texture2D" uid="uid://cadtuklxnuhd8" path="res://Levels/Jtad/Microgames/Kiss Kiss/sprite2.png" id="2_4iefh"]
-[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Kiss Kiss/grabbable_fish.gd" id="3_6va0m"]
+[ext_resource type="Script" uid="uid://uqxvkqykrcks" path="res://Levels/Jtad/Microgames/Kiss Kiss/grabbable_fish.gd" id="3_6va0m"]
 [ext_resource type="Texture2D" uid="uid://cqjp5bs5xapt2" path="res://Levels/Jtad/Microgames/Kiss Kiss/heart.png" id="4_0tts1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bdxqe"]

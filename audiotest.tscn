@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://wb7hvtndlw1t"]
 
-[ext_resource type="Script" path="res://audiotest.gd" id="1_sejku"]
-[ext_resource type="Script" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="2_i6kcs"]
+[ext_resource type="Script" uid="uid://cc4timbtm3sst" path="res://audiotest.gd" id="1_sejku"]
+[ext_resource type="Script" uid="uid://cdf458shpmx1u" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="2_i6kcs"]
 [ext_resource type="Texture2D" uid="uid://35v6h0mbeejh" path="res://icon.png" id="3_uggt8"]
 [ext_resource type="AudioStream" uid="uid://cq3y4o1l0u10r" path="res://De Dijk - Nergens goed voor (1989).mp3" id="3_xrqi8"]
 

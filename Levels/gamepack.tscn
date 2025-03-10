@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cucdlrepvhu3i"]
 
-[ext_resource type="Script" path="res://Templates/Game/gamepack.gd" id="1_akc42"]
+[ext_resource type="Script" uid="uid://wggkbf0erllb" path="res://Templates/Game/gamepack.gd" id="1_akc42"]
 [ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="3_bu25b"]
-[ext_resource type="Script" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_ld3go"]
-[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="4_6f3xs"]
+[ext_resource type="Script" uid="uid://cdf458shpmx1u" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_ld3go"]
+[ext_resource type="Script" uid="uid://bap78s4fqkbpa" path="res://Templates/Menus/button.gd" id="4_6f3xs"]
 
 [node name="Gamepack" type="Node2D"]
 script = ExtResource("1_akc42")

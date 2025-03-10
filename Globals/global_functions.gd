@@ -113,7 +113,7 @@ func set_setting(variable, value):
 
 
 func interpret_settings():
-	get_window().mode = 3 if fullscreen else 0 if get_window().mode == 3 else get_window().mode
+	get_window().mode = Window.Mode.MODE_FULLSCREEN if fullscreen else 0 if get_window().mode == 3 else get_window().mode
 	AudioServer.set_bus_volume_db(
 		AudioServer.get_bus_index("Music"),
 		linear_to_db(float(music_volume)*.01) if music_on else -80.

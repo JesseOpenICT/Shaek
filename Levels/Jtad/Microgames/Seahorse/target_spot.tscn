@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://k3865o6ln0al"]
 
-[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Seahorse/target_spot.gd" id="1_0d3yu"]
+[ext_resource type="Script" uid="uid://hdw8dqwfgw25" path="res://Levels/Jtad/Microgames/Seahorse/target_spot.gd" id="1_0d3yu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pv4g"]
 

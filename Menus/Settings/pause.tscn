@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://hm5foxhh74i"]
 
-[ext_resource type="Script" path="res://Menus/Settings/settings.gd" id="1_4onsg"]
+[ext_resource type="Script" uid="uid://bxb0t0ewde7m5" path="res://Menus/Settings/settings.gd" id="1_4onsg"]
 [ext_resource type="Theme" uid="uid://blcoum186br5p" path="res://Templates/Theme/base_theme.tres" id="2_bxujc"]
-[ext_resource type="Script" path="res://Templates/Menus/button.gd" id="5_n5r6x"]
+[ext_resource type="Script" uid="uid://bap78s4fqkbpa" path="res://Templates/Menus/button.gd" id="5_n5r6x"]
 
 [node name="Settings" type="Node2D" node_paths=PackedStringArray("focus")]
 process_mode = 3

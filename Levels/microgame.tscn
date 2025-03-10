@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://by252r1um8onb"]
 
-[ext_resource type="Script" path="res://Templates/Game/microgame.gd" id="1_vbo5u"]
+[ext_resource type="Script" uid="uid://bg2f3qacxefg8" path="res://Templates/Game/microgame.gd" id="1_vbo5u"]
 [ext_resource type="SpriteFrames" uid="uid://csf3ipv0mkjx6" path="res://Levels/Jtad/Microgames/countdown.tres" id="2_2b1ki"]
 
 [node name="Microgame" type="Node2D"]

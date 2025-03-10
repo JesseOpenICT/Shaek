@@ -2,15 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jp7ls"]
 [ext_resource type="Texture2D" uid="uid://7abhmv5c1qa6" path="res://Levels/Jtad/Microgames/Seahorse/board.png" id="2_pdse1"]
-[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Seahorse/microgame.gd" id="2_rovut"]
+[ext_resource type="Script" uid="uid://bin6fomw61lme" path="res://Levels/Jtad/Microgames/Seahorse/microgame.gd" id="2_rovut"]
 [ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_0dp85"]
 [ext_resource type="Texture2D" uid="uid://yh5x0iw1lqfh" path="res://Levels/Jtad/Microgames/Seahorse/tiles.png" id="3_yu1my"]
-[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Seahorse/tilesetter.gd" id="6_84s45"]
+[ext_resource type="Script" uid="uid://cwol48xfxj8r" path="res://Levels/Jtad/Microgames/Seahorse/tilesetter.gd" id="6_84s45"]
 [ext_resource type="Texture2D" uid="uid://c3stvngpbo0sx" path="res://Levels/Jtad/Microgames/Seahorse/target_tile.png" id="6_gw464"]
 [ext_resource type="Texture2D" uid="uid://bew37iof2m7w4" path="res://Levels/Jtad/Microgames/Seahorse/horse.png" id="7_t6kin"]
 [ext_resource type="Texture2D" uid="uid://c2uvg2s02n8la" path="res://Levels/Jtad/Microgames/Seahorse/king.png" id="8_c4m4x"]
 [ext_resource type="PackedScene" uid="uid://k3865o6ln0al" path="res://Levels/Jtad/Microgames/Seahorse/target_spot.tscn" id="9_5anrf"]
-[ext_resource type="Shader" path="res://Levels/Jtad/Microgames/Kiss Kiss/waterbg.gdshader" id="11_wq0jr"]
+[ext_resource type="Shader" uid="uid://clxjafl4if4rw" path="res://Levels/Jtad/Microgames/Kiss Kiss/waterbg.gdshader" id="11_wq0jr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ohkxo"]
 resource_name = "base"
@@ -60,8 +60,8 @@ noise = SubResource("FastNoiseLite_4l0xh")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sktvq"]
 shader = ExtResource("11_wq0jr")
-shader_parameter/scale = 0.005
 shader_parameter/image = SubResource("NoiseTexture2D_np4ys")
+shader_parameter/scale = 0.005
 
 [node name="Microgame" node_paths=PackedStringArray("horse_meeple", "king_meeple") instance=ExtResource("1_jp7ls")]
 script = ExtResource("2_rovut")

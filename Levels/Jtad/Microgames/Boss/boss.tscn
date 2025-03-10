@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://hojgvx4qjdba"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_fmw3n"]
+[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="2_cpubr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fmw3n"]
+
+[node name="Boss" instance=ExtResource("1_fmw3n")]
+preparation_text = "Boss!"
+preparation_image = ExtResource("2_cpubr")
+beats = 80
+
+[node name="TestWater" type="ColorRect" parent="." index="1"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 96.0
+offset_right = 256.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0830731, 0.169035, 0.295187, 1)
+
+[node name="Area2D" type="Area2D" parent="TestWater" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestWater/Area2D" index="0"]
+shape = SubResource("CircleShape2D_fmw3n")
+debug_color = Color(0, 0.509804, 0.984314, 0.533333)

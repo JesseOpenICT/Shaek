@@ -10,10 +10,9 @@ var active ## is true if you're winning
 @export_range(-360, 360, 1, "radians_as_degrees") var rotate_min : float
 @export_range(-360, 360, 1, "radians_as_degrees") var rotate_max : float
 
-var pivotpoint : int = 0
+var pivotpoint : float = 0
 
 signal overwrite_grab
-signal kissed
 
 
 func _on_grab_mouse_entered() -> void:
@@ -34,6 +33,7 @@ func _process(delta: float) -> void:
 			spark.queue_free()
 		rotation = move_toward(rotation, position.angle_to_point(get_viewport().get_mouse_position()) - pivotpoint, 9* delta)
 	else:
+		@warning_ignore("incompatible_ternary")
 		rotation = move_toward(rotation, (0 if rotation < rotate_max/2 else rotate_max), 5* delta)
 	rotation = clamp(rotation, rotate_min, rotate_max)
 	if rotation > rotate_max/2:
