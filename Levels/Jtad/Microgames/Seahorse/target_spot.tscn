@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://k3865o6ln0al"]
+
+[ext_resource type="Script" path="res://Levels/Jtad/Microgames/Seahorse/target_spot.gd" id="1_0d3yu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pv4g"]
+
+[node name="TargetSpot" type="Area2D"]
+script = ExtResource("1_0d3yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4pv4g")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -27,6 +27,10 @@ func _on_snoot_area_entered(area: Area2D) -> void:
 		joint_node.joint_node = self
 		kissed.emit()
 		
+		play("win")
+		joint_node.play("win")
+		$GPUParticles2D.emitting = true
+		
 		if self.scale.x > 0:
 			joint_node.position = Vector2(self.position.x + $Snoot/CollisionShape2D.position.x*2, self.position.y)
 		else:

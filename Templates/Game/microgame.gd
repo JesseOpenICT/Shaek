@@ -9,6 +9,10 @@ class_name Microgame
 ## Image of mouse, arrow keys, spacebar, ideally nothing else
 @export var preparation_image : CompressedTexture2D
 
+## The volume of the main music during this microgame. After it ends, it'll return to 0 (normal).
+## Note that each step of -6 halves the volume.
+@export_range(-80, 0, 0.01, "suffix:DB") var music_volume_DB : float
+
 ## amount of beats the microgame takes. Oughtta be a multiple of 4.
 @export var beats : int = 8
 var remaining_ticks : float 

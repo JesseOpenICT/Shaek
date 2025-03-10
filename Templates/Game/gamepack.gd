@@ -81,10 +81,14 @@ var levels_cleared : int
 ## What happens to your music during microgames. 
 ## If set to [b]pause music[/b], the music will pause, then continue afterwards. 
 ## If set to [b]reduce volume[/b], instead the volume will keep playing but reduce according to the variable below.
-@export_enum("pause music", "reduce volume") var microgame_music_mode = 0
+#disabled in favor of not pausing music
+#@export_enum("pause music", "reduce volume") var microgame_music_mode = 0
 ## The volume in decibels for the music during microgames. 
 ## Remember! 0 is default, 6 is double -6 is half, then -12 is half of -6 etc.
-@export var microgame_music_volume : float
+# disabled in favor of microgame specific music volume
+#@export var microgame_music_volume : float
+## default volume of the music player.
+@onready var music_base_volume = music_player.volume_db
 ## The BPM of your background music. The microgame's speed varies based on this value, and the increasing speed variable. 
 @export var music_BPM : int = 120
 var passed_beats : int
@@ -146,6 +150,7 @@ func await_next_microgame():
 	show_microgame_preparation_hint.emit(next_microgame.preparation_text, next_microgame.preparation_image)
 	await await_beats(beats_after_hint)
 	instatiate_microgame(next_microgame)
+	music_player.volume_db = music_base_volume + next_microgame.music_volume_DB
 	open.emit(true)
 
 
@@ -178,6 +183,7 @@ func instatiate_microgame(microgame:Microgame):
 ## Gets called when a microgame ends, increases your score, handles speedup,
 ## Heart loss, and Game Over.
 func completed_microgame(won:bool) -> void:
+	music_player.volume_db = music_base_volume
 	open.emit(false)
 	microgame_end.emit(won)
 	print_rich("[color=green]win" if won else "[color=red]lose")

@@ -124,7 +124,7 @@ process_mode = 1
 title = "Stargazing Down"
 author = "Jtad"
 cover_art = ExtResource("2_kx0ge")
-microgames = Array[String](["res://Levels/Jtad/Microgames/Kiss Kiss/kiss_kiss.tscn", "res://Levels/Jtad/Microgames/Pool Maker/microgame.tscn"])
+microgames = Array[String](["res://Levels/Jtad/Microgames/Kiss Kiss/kiss_kiss.tscn", "res://Levels/Jtad/Microgames/Pool Maker/microgame.tscn", "res://Levels/Jtad/Microgames/Seahorse/microgame.tscn"])
 lives = [NodePath("Subscript/FishCam/Life1"), NodePath("Subscript/FishCam/Life2"), NodePath("Subscript/FishCam/Life3"), NodePath("Subscript/FishCam/Life4")]
 
 [node name="Subscript" parent="." index="0" node_paths=PackedStringArray("guys_sprite", "score", "hint_image", "hint_text", "speedup_label")]
@@ -138,9 +138,11 @@ speedup_label = NodePath("FishCam/SpeedUpLabel")
 [node name="RhythmNotifier" parent="Subscript" index="0"]
 bpm = 120.0
 beat_length = 0.5
+running = false
 
 [node name="AudioStreamPlayer" parent="Subscript" index="1"]
 stream = ExtResource("4_h47r4")
+volume_db = 1.0
 
 [node name="Wave" type="NinePatchRect" parent="Subscript" index="3"]
 clip_children = 2
