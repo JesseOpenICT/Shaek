@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://1gqjkmj782x1"]
+
+[ext_resource type="Shader" uid="uid://ucss264wv32j" path="res://Levels/Jtad/Microgames/Boss/spiky.gdshader" id="1_sja5p"]
+[ext_resource type="Texture2D" uid="uid://duk62x0n4knrr" path="res://Levels/Jtad/Microgames/Boss/Art/hurt1.png" id="2_ehywb"]
+[ext_resource type="Script" uid="uid://bifvlfwh8d37o" path="res://Levels/Jtad/Microgames/Boss/pain.gd" id="2_sqeg4"]
+[ext_resource type="Texture2D" uid="uid://c3toyvwciq3wt" path="res://Levels/Jtad/Microgames/Boss/Art/hurt3.png" id="3_sqeg4"]
+[ext_resource type="Texture2D" uid="uid://dkx6k758nxshm" path="res://Levels/Jtad/Microgames/Boss/Art/hurt2.png" id="4_a1mjb"]
+
+[sub_resource type="Gradient" id="Gradient_qfqf5"]
+offsets = PackedFloat32Array(0, 0.665116, 0.75814, 0.851163, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.253733, 0.0214376, 0.178919, 1, 0.555602, 0.102858, 0.268796, 1, 0.968587, 5.67943e-06, 7.70092e-07, 1, 1, 0.0780459, 0.704557, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qkofh"]
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_apsxc"]
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_qfqf5")
+noise = SubResource("FastNoiseLite_qkofh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2kka7"]
+shader = ExtResource("1_sja5p")
+shader_parameter/spikynoise = SubResource("NoiseTexture2D_apsxc")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vp65n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0arb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ehywb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sqeg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a1mjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sqeg4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Pain" type="Area2D" groups=["pain"]]
+z_index = 2
+material = SubResource("ShaderMaterial_2kka7")
+script = ExtResource("2_sqeg4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vp65n")
+debug_color = Color(0.964979, 0, 0.489491, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_2kka7")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_0arb3")
+autoplay = "default"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

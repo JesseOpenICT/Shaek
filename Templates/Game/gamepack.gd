@@ -23,7 +23,7 @@ class_name Gamepack
 @export_file("*.tscn") var boss_microgame : String 
 ## Once your score reaches this number minus one, you'll face the boss microgame. So if the number is
 ## 20, after beating 19 microgames, the 20th will be the boss. You'll win classic mode after beating it.
-## If no boss microgame is set, you'll still win classic once you succesfully get this score, but a normal.
+## If no boss microgame is set, you'll still win classic once you succesfully get this score, but a normal
 ## microgame will play.
 @export var boss_level : int = 20
 ## List of microgames as packed scenes. We can instantiate these right away.
@@ -41,20 +41,20 @@ var levels_cleared : int
 ## Before being removed though the game will attempt to run the dismiss() function on them, 
 ## allowing you to play an animation for them.
 @export var lives : Array[Node]
-## The points at which the game will speed up. X represents the amount of cleared microgames. 
-## Y represents the scale of the speed (1 being default, 2 being double). I can't recommend going above 2.
-@export var speedup_scale : Array[Dictionary] = [
-			{"level":6, "speed":1.05},
-			{"level":12, "speed":1.1},
-			{"level":18, "speed":1.2},
-			{"level":24, "speed":1.3},
-			{"level":30, "speed":1.4},
-			{"level":36, "speed":1.5},
-			{"level":42, "speed":1.6},
-			{"level":48, "speed":1.8},
-			{"level":54, "speed":1.9},
-			{"level":60, "speed":2},
-		]
+## The points at which the game will speed up. The key represents the amount of cleared microgames. 
+## The float represents the scale of the speed (1 being default, 2 being double). I can't recommend going above 2.
+@export var speedup_scale : Dictionary[int, float] = {
+				6:  1.05,
+				12: 1.1,
+				18: 1.2,
+				24: 1.3,
+				30: 1.4,
+				36: 1.5,
+				42: 1.6,
+				48: 1.8,
+				52: 1.9,
+				60: 2.0,
+			}
 
 
 @export_subgroup("Downtime")
@@ -138,6 +138,7 @@ func await_beats(beats:int) -> void:
 func _ready() -> void:
 	preload_levels()
 	await get_tree().process_frame
+	$Subscript/AudioStreamPlayer.play()
 	await await_beats(beats_until_start)
 	await_next_microgame()
 
@@ -156,7 +157,7 @@ func await_next_microgame():
 
 ## Selects a random microgame using a bag system. Reloads the microgames when you run out.
 func choose_microgame():
-	if boss_microgame and GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC:
+	if boss_microgame:# and GlobalFunctions.gamemode == GlobalFunctions.Gamemode.CLASSIC:
 		if (levels_cleared+1)%boss_level == 0 and levels_cleared > 0:
 			next_microgame = loaded_boss.instantiate()
 			return
@@ -166,7 +167,6 @@ func choose_microgame():
 		for microgame in loaded_microgames:
 			rolled_levels.append(index)
 			index+=1
-		print("Levels : "+ str(rolled_levels))
 	var microgame_picked_index = rolled_levels[randi_range(0, rolled_levels.size()-1)]
 	next_microgame = loaded_microgames[microgame_picked_index].instantiate()
 	rolled_levels.erase(microgame_picked_index)
@@ -209,12 +209,12 @@ func completed_microgame(won:bool) -> void:
 		
 	
 	
-	for speed_scale in speedup_scale:
-		if speed_scale["level"] == levels_cleared:
+	for speed_scale : int in speedup_scale.keys():
+		if speed_scale == levels_cleared:
 			speed_up.emit()
 			await await_beats(beats_upon_speedup)
-			$Subscript/AudioStreamPlayer.pitch_scale = speed_scale["speed"]
-			speed = speed_scale["speed"]
+			$Subscript/AudioStreamPlayer.pitch_scale = speedup_scale[speed_scale]
+			speed = speedup_scale[speed_scale]
 	
 	await_next_microgame()
 	

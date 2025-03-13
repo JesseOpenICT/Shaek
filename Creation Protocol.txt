@@ -12,14 +12,44 @@ After you add your levelpack to the folder, you should no longer need to do anyt
 personal folder.
 
 
-MICROGAMES
--	Each microgame will be its own scene. It will operate almost entirely just fine on its own.
--	To create a microgame, simply create a new scene, (just press + at the top)
--	Then add the microgame.tscn from the "res://Levels/" into the 2D editor.
--	Create a folder within your Microgames folder to save this scene to. Keeping your microgames in seperate folders helps keep you organized.
--	Each microgame has a "won" boolean. Set this to true or false during the game to indicate success or failure.
-	-	Example: A game where you balance an object could be true, then become false if the object falls.
-	-	Example: 
+GAMEPACK SCENE
+-	your gamepack.tscn will have several variables that need to be adjusted:
+	-	Add a title, author and cover art that will be displayed in the level selection.
+	-	Add all your microgames as variables under the Game Functionality section.
+	-	Add ideally 4 visible nodes as Lives. More on Lives later.
+	
+	-	Add music to the AudioStreamPlayer and
+	-	add its BPM to the RhythmNotifier and under music in the Gamepack s variables
+
+-	You can add any code you want to the $Subscript scene if you want to keep it seperate.
+-	The above variables are required for basic functionality, but some visuals will need to be added 
+	as well. Connect these signals from the Gamepack to scenes you create to dress up your own levelpack.
+	-	The gamepack will send several signals. 
+		-	game_over(int) will happen when the game ends, either because you beat the boss or because
+			you ran out of lives. You do not strictly have to use this.
+		-	microgame_end(bool) will tell you when a microgame is over. You can use its variable to play a 
+			different animation for winning or losing
+VITAL	-	open(bool) will happen when a microgame starts or ends. Connect this to a "curtain" that will
+			open when true to reveal the microgame, and close if false to hide the process of cleaning it up.
+		-	set_score(int) will update after each microgame. Use it to display the number of levels cleared.
+		-	show_microgame_preparation_hint(String, CompressedTexture2D) is a bit hard to explain. Before
+			each microgame, you will be given a hint like "jump!" or "catch!" something like that, as well
+			as an image to indicate the controls used to do so. Add a label and a texture that show these
+			and become visible when the signal is received. Logically it should be hidden again somehow when
+			the microgame starts or ends.
+		-	Speed up can be used to show a speed up animation. This animation takes 4 beats by default.
+	- You should have four visible nodes that represent your health.
+		-	By default, these are removed using queue_free()
+		-	If you add a dismiss() function to these nodes, the script will instead call this. You can use
+			dismiss() to add an animation to the health, such as the sprite shrinking or simply leaving
+
+-	You can customize the gamepack even further.
+	-	You can change when the Boss Level occurs
+	-	You can change when the music and with it the game speeds up
+	-	You can change how many music beats it takes;
+		-	Between Microgame s, the sum of until hint and after hint
+		-	A delay when the last microgame ends instead of the after hint delay
+		-	A delay when the audio speeds up for a special animation.
 
 
 CONTROLS
@@ -29,10 +59,49 @@ CONTROLS
 		* Mouse position and movement
 		* Arrows ("UP", "LEFT", "RIGHT", "DOWN")
 -	These will have keybindings so you can change them
+	-	Note: These may have keybindings later it is not a priority sorry
 
+
+MICROGAMES
+-	Each microgame will be its own scene. It will operate almost entirely just fine on its own.
+-	To create a microgame, simply create a new scene, (just press + at the top)
+-	Then add the microgame.tscn from the "res://Levels/" into the 2D editor.
+-	Create a folder within your Microgames folder to save this scene to. Keeping your microgames 
+	in seperate folders helps keep you organized.
+-	Each microgame has a "won" boolean. Set this to true or false during the game to indicate success or failure.
+	-	Example: A game where you balance an object could be true, then become false if the object falls.
+	-	Example: A game where you have to pick up all coins would be false, then once all coins are picked up becomes true.
+-	As for a microgames variables:
+	-	Preparation Text and Preparation Image are the String and Image shown before the microgame starts,
+		see show_microgame_preparation_hint(String, CompressedTexture2D)
+	-	Music volume Db is added to the musics volume during the microgame. Set it to -80 to mute music.
+		-6 halves the volume, -12 quarters it, 0 keeps it normal.
+	-	Beats is the number of music beats the microgame lasts. If your bpm is 120, a microgame is 4
+		seconds. Ideally change it in multiples of 2 or perhaps 4, or 3 if your music is in threes.
 
 MICROGAME COUNTER
 -	When 8 beats are left, a counter will appear for your microgame. This is a child of your Microgame scene.
 -	You should add a unique SpriteFrames to this, consisting of 8 frames.
 -	Remove the loop and set the FPS to 2
 -	Its functionality will be handled by the Microgame
+
+MICROGAME SPEED
+-	Every beat, the beat(int) signal is sent from the Gamepack to the Microgame scene. This means you can
+	synchronize anything to this beat
+-	In addition, and perhaps more importantly, a speed variable will be sent to the microgame that reflects
+	on the musics speed. If your music speed is 1.5, then the speed will also be 1.5, for instance.
+		this is useful by for instance using delta*speed.
+-	If you dont change anything, the game speed will still be reflected on the counter. This is fine for
+	dexterity based games but may not be ideal if you want something where you hold keys for instance.
+-	If, for whatever reason, a game should last indefinitely, 
+
+ADDITIONAL NOTES
+-	Avoid using cameras. If you have to, put them into a subviewport.
+-	The window is ALWAYS 256*192 pixels. Use this to your advantage.
+-	Avoid declaring new classes. This can clutter the project.
+-	Microgame s have a _ready() and _process(delta:float) function, and Gamepack s have a _ready() function.
+	adding a new _ready() or _process(delta) will overwrite the previously existing function. To avoid this,
+	add super() or super(delta) to the script- super() will call a function of the same name inherited by the
+	scene from which it gets inherited.
+-	Feel free to ask any questions at any time if you need help. I might change some of this functionality later.
+	if it better suits everyones needs.

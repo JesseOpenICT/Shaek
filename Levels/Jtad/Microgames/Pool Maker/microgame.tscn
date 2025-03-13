@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://81b65x5qbdek"]
+[gd_scene load_steps=25 format=3 uid="uid://81b65x5qbdek"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jxf8b"]
 [ext_resource type="Script" uid="uid://cfiquvj603jlv" path="res://Levels/Jtad/Microgames/Pool Maker/Script.gd" id="2_p8v50"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bw6d2pjcvh7n4" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/roof.png" id="7_fc0e1"]
 [ext_resource type="Texture2D" uid="uid://c7j8ui03cplc2" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/sparkindicator1.png" id="7_i67qb"]
 [ext_resource type="Texture2D" uid="uid://clblvdbxwatdw" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/building.png" id="8_iraa8"]
+[ext_resource type="AudioStream" uid="uid://5mwvcu6amumt" path="res://Levels/Jtad/Microgames/Pool Maker/water.wav" id="8_srt45"]
 [ext_resource type="Texture2D" uid="uid://bg0hp2wjltw8m" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/sparkindicator2.png" id="8_t6af3"]
 [ext_resource type="Texture2D" uid="uid://bhiuklwx4jewx" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/backdrop.png" id="9_v2r3b"]
 [ext_resource type="Texture2D" uid="uid://glhdc3vnqo5n" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/w1.png" id="10_plcen"]
@@ -101,11 +102,16 @@ z_index = -1
 position = Vector2(21, -24)
 rotation = -0.933529
 amount = 384
-process_material = SubResource("ParticleProcessMaterial_06ci6")
 lifetime = 3.0
 fixed_fps = 0
 draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_06ci6")
 script = ExtResource("4_3hfvl")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Pour/CPUParticles2D" index="0"]
+stream = ExtResource("8_srt45")
+volume_db = -30.0
+bus = &"Effects"
 
 [node name="Cup" type="LightOccluder2D" parent="Pour" index="2"]
 occluder = SubResource("OccluderPolygon2D_pjt1v")
@@ -188,6 +194,7 @@ frame_progress = 0.227365
 [node name="Timer" type="Timer" parent="." index="8"]
 one_shot = true
 
+[connection signal="end" from="." to="Pour/CPUParticles2D" method="_on_microgame_end"]
 [connection signal="mouse_entered" from="Pour/Grab" to="Pour" method="_on_grab_mouse_entered"]
 [connection signal="mouse_exited" from="Pour/Grab" to="Pour" method="_on_grab_mouse_exited"]
 [connection signal="mouse_entered" from="RoofPivot/Grab" to="RoofPivot" method="_on_grab_mouse_entered"]

@@ -21,5 +21,3 @@ func _on_value_changed(tovalue: float) -> void:
 		parameters_plus_toggle.append_array(parameters)
 		parameters_plus_toggle.append(tovalue)
 		callable.callv(parameters_plus_toggle)
-	else:
-		print("invalid function. Check the name, main scene, and parameters")

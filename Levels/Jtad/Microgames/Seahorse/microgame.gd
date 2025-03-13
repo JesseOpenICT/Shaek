@@ -4,6 +4,7 @@ var start_horse : Vector2i = Vector2i(5,5)
 var start_king : Vector2i = Vector2i(0,0)
 var horse_pos : Vector2i
 
+var started = false
 
 const BASE : Vector2i = Vector2i(58, 26) ## The 0,0 position of the board in screen pos
 const STEP : int = 20
@@ -77,4 +78,8 @@ func move_horse(targetspot : Vector2i):
 		tween2.tween_property(self, "king_progress", 1., 1.4/speed)
 		win = true
 		$King/GPUParticles2D.emitting = true
+		$Win.play()
 	set_tiles()
+	if started:
+		$Click1.play()
+	started=true

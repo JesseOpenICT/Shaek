@@ -76,5 +76,6 @@ target_global = true
 function = "load_scene"
 parameters = ["res://Menus/LevelSelect/main.tscn"]
 
+[connection signal="game_over" from="." to="." method="_on_game_over"]
 [connection signal="beat" from="Subscript/RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]
 [connection signal="pressed" from="Subscript/EndScreen/MarginContainer/VBoxContainer/Exit" to="Subscript/EndScreen/MarginContainer/VBoxContainer/Exit" method="_on_pressed"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c712guhbqpoho"]
+[gd_scene load_steps=12 format=3 uid="uid://c712guhbqpoho"]
 
 [ext_resource type="Texture2D" uid="uid://flnxehy4ikm2" path="res://Levels/Jtad/Microgames/Kiss Kiss/sprite1.png" id="1_6cmv6"]
 [ext_resource type="Texture2D" uid="uid://cadtuklxnuhd8" path="res://Levels/Jtad/Microgames/Kiss Kiss/sprite2.png" id="2_4iefh"]
 [ext_resource type="Script" uid="uid://uqxvkqykrcks" path="res://Levels/Jtad/Microgames/Kiss Kiss/grabbable_fish.gd" id="3_6va0m"]
 [ext_resource type="Texture2D" uid="uid://cqjp5bs5xapt2" path="res://Levels/Jtad/Microgames/Kiss Kiss/heart.png" id="4_0tts1"]
+[ext_resource type="AudioStream" uid="uid://dwggh4b5tx18w" path="res://Levels/Jtad/Microgames/Kiss Kiss/Kiss.wav" id="5_acqxk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bdxqe"]
 animations = [{
@@ -70,10 +71,15 @@ debug_color = Color(0.853041, 0.000823613, 0.892728, 0.42)
 position = Vector2(-20, 2)
 emitting = false
 amount = 12
-process_material = SubResource("ParticleProcessMaterial_qreld")
 texture = ExtResource("4_0tts1")
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qreld")
+
+[node name="Kiss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_acqxk")
+volume_db = -8.0
+bus = &"Effects"
 
 [connection signal="mouse_entered" from="Grab" to="." method="_on_grab_mouse_entered"]
 [connection signal="mouse_exited" from="Grab" to="." method="_on_grab_mouse_exited"]

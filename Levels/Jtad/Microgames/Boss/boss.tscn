@@ -1,16 +1,262 @@
-[gd_scene load_steps=4 format=3 uid="uid://hojgvx4qjdba"]
+[gd_scene load_steps=34 format=3 uid="uid://hojgvx4qjdba"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_fmw3n"]
+[ext_resource type="Script" uid="uid://rsau2jnm8cgn" path="res://Levels/Jtad/Microgames/Boss/boss.gd" id="2_am48h"]
 [ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="2_cpubr"]
+[ext_resource type="Script" uid="uid://xwx6cje4ut70" path="res://Levels/Jtad/Microgames/Boss/player_fish.gd" id="3_k5hce"]
+[ext_resource type="Texture2D" uid="uid://bdjg0hsh8i8ek" path="res://Levels/Jtad/Microgames/Boss/Art/dip.png" id="4_am48h"]
+[ext_resource type="Texture2D" uid="uid://cqjp5bs5xapt2" path="res://Levels/Jtad/Microgames/Kiss Kiss/heart.png" id="4_crwap"]
+[ext_resource type="Script" uid="uid://b0batt6kbpxux" path="res://Levels/Jtad/Microgames/Boss/rail.gd" id="4_m4unj"]
+[ext_resource type="PackedScene" uid="uid://1gqjkmj782x1" path="res://Levels/Jtad/Microgames/Boss/pain.tscn" id="5_3vc7j"]
+[ext_resource type="Texture2D" uid="uid://cwfgxvxcxspn" path="res://Levels/Jtad/Microgames/Boss/Art/falling.png" id="5_q3jw6"]
+[ext_resource type="Texture2D" uid="uid://bcvlg8nsinubf" path="res://Levels/Jtad/Microgames/Boss/Art/dmg1.png" id="6_ddh8f"]
+[ext_resource type="Texture2D" uid="uid://c46fitbt4mheh" path="res://Levels/Jtad/Microgames/Boss/Art/peak.png" id="6_nmt2y"]
+[ext_resource type="Texture2D" uid="uid://b3pumctoowlah" path="res://Levels/Jtad/Microgames/Boss/Art/rising.png" id="7_ddh8f"]
+[ext_resource type="Texture2D" uid="uid://bkxwdy11agie7" path="res://Levels/Jtad/Microgames/Boss/Art/dmg2.png" id="7_m4unj"]
+[ext_resource type="Texture2D" uid="uid://cp6jsrasr2w3f" path="res://Levels/Jtad/Microgames/Boss/Art/bg.png" id="12_apsxc"]
+[ext_resource type="Texture2D" uid="uid://bem2f7mmq52k1" path="res://Levels/Jtad/Microgames/Boss/Art/dudes.png" id="13_2kka7"]
+[ext_resource type="AudioStream" uid="uid://dew6ap7gha3dg" path="res://Levels/Jtad/Microgames/Boss/Pain.wav" id="13_38g1y"]
+[ext_resource type="Texture2D" uid="uid://brxepu2crtrpp" path="res://Levels/Jtad/Microgames/Boss/Art/dudes_release.png" id="14_3vc7j"]
+[ext_resource type="Texture2D" uid="uid://dg08e0kef0nvq" path="res://Levels/Jtad/Microgames/Boss/Art/castle.png" id="15_38g1y"]
+[ext_resource type="Texture2D" uid="uid://ussgi2v7j2qo" path="res://Levels/Jtad/Microgames/Boss/Art/moon.png" id="16_6ghd2"]
+[ext_resource type="Script" uid="uid://0m1p3dehar3p" path="res://Levels/Jtad/Microgames/Boss/heart.gd" id="18_vp65n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0arb3"]
+radius = 60.0
+
+[sub_resource type="Gradient" id="Gradient_apsxc"]
+offsets = PackedFloat32Array(0, 0.1133, 0.418719, 0.73399, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0.486275, 1, 1, 0.552941, 0.4, 1, 0.956863, 0.32549, 0.407843, 0.827451, 0.890196, 0, 0.419608, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2kka7"]
+gradient = SubResource("Gradient_apsxc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3vc7j"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 134.84
+initial_velocity_max = 194.77
+gravity = Vector3(0, 0, 0)
+damping_min = 92.508
+damping_max = 100.0
+color_ramp = SubResource("GradientTexture1D_2kka7")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hlfm2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_am48h")
+}],
+"loop": true,
+"name": &"dip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ddh8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m4unj")
+}],
+"loop": true,
+"name": &"dmg",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_q3jw6")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_nmt2y")
+}],
+"loop": true,
+"name": &"peak",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ddh8f")
+}],
+"loop": true,
+"name": &"rise",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fmw3n"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_am48h"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q3jw6"]
+gradient = SubResource("Gradient_am48h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nmt2y"]
+particle_flag_disable_z = true
+direction = Vector3(0.2, 1.3, 0)
+spread = 40.814
+initial_velocity_min = 117.45
+initial_velocity_max = 151.43
+gravity = Vector3(0, -98, 0)
+damping_min = 30.0
+damping_max = 60.0
+color_ramp = SubResource("GradientTexture1D_q3jw6")
+turbulence_enabled = true
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[sub_resource type="Gradient" id="Gradient_q3jw6"]
+colors = PackedColorArray(0.12549, 0.243137, 0.796078, 1, 0.347406, 0.510013, 0.972283, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nmt2y"]
+gradient = SubResource("Gradient_q3jw6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ddh8f"]
+particle_flag_disable_z = true
+direction = Vector3(0.1, -0.8, 0)
+spread = 53.372
+initial_velocity_min = 80.0
+initial_velocity_max = 151.43
+gravity = Vector3(0, 98, 0)
+damping_min = 30.0
+damping_max = 60.0
+color_ramp = SubResource("GradientTexture1D_nmt2y")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vp65n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2kka7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_3vc7j")
+}],
+"loop": true,
+"name": &"toss",
+"speed": 5.0
+}]
 
 [node name="Boss" instance=ExtResource("1_fmw3n")]
+script = ExtResource("2_am48h")
 preparation_text = "Boss!"
 preparation_image = ExtResource("2_cpubr")
-beats = 80
+beats = 16
 
-[node name="TestWater" type="ColorRect" parent="." index="1"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." index="1"]
+offset_right = 256.0
+offset_bottom = 192.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
+handle_input_locally = false
+size = Vector2i(256, 192)
+render_target_update_mode = 4
+
+[node name="WinArea" type="Area2D" parent="SubViewportContainer/SubViewport" index="0" groups=["win"]]
+position = Vector2(27, 59.68)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/WinArea" index="0"]
+shape = SubResource("CircleShape2D_0arb3")
+disabled = true
+debug_color = Color(0.605669, 0.541017, 0, 0.42)
+
+[node name="Shine" type="GPUParticles2D" parent="SubViewportContainer/SubViewport" index="1"]
+z_index = 2
+position = Vector2(27, 59.68)
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 80
+randomness = 0.43
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_3vc7j")
+
+[node name="Rail" type="Camera2D" parent="SubViewportContainer/SubViewport" index="2"]
+position = Vector2(128, 96)
+script = ExtResource("4_m4unj")
+pain = ExtResource("5_3vc7j")
+
+[node name="PlayerFish" type="Area2D" parent="SubViewportContainer/SubViewport/Rail" index="0" node_paths=PackedStringArray("health_nodes")]
+visible = false
+z_index = 3
+position = Vector2(-101, -36.32)
+script = ExtResource("3_k5hce")
+health_nodes = [NodePath("../Heart0"), NodePath("../Heart1"), NodePath("../Heart2")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="0"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_hlfm2")
+animation = &"rise"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="1"]
+shape = SubResource("CircleShape2D_fmw3n")
+debug_color = Color(0, 0.509804, 0.984314, 0.533333)
+
+[node name="ParticlesDown" type="GPUParticles2D" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="2"]
+emitting = false
+amount = 30
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.66
+process_material = SubResource("ParticleProcessMaterial_nmt2y")
+
+[node name="ParticlesUp" type="GPUParticles2D" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="3"]
+emitting = false
+amount = 30
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.09
+process_material = SubResource("ParticleProcessMaterial_ddh8f")
+
+[node name="DamageTimer" type="Timer" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="4"]
+one_shot = true
+
+[node name="Hurtsfx" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="5"]
+stream = ExtResource("13_38g1y")
+volume_db = -16.0
+
+[node name="Bg" type="Sprite2D" parent="SubViewportContainer/SubViewport/Rail" index="1"]
+z_index = -10
+texture = ExtResource("12_apsxc")
+
+[node name="Heart0" type="Sprite2D" parent="SubViewportContainer/SubViewport/Rail" index="2"]
+z_index = 5
+position = Vector2(-113, -81)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_crwap")
+script = ExtResource("18_vp65n")
+
+[node name="Heart1" type="Sprite2D" parent="SubViewportContainer/SubViewport/Rail" index="3"]
+z_index = 5
+position = Vector2(-89, -81)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_crwap")
+script = ExtResource("18_vp65n")
+
+[node name="Heart2" type="Sprite2D" parent="SubViewportContainer/SubViewport/Rail" index="4"]
+z_index = 5
+position = Vector2(-70, -81)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_crwap")
+script = ExtResource("18_vp65n")
+
+[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/Rail" index="5"]
+wait_time = 3.5
+
+[node name="TestWater" type="ColorRect" parent="SubViewportContainer/SubViewport" index="3"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,8 +267,32 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0830731, 0.169035, 0.295187, 1)
 
-[node name="Area2D" type="Area2D" parent="TestWater" index="0"]
+[node name="Dudes" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport" index="4"]
+position = Vector2(128, 96)
+sprite_frames = SubResource("SpriteFrames_vp65n")
+animation = &"toss"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestWater/Area2D" index="0"]
-shape = SubResource("CircleShape2D_fmw3n")
-debug_color = Color(0, 0.509804, 0.984314, 0.533333)
+[node name="CastleParallax" type="Parallax2D" parent="SubViewportContainer/SubViewport" index="5"]
+scroll_scale = Vector2(0.3, 0.3)
+
+[node name="Castle" type="Sprite2D" parent="SubViewportContainer/SubViewport/CastleParallax" index="0"]
+position = Vector2(128, 96)
+texture = ExtResource("15_38g1y")
+
+[node name="MoonParallax" type="Parallax2D" parent="SubViewportContainer/SubViewport" index="6"]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="Moon" type="Sprite2D" parent="SubViewportContainer/SubViewport/MoonParallax" index="0"]
+position = Vector2(128, 96)
+texture = ExtResource("16_6ghd2")
+
+[node name="StartTimer" type="Timer" parent="." index="2"]
+wait_time = 1.15
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="SubViewportContainer/SubViewport/Rail/PlayerFish" to="SubViewportContainer/SubViewport/Rail/PlayerFish" method="_on_area_entered"]
+[connection signal="end" from="SubViewportContainer/SubViewport/Rail/PlayerFish" to="." method="_on_player_fish_end"]
+[connection signal="end" from="SubViewportContainer/SubViewport/Rail/PlayerFish" to="SubViewportContainer/SubViewport/Rail" method="_on_player_fish_end"]
+[connection signal="timeout" from="SubViewportContainer/SubViewport/Rail/PlayerFish/DamageTimer" to="SubViewportContainer/SubViewport/Rail/PlayerFish" method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="SubViewportContainer/SubViewport/Rail/Timer" to="SubViewportContainer/SubViewport/Rail" method="spawn"]

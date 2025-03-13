@@ -10,5 +10,3 @@ func _on_pressed() -> void:
 	var callable = Callable(target, function)
 	if callable.is_valid():
 		callable.callv(parameters)
-	else:
-		print("invalid function. Check the name, main scene, and parameters")

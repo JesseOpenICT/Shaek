@@ -75,7 +75,6 @@ func load_gamepack(scene : Gamepack, mode = Gamemode):
 		return
 	
 	gamemode = mode
-	print(gamemode)
 	loading = true
 	close.emit(false)
 	await get_tree().create_timer(LOADING_TIME).timeout

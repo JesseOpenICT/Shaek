@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwggh4b5tx18w"
+path="res://.godot/imported/Kiss.wav-30a89f487193be04230c19fb2e4392ff.sample"
+
+[deps]
+
+source_file="res://Levels/Jtad/Microgames/Kiss Kiss/Kiss.wav"
+dest_files=["res://.godot/imported/Kiss.wav-30a89f487193be04230c19fb2e4392ff.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

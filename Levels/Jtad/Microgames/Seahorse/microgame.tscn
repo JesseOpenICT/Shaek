@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://2h4pqiis8e2v"]
+[gd_scene load_steps=24 format=4 uid="uid://2h4pqiis8e2v"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jp7ls"]
 [ext_resource type="Texture2D" uid="uid://7abhmv5c1qa6" path="res://Levels/Jtad/Microgames/Seahorse/board.png" id="2_pdse1"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://c2uvg2s02n8la" path="res://Levels/Jtad/Microgames/Seahorse/king.png" id="8_c4m4x"]
 [ext_resource type="PackedScene" uid="uid://k3865o6ln0al" path="res://Levels/Jtad/Microgames/Seahorse/target_spot.tscn" id="9_5anrf"]
 [ext_resource type="Shader" uid="uid://clxjafl4if4rw" path="res://Levels/Jtad/Microgames/Kiss Kiss/waterbg.gdshader" id="11_wq0jr"]
+[ext_resource type="AudioStream" uid="uid://ba4jnea3n4l8d" path="res://Levels/Jtad/Microgames/Seahorse/qubodup-click1.wav" id="12_tvd26"]
+[ext_resource type="AudioStream" uid="uid://d1wrl48ciiecp" path="res://Levels/Jtad/Microgames/Seahorse/Capture.wav" id="13_oeqy2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ohkxo"]
 resource_name = "base"
@@ -90,10 +92,10 @@ texture = ExtResource("8_c4m4x")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="King" index="0"]
 emitting = false
 amount = 12
-process_material = SubResource("ParticleProcessMaterial_sak1k")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sak1k")
 
 [node name="Horse" type="Sprite2D" parent="." index="3"]
 position = Vector2(58, 26)
@@ -107,3 +109,13 @@ custom_minimum_size = Vector2(256, 192)
 offset_right = 256.0
 offset_bottom = 192.0
 mouse_filter = 2
+
+[node name="Click1" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("12_tvd26")
+volume_db = -6.0
+bus = &"Effects"
+
+[node name="Win" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("13_oeqy2")
+volume_db = -22.0
+bus = &"Effects"
