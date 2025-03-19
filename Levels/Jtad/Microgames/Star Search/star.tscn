@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=3 uid="uid://bcoyqt1nqnn1f"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_xmtrv"]
+[ext_resource type="Script" uid="uid://dj8wmjmyrgbvp" path="res://Levels/Jtad/Microgames/Star Search/starsearch.gd" id="2_cs5ik"]
+[ext_resource type="Texture2D" uid="uid://dss87f3aljxxg" path="res://Levels/Jtad/Microgames/Star Search/stars.png" id="3_8rc3y"]
+[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="3_88081"]
+[ext_resource type="Texture2D" uid="uid://c1cxbf75v3g7p" path="res://Levels/Jtad/Microgames/Star Search/lensfalse.png" id="5_ii5k7"]
+[ext_resource type="Texture2D" uid="uid://djr1extood8qv" path="res://Levels/Jtad/Microgames/Star Search/lenstrue.png" id="6_2th14"]
+[ext_resource type="Texture2D" uid="uid://drxc4mx5i5dh8" path="res://Levels/Jtad/Microgames/Star Search/find.png" id="7_ii5k7"]
+[ext_resource type="Shader" uid="uid://65yfsfpkfsh1" path="res://Levels/Jtad/Microgames/Star Search/add.gdshader" id="8_pce2r"]
+[ext_resource type="Texture2D" uid="uid://cttws0u8qn3s2" path="res://Levels/Jtad/Microgames/Star Search/glow.png" id="9_pyfd6"]
+[ext_resource type="AudioStream" uid="uid://batjes6bsju87" path="res://Levels/Jtad/Microgames/Star Search/Found_Ya.wav" id="10_pyfd6"]
+[ext_resource type="AudioStream" uid="uid://cnn0ntmt607so" path="res://Levels/Jtad/Microgames/Seahorse/qubodup-click2.wav" id="11_t5r6q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pce2r"]
+radius = 20.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pce2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ii5k7")
+}],
+"loop": true,
+"name": &"lose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2th14")
+}],
+"loop": true,
+"name": &"win",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5r6q"]
+shader = ExtResource("8_pce2r")
+shader_parameter/glow = ExtResource("9_pyfd6")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pyfd6"]
+radius = 42.35
+
+[node name="Star" instance=ExtResource("1_xmtrv")]
+script = ExtResource("2_cs5ik")
+preparation_text = "Find!"
+preparation_image = ExtResource("3_88081")
+beats = 12
+
+[node name="Backdrop" type="Sprite2D" parent="." index="1"]
+z_index = -3
+position = Vector2(128, 96)
+texture = ExtResource("3_8rc3y")
+
+[node name="Star" type="Sprite2D" parent="Backdrop" index="0"]
+position = Vector2(256, 192)
+texture = ExtResource("7_ii5k7")
+
+[node name="Area2D" type="Area2D" parent="Backdrop/Star" index="0" groups=["Star"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backdrop/Star/Area2D" index="0"]
+shape = SubResource("CircleShape2D_pce2r")
+debug_color = Color(0.556863, 0.647059, 0.92549, 0.717647)
+
+[node name="Lens" type="AnimatedSprite2D" parent="." index="2"]
+z_index = 1
+position = Vector2(128, 96)
+sprite_frames = SubResource("SpriteFrames_pce2r")
+animation = &"lose"
+autoplay = "lose"
+
+[node name="Glow" type="ColorRect" parent="Lens" index="0"]
+z_index = -2
+material = SubResource("ShaderMaterial_t5r6q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -96.0
+offset_right = -128.0
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Area2D" type="Area2D" parent="Lens" index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lens/Area2D" index="0"]
+shape = SubResource("CircleShape2D_pyfd6")
+debug_color = Color(0.26355, 0.35253, 0.721392, 0.42)
+
+[node name="FoundYa" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("10_pyfd6")
+volume_db = -16.0
+bus = &"Effects"
+
+[node name="Timer" type="Timer" parent="FoundYa" index="0"]
+
+[node name="Tick" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("11_t5r6q")
+volume_db = -30.0
+bus = &"Effects"
+
+[connection signal="area_entered" from="Lens/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Lens/Area2D" to="." method="_on_area_2d_area_exited"]
