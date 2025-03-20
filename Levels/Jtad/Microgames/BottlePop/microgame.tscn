@@ -1,0 +1,129 @@
+[gd_scene load_steps=19 format=3 uid="uid://dd6odhr4ffnqr"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_whyl5"]
+[ext_resource type="Script" uid="uid://0owcv8binowd" path="res://Levels/Jtad/Microgames/BottlePop/microgame.gd" id="2_rkbun"]
+[ext_resource type="Texture2D" uid="uid://3c2suaiwm3l5" path="res://Levels/Jtad/Microgames/BottlePop/background.png" id="3_rwrsx"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_uj146"]
+[ext_resource type="Texture2D" uid="uid://ddv6jylk3075f" path="res://Levels/Jtad/Microgames/BottlePop/cork.png" id="4_uj146"]
+[ext_resource type="Script" uid="uid://o7mtoxq73tw0" path="res://Levels/Jtad/Microgames/BottlePop/cork.gd" id="5_kp2fo"]
+[ext_resource type="Texture2D" uid="uid://d36bmldykxm2" path="res://Levels/Jtad/Microgames/BottlePop/bottle.png" id="6_uug7j"]
+[ext_resource type="AudioStream" uid="uid://vx3vh8bvomex" path="res://Levels/Jtad/Microgames/BottlePop/pop3.ogg" id="7_ls3gu"]
+[ext_resource type="Texture2D" uid="uid://clj3ynvgk5h0t" path="res://Levels/Jtad/Microgames/BottlePop/win1.png" id="8_uug7j"]
+[ext_resource type="Texture2D" uid="uid://bruyq2i3mgwsf" path="res://Levels/Jtad/Microgames/BottlePop/win2.png" id="9_ls3gu"]
+
+[sub_resource type="Curve2D" id="Curve2D_rwrsx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, -60)
+}
+point_count = 2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ls3gu"]
+radius = 21.15
+height = 85.52
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4tka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_uug7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ls3gu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_uug7j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.165877, 0.407583, 0.611374, 0.810427)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.658824, 0, 1, 0.56344, 0.83834, 3.85046e-07, 1, 0.207069, 0.510872, 1, 1, 1, 0.356863, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ls3gu"]
+gradient = SubResource("Gradient_uug7j")
+
+[sub_resource type="Curve" id="Curve_k4tka"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.722892, 0.267918), 0.591845, 0.591845, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sg7c5"]
+curve = SubResource("Curve_k4tka")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ygop2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+direction = Vector3(0, -100, 0)
+spread = 39.586
+initial_velocity_min = 65.46
+initial_velocity_max = 112.73
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 2.0
+color_initial_ramp = SubResource("GradientTexture1D_ls3gu")
+turbulence_enabled = true
+turbulence_influence_over_life = SubResource("CurveTexture_sg7c5")
+
+[node name="Microgame" instance=ExtResource("1_whyl5")]
+script = ExtResource("2_rkbun")
+preparation_text = "Uncork!"
+preparation_image = ExtResource("3_uj146")
+
+[node name="Background" type="Sprite2D" parent="." index="1"]
+position = Vector2(128, 96)
+texture = ExtResource("3_rwrsx")
+
+[node name="Path2D" type="Path2D" parent="." index="2"]
+position = Vector2(128, 96)
+curve = SubResource("Curve2D_rwrsx")
+
+[node name="Cork" type="Sprite2D" parent="." index="3" node_paths=PackedStringArray("scene")]
+position = Vector2(128, 96)
+texture = ExtResource("4_uj146")
+script = ExtResource("5_kp2fo")
+scene = NodePath("..")
+
+[node name="Grab" type="Area2D" parent="Cork" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cork/Grab" index="0"]
+position = Vector2(-1, 1)
+rotation = 1.05802
+shape = SubResource("CapsuleShape2D_ls3gu")
+debug_color = Color(0.312679, 1.36571e-06, 0.10229, 0.627451)
+
+[node name="Pop" type="AudioStreamPlayer" parent="Cork" index="1"]
+stream = ExtResource("7_ls3gu")
+volume_db = -0.3
+bus = &"Effects"
+
+[node name="Timer" type="Timer" parent="Cork" index="2"]
+one_shot = true
+
+[node name="Bottle" type="Sprite2D" parent="." index="4"]
+position = Vector2(128, 96)
+texture = ExtResource("6_uug7j")
+
+[node name="WinScreen" type="AnimatedSprite2D" parent="." index="5"]
+visible = false
+position = Vector2(128, 96)
+sprite_frames = SubResource("SpriteFrames_k4tka")
+autoplay = "default"
+frame_progress = 0.334833
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="6"]
+position = Vector2(132, 190)
+scale = Vector2(1.43332, 1.67997)
+emitting = false
+amount = 150
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ygop2")
+
+[connection signal="mouse_entered" from="Cork/Grab" to="Cork" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Cork/Grab" to="." method="_on_grab_mouse_exited"]
+[connection signal="mouse_exited" from="Cork/Grab" to="Cork" method="_on_grab_mouse_exited"]
