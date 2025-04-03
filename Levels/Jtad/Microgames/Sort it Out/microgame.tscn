@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://e0aiwr2exthk"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_llqpp"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="2_5q24v"]
+[ext_resource type="Script" uid="uid://ch5vuepcjsxab" path="res://Levels/Jtad/Microgames/Sort it Out/autosort_fish.gd" id="3_5q24v"]
+[ext_resource type="Texture2D" uid="uid://brfy1tmna708o" path="res://Levels/Jtad/Microgames/Sort it Out/fishS.png" id="3_48d7d"]
+[ext_resource type="Texture2D" uid="uid://co5p81edxiegf" path="res://Levels/Jtad/Microgames/Sort it Out/bg.png" id="3_67fwn"]
+[ext_resource type="Shader" uid="uid://dd50s24rkvpa" path="res://Levels/Jtad/Microgames/Sort it Out/godrays.gdshader" id="3_p51dv"]
+[ext_resource type="Script" uid="uid://ljlwi6tm5cau" path="res://Levels/Jtad/Microgames/Sort it Out/point_sorter.gd" id="4_v1fbo"]
+[ext_resource type="Texture2D" uid="uid://5s7v6po01mk2" path="res://Levels/Jtad/Microgames/Sort it Out/fishM.png" id="5_67fwn"]
+[ext_resource type="Texture2D" uid="uid://3xkn3ir345i6" path="res://Levels/Jtad/Microgames/Sort it Out/fishL.png" id="6_p51dv"]
+[ext_resource type="Texture2D" uid="uid://cftn5e0clfq05" path="res://Levels/Jtad/Microgames/Sort it Out/fishXL.png" id="7_nfo7m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nfo7m"]
+noise_type = 2
+frequency = 0.0108
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_th37m"]
+seamless = true
+noise = SubResource("FastNoiseLite_nfo7m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymkrc"]
+shader = ExtResource("3_p51dv")
+shader_parameter/noise = SubResource("NoiseTexture2D_th37m")
+shader_parameter/color = Color(0.192157, 0.262745, 0.403922, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48d7d"]
+size = Vector2(80, 80)
+
+[node name="Microgame" instance=ExtResource("1_llqpp")]
+preparation_text = "Sort!"
+preparation_image = ExtResource("2_5q24v")
+
+[node name="Bg" type="Sprite2D" parent="." index="0"]
+z_index = -2
+material = SubResource("ShaderMaterial_ymkrc")
+position = Vector2(128, 96)
+texture = ExtResource("3_67fwn")
+
+[node name="Fish0" type="Sprite2D" parent="." index="2"]
+position = Vector2(128, 96)
+texture = ExtResource("3_48d7d")
+script = ExtResource("3_5q24v")
+
+[node name="Grab" type="Area2D" parent="Fish0" index="0"]
+scale = Vector2(0.6, 0.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish0/Grab" index="0"]
+shape = SubResource("RectangleShape2D_48d7d")
+
+[node name="Fish1" type="Sprite2D" parent="." index="3"]
+position = Vector2(128, 96)
+texture = ExtResource("5_67fwn")
+script = ExtResource("3_5q24v")
+
+[node name="Grab" type="Area2D" parent="Fish1" index="0"]
+scale = Vector2(1, 0.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish1/Grab" index="0"]
+shape = SubResource("RectangleShape2D_48d7d")
+
+[node name="Fish2" type="Sprite2D" parent="." index="4"]
+position = Vector2(128, 96)
+texture = ExtResource("6_p51dv")
+script = ExtResource("3_5q24v")
+
+[node name="Grab" type="Area2D" parent="Fish2" index="0"]
+scale = Vector2(1.5, 0.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish2/Grab" index="0"]
+shape = SubResource("RectangleShape2D_48d7d")
+
+[node name="Fish3" type="Sprite2D" parent="." index="5"]
+position = Vector2(128, 96)
+texture = ExtResource("7_nfo7m")
+script = ExtResource("3_5q24v")
+
+[node name="Grab" type="Area2D" parent="Fish3" index="0"]
+scale = Vector2(2, 0.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish3/Grab" index="0"]
+shape = SubResource("RectangleShape2D_48d7d")
+
+[node name="M0" type="Marker2D" parent="." index="6"]
+position = Vector2(128, 24)
+
+[node name="M1" type="Marker2D" parent="." index="7"]
+position = Vector2(128, 72)
+
+[node name="M2" type="Marker2D" parent="." index="8"]
+position = Vector2(128, 120)
+
+[node name="M3" type="Marker2D" parent="." index="9"]
+position = Vector2(128, 168)
+
+[node name="PointSorter" type="Node2D" parent="." index="10" node_paths=PackedStringArray("sortables", "points")]
+position = Vector2(128, 96)
+script = ExtResource("4_v1fbo")
+sortables = [NodePath("../Fish0"), NodePath("../Fish1"), NodePath("../Fish2"), NodePath("../Fish3")]
+points = [NodePath("../M0"), NodePath("../M1"), NodePath("../M2"), NodePath("../M3")]
+
+[connection signal="mouse_entered" from="Fish0/Grab" to="Fish0" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Fish0/Grab" to="Fish0" method="_on_grab_mouse_exited"]
+[connection signal="mouse_entered" from="Fish1/Grab" to="Fish1" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Fish1/Grab" to="Fish1" method="_on_grab_mouse_exited"]
+[connection signal="mouse_entered" from="Fish2/Grab" to="Fish2" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Fish2/Grab" to="Fish2" method="_on_grab_mouse_exited"]
+[connection signal="mouse_entered" from="Fish3/Grab" to="Fish3" method="_on_grab_mouse_entered"]
+[connection signal="mouse_exited" from="Fish3/Grab" to="Fish3" method="_on_grab_mouse_exited"]
