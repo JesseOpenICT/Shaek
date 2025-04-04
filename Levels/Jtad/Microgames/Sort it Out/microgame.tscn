@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="2_5q24v"]
 [ext_resource type="Script" uid="uid://ch5vuepcjsxab" path="res://Levels/Jtad/Microgames/Sort it Out/autosort_fish.gd" id="3_5q24v"]
 [ext_resource type="Texture2D" uid="uid://brfy1tmna708o" path="res://Levels/Jtad/Microgames/Sort it Out/fishS.png" id="3_48d7d"]
-[ext_resource type="Texture2D" uid="uid://co5p81edxiegf" path="res://Levels/Jtad/Microgames/Sort it Out/bg.png" id="3_67fwn"]
 [ext_resource type="Shader" uid="uid://dd50s24rkvpa" path="res://Levels/Jtad/Microgames/Sort it Out/godrays.gdshader" id="3_p51dv"]
+[ext_resource type="Texture2D" uid="uid://ixgocyevw4uk" path="res://Levels/Jtad/Microgames/Sort it Out/bgoff.png" id="4_p51dv"]
 [ext_resource type="Script" uid="uid://ljlwi6tm5cau" path="res://Levels/Jtad/Microgames/Sort it Out/point_sorter.gd" id="4_v1fbo"]
 [ext_resource type="Texture2D" uid="uid://5s7v6po01mk2" path="res://Levels/Jtad/Microgames/Sort it Out/fishM.png" id="5_67fwn"]
 [ext_resource type="Texture2D" uid="uid://3xkn3ir345i6" path="res://Levels/Jtad/Microgames/Sort it Out/fishL.png" id="6_p51dv"]
@@ -36,7 +36,7 @@ preparation_image = ExtResource("2_5q24v")
 z_index = -2
 material = SubResource("ShaderMaterial_ymkrc")
 position = Vector2(128, 96)
-texture = ExtResource("3_67fwn")
+texture = ExtResource("4_p51dv")
 
 [node name="Fish0" type="Sprite2D" parent="." index="2"]
 position = Vector2(128, 96)
