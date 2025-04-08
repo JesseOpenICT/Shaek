@@ -226,6 +226,7 @@ one_shot = true
 [node name="Hurtsfx" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Rail/PlayerFish" index="5"]
 stream = ExtResource("13_38g1y")
 volume_db = -16.0
+bus = &"Effects"
 
 [node name="Bg" type="Sprite2D" parent="SubViewportContainer/SubViewport/Rail" index="1"]
 z_index = -10
