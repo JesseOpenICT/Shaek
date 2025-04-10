@@ -17,6 +17,10 @@ class_name Gamepack
 
 @export_group("Game Functionality")
 
+## Set this interget to force that microgame to be loaded every time. Used for debugging.
+## For instance, set this to 0 to get [b]microgames[0][/b] every time. If the value is not in the 
+## array, it will not be used. Set it to -1 if you're not testing a microgame.
+@export var forced_microgame : int = -1
 ## Add all Microgames as [b]reference links[/b]
 @export_file("*.tscn") var microgames : Array[String] 
 ## The boss microgame. Is optional.
@@ -122,6 +126,10 @@ signal game_over(score:int)
 
 
 func preload_levels() -> void:
+	if forced_microgame in range(microgames.size()):
+		var microgame = load(microgames[forced_microgame])
+		loaded_microgames.append (microgame)
+		return
 	for game in microgames:
 		var microgame = load(game)
 		loaded_microgames.append (microgame)
