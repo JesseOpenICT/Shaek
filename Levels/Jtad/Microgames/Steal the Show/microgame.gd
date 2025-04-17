@@ -50,7 +50,6 @@ func is_direction(input: InputEvent) -> bool:
 
 func _unhandled_input(event: InputEvent) -> void:
 		if botched < 3 and not win and is_direction(event):
-			print(notes[current_note].direction)
 			if Input.is_action_just_pressed(notes[current_note].direction):
 				spin(notes[current_note].direction)
 				notes[current_note].tone = tone_ladders[nset][current_note]

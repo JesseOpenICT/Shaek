@@ -1,0 +1,143 @@
+[gd_scene load_steps=18 format=3 uid="uid://dobqdwv8msml4"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_elabj"]
+[ext_resource type="Script" uid="uid://bvy61u5m241xc" path="res://Levels/Jtad/Microgames/Paddle Crab/ball_axis.gd" id="2_g7h8x"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="2_v0rlk"]
+[ext_resource type="Texture2D" uid="uid://d4bof7xr5pug6" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/bg.png" id="3_2ieok"]
+[ext_resource type="Texture2D" uid="uid://b0vwytwxy8shl" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/ball2.png" id="4_vev07"]
+[ext_resource type="Texture2D" uid="uid://cfustwvlxk0cy" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/ball1.png" id="5_8cxim"]
+[ext_resource type="Texture2D" uid="uid://roiwg483a6o7" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/opp1.png" id="5_dugw1"]
+[ext_resource type="Texture2D" uid="uid://dt06v1w7hdyuo" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/opp2.png" id="6_vev07"]
+[ext_resource type="Texture2D" uid="uid://cs6pkjlxhqce5" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/crab1.png" id="7_8cxim"]
+[ext_resource type="Texture2D" uid="uid://bgma0xag76ftr" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/crab2.png" id="8_2nruo"]
+[ext_resource type="Texture2D" uid="uid://fm44nn11018x" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/handsdown.png" id="8_38i6c"]
+[ext_resource type="Texture2D" uid="uid://bh7o4xlodwp02" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/handsup.png" id="9_2ieok"]
+[ext_resource type="Texture2D" uid="uid://defi8xqycpfib" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/oppdown.png" id="10_iknuj"]
+[ext_resource type="Texture2D" uid="uid://duv5nc7dp4fjo" path="res://Levels/Jtad/Microgames/Paddle Crab/assets/oppup.png" id="11_f1fpl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yys7x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dugw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vev07")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w2qis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_2ieok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_38i6c")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_f1fpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_iknuj")
+}],
+"loop": false,
+"name": &"opp",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_38i6c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8cxim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2nruo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Microgame" instance=ExtResource("1_elabj")]
+z_index = -7
+preparation_text = "Paddle!"
+preparation_image = ExtResource("2_v0rlk")
+beats = 12
+
+[node name="Bg" type="Sprite2D" parent="." index="0"]
+z_index = -12
+position = Vector2(128, 96)
+texture = ExtResource("3_2ieok")
+
+[node name="BallAxis" type="Node2D" parent="." index="2"]
+position = Vector2(128, 160)
+script = ExtResource("2_g7h8x")
+
+[node name="Ball" type="Sprite2D" parent="BallAxis" index="0"]
+self_modulate = Color(0, 0, 0, 0.207843)
+z_index = -2
+texture = ExtResource("4_vev07")
+
+[node name="BallNotShadow" type="Sprite2D" parent="BallAxis/Ball" index="0"]
+modulate = Color(1, 0.392157, 1, 1)
+z_index = 1
+texture = ExtResource("4_vev07")
+
+[node name="BallNotShadow2" type="Sprite2D" parent="BallAxis/Ball/BallNotShadow" index="0"]
+texture = ExtResource("5_8cxim")
+
+[node name="Opponent_Rail" type="Node2D" parent="." index="3"]
+z_index = -2
+position = Vector2(128, 60)
+scale = Vector2(0.4, 0.4)
+
+[node name="Opponent" type="AnimatedSprite2D" parent="Opponent_Rail" index="0"]
+position = Vector2(-68, 0)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_yys7x")
+frame_progress = 0.944198
+
+[node name="Hands" type="AnimatedSprite2D" parent="Opponent_Rail/Opponent" index="0"]
+sprite_frames = SubResource("SpriteFrames_w2qis")
+animation = &"opp"
+frame = 1
+frame_progress = 0.697027
+
+[node name="Shadow" type="Sprite2D" parent="Opponent_Rail/Opponent" index="1"]
+self_modulate = Color(0, 0, 0, 0.207843)
+z_index = -2
+y_sort_enabled = true
+position = Vector2(0, 8)
+scale = Vector2(2.98512, 0.27362)
+texture = ExtResource("4_vev07")
+
+[node name="Player" type="AnimatedSprite2D" parent="." index="4"]
+position = Vector2(68, 160)
+sprite_frames = SubResource("SpriteFrames_38i6c")
+frame = 1
+frame_progress = 1.0
+
+[node name="Hands" type="AnimatedSprite2D" parent="Player" index="0"]
+sprite_frames = SubResource("SpriteFrames_w2qis")
+frame = 1
+frame_progress = 0.723986
+
+[node name="Shadow" type="Sprite2D" parent="Player" index="1"]
+self_modulate = Color(0, 0, 0, 0.207843)
+z_index = -1
+y_sort_enabled = true
+position = Vector2(0, 21)
+scale = Vector2(4.46512, 1.01614)
+texture = ExtResource("4_vev07")
+
+[node name="Timer" type="Timer" parent="." index="5"]

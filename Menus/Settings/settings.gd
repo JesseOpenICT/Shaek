@@ -7,4 +7,5 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	focus.grab_focus()
-	GlobalFunctions.close_settings.connect(_ready)
+	if not GlobalFunctions.is_connected("close_settings", _ready):
+		GlobalFunctions.close_settings.connect(_ready)
