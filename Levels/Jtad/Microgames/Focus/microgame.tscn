@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1qns86feyh7e"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_iatf4"]
+[ext_resource type="Script" uid="uid://dycy50tp8qlnf" path="res://Levels/Jtad/Microgames/Focus/microgame.gd" id="1_svbqj"]
+[ext_resource type="Shader" uid="uid://c0kxvakj5y056" path="res://Levels/Jtad/Microgames/Focus/focus.gdshader" id="2_j3r3e"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_1tag1"]
+[ext_resource type="Texture2D" uid="uid://d0rc1ynco7g4y" path="res://Levels/Jtad/Microgames/Focus/1.png" id="3_iatf4"]
+[ext_resource type="AudioStream" uid="uid://gckbn7k2qroe" path="res://Levels/Jtad/Microgames/Focus/wav.wav" id="4_1tag1"]
+[ext_resource type="AudioStream" uid="uid://wwcbegvuebkx" path="res://Levels/Jtad/Microgames/Constellate/ping.wav" id="7_4dqbe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4dqbe"]
+shader = ExtResource("2_j3r3e")
+shader_parameter/shape = ExtResource("3_iatf4")
+shader_parameter/current_position = Vector2(0, 0)
+shader_parameter/depth = 1.0
+
+[node name="Microgame" instance=ExtResource("1_iatf4")]
+script = ExtResource("1_svbqj")
+zoom = 1.0
+preparation_text = "Focus!"
+preparation_image = ExtResource("3_1tag1")
+music_volume_DB = -12.0
+
+[node name="Wave" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource("4_1tag1")
+volume_db = -16.0
+autoplay = true
+bus = &"Effects"
+
+[node name="ColorRect" type="ColorRect" parent="." index="2"]
+material = SubResource("ShaderMaterial_4dqbe")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = 384.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinAudio" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("7_4dqbe")
+volume_db = -6.0
+bus = &"Effects"
+
+[connection signal="end" from="." to="." method="_on_end"]

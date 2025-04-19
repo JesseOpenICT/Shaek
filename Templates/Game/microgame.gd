@@ -26,7 +26,7 @@ var speed : float = 1
 
 var win : bool
 
-signal end
+signal end(won:bool)
 
 
 func _ready() -> void:
