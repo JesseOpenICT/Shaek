@@ -1,0 +1,75 @@
+[gd_scene load_steps=16 format=3 uid="uid://cdcvxhcgkeq2q"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_1e3hm"]
+[ext_resource type="Shader" uid="uid://c1auhwqk6fth2" path="res://Levels/Jtad/Microgames/Hat Drop/backdrop.gdshader" id="2_hgiat"]
+[ext_resource type="Texture2D" uid="uid://btq8o40qlyg1d" path="res://Levels/Jtad/space.png" id="2_tkiwp"]
+[ext_resource type="Texture2D" uid="uid://bgkqhbq7o2aqs" path="res://Levels/Jtad/Microgames/Hat Drop/fis1.png" id="3_8q7nq"]
+[ext_resource type="Script" uid="uid://2ol88joco7i5" path="res://Levels/Jtad/Microgames/Hat Drop/hat.gd" id="3_wa76y"]
+[ext_resource type="Texture2D" uid="uid://crupuorg2nvuw" path="res://Levels/Jtad/Microgames/Hat Drop/hat.png" id="4_vny7v"]
+[ext_resource type="AudioStream" uid="uid://diokfowf3vprn" path="res://Levels/Jtad/Microgames/Hat Drop/Drop.wav" id="6_hp6w3"]
+[ext_resource type="AudioStream" uid="uid://b054lyidhndm2" path="res://Levels/Jtad/Microgames/Hat Drop/Land.wav" id="7_tkiwp"]
+
+[sub_resource type="Gradient" id="Gradient_hgiat"]
+offsets = PackedFloat32Array(0, 0.414508, 0.746114, 1)
+colors = PackedColorArray(0.114629, 2.93598e-06, 0.543536, 1, 0.00113338, 0.227699, 0.80645, 1, 0, 0.581381, 0.990483, 1, 0.304495, 0.685571, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8q7nq"]
+gradient = SubResource("Gradient_hgiat")
+
+[sub_resource type="Gradient" id="Gradient_vny7v"]
+colors = PackedColorArray(0.749298, 0.358486, 9.62615e-07, 1, 1, 1, 0.0823529, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hp6w3"]
+gradient = SubResource("Gradient_vny7v")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8q7nq"]
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vny7v"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_8q7nq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp6w3"]
+resource_local_to_scene = true
+shader = ExtResource("2_hgiat")
+shader_parameter/noise = SubResource("NoiseTexture2D_vny7v")
+shader_parameter/gradient = SubResource("GradientTexture1D_8q7nq")
+shader_parameter/gradient2 = SubResource("GradientTexture1D_hp6w3")
+shader_parameter/morph = 0.0
+
+[node name="Microgame" instance=ExtResource("1_1e3hm")]
+preparation_text = "Drop!"
+preparation_image = ExtResource("2_tkiwp")
+
+[node name="BG" type="ColorRect" parent="." index="0"]
+material = SubResource("ShaderMaterial_hp6w3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 256.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3001, 0, 0.0172866, 1)
+
+[node name="Head" type="Sprite2D" parent="." index="2"]
+position = Vector2(128, 147)
+texture = ExtResource("3_8q7nq")
+
+[node name="Hat" type="Sprite2D" parent="." index="3"]
+position = Vector2(128, 49.92)
+texture = ExtResource("4_vny7v")
+script = ExtResource("3_wa76y")
+
+[node name="Drop" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("6_hp6w3")
+volume_db = -12.0
+bus = &"Effects"
+
+[node name="Land" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("7_tkiwp")
+volume_db = -12.0
+bus = &"Effects"
+
+[connection signal="finished" from="Drop" to="Hat" method="end"]
