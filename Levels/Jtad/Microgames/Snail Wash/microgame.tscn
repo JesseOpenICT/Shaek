@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://bktp685a0tdm1"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_y1yvp"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="2_0g8os"]
+[ext_resource type="Texture2D" uid="uid://bmpgr6neqlfgn" path="res://Levels/Jtad/Microgames/Snail Wash/stain1.png" id="2_kou50"]
+[ext_resource type="Script" uid="uid://dxruet56bki70" path="res://Levels/Jtad/Microgames/Snail Wash/stain.gd" id="3_kou50"]
+
+[node name="Microgame" instance=ExtResource("1_y1yvp")]
+preparation_text = "Clean"
+preparation_image = ExtResource("2_0g8os")
+
+[node name="Stain" type="Sprite2D" parent="." index="1"]
+position = Vector2(128, 96)
+texture = ExtResource("2_kou50")
+script = ExtResource("3_kou50")

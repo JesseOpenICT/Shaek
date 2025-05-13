@@ -14,6 +14,11 @@ const WIN_HEIGHT = 110
 var stopped : bool
 
 
+func _ready() -> void:
+	if randf() < randf():
+		texture = preload("res://Levels/Jtad/Microgames/Hat Drop/hat2.png")
+
+
 func _process(delta: float) -> void:
 	if not stopped:
 		var modified_move_rate = get_parent().speed/2 * (1-CONSISTENCY) + CONSISTENCY
