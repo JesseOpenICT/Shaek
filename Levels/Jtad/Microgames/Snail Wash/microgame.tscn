@@ -25,6 +25,7 @@ seamless_blend_skirt = 1.0
 noise = SubResource("FastNoiseLite_ix1ax")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nod2t"]
+resource_local_to_scene = true
 shader = ExtResource("4_jyohb")
 shader_parameter/amount = 0.0
 shader_parameter/noise = SubResource("NoiseTexture2D_07txt")
