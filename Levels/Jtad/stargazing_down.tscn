@@ -124,7 +124,7 @@ process_mode = 1
 title = "Stargazing Down"
 author = "Jtad"
 cover_art = ExtResource("2_kx0ge")
-microgames = Array[String](["uid://te6drjpcx5ae", "uid://81b65x5qbdek", "uid://2h4pqiis8e2v", "uid://bcoyqt1nqnn1f", "uid://dd6odhr4ffnqr", "uid://e0aiwr2exthk", "uid://dcm020386h6oy", "uid://dgh5fltanl0ji", "uid://dobqdwv8msml4", "uid://c1qns86feyh7e", "uid://cdcvxhcgkeq2q", "uid://bktp685a0tdm1"])
+microgames = Array[String](["uid://te6drjpcx5ae", "uid://81b65x5qbdek", "uid://2h4pqiis8e2v", "uid://bcoyqt1nqnn1f", "uid://dd6odhr4ffnqr", "uid://e0aiwr2exthk", "uid://dcm020386h6oy", "uid://dgh5fltanl0ji", "uid://dobqdwv8msml4", "uid://c1qns86feyh7e", "uid://cdcvxhcgkeq2q", "uid://bktp685a0tdm1", "uid://ca1jcyg6vcmsj", "uid://7ng2c2i4ru40"])
 boss_microgame = "uid://hojgvx4qjdba"
 lives = [NodePath("Subscript/FishCam/Life1"), NodePath("Subscript/FishCam/Life2"), NodePath("Subscript/FishCam/Life3"), NodePath("Subscript/FishCam/Life4")]
 

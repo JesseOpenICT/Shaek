@@ -6,6 +6,9 @@ var cleared : bool
 
 var to_clear : int
 
+var img : Image
+
+
 func _ready() -> void:
 	var select = randi_range(0,3)
 	$"../Shell".texture = [
@@ -21,6 +24,9 @@ func _ready() -> void:
 		preload("res://Levels/Jtad/Microgames/Snail Wash/Stains/s4.png"),
 	][select]
 	to_clear = [2200, 2200, 1800, 1900][select]
+	img = texture.get_image()
+	img.decompress() ## https://forum.godotengine.org/t/cannot-get-pixel-on-compressed-image-formats/52554
+		
 
 func _process(delta: float) -> void:
 	$"../Bar/Bubbles".amount_ratio = move_toward($"../Bar/Bubbles".amount_ratio, 0, 4 * delta)
@@ -50,14 +56,10 @@ func area_clean(positions : Array[Vector2i]):
 
 
 func clean(positions : Array[Vector2i]):
-		
-		var img : Image = texture.get_image()
-		img.decompress() ## https://forum.godotengine.org/t/cannot-get-pixel-on-compressed-image-formats/52554
-		
 		for pos in positions:
 			pos.x = clamp(pos.x, 0, 255)
 			pos.y = clamp(pos.y, 0, 191)
-			if img.get_pixel(pos.x, pos.y).a != 0.0:
+			if img.get_pixelv(pos).a != 0.0:
 				cleaned += 1
 				$"../Bar/Bubbles".amount_ratio = min(1, $"../Bar/Bubbles".amount_ratio +.1)
 				img.set_pixelv(pos,Color.TRANSPARENT) ## https://docs.godotengine.org/en/stable/classes/class_image.html#class-image-method-set-pixelv

@@ -1,0 +1,85 @@
+[gd_scene load_steps=21 format=3 uid="uid://7ng2c2i4ru40"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_kab35"]
+[ext_resource type="Shader" uid="uid://dx6aga3gtmhak" path="res://Levels/Jtad/Microgames/Breakout/shine.gdshader" id="2_1m2ib"]
+[ext_resource type="Texture2D" uid="uid://btq8o40qlyg1d" path="res://Levels/Jtad/space.png" id="2_3dd2u"]
+[ext_resource type="Texture2D" uid="uid://b1bwu778hh8vn" path="res://Levels/Jtad/Microgames/Breakout/free.png" id="3_1m2ib"]
+[ext_resource type="Texture2D" uid="uid://cxbntw6ip4iwh" path="res://Levels/Jtad/Microgames/Breakout/break1.png" id="3_vq4n4"]
+[ext_resource type="Script" uid="uid://cyvyd60iibmbw" path="res://Levels/Jtad/Microgames/Breakout/ice.gd" id="4_tj8s6"]
+[ext_resource type="Shader" uid="uid://bvq1246k8l0nk" path="res://Levels/Jtad/Microgames/Snail Wash/gloss.gdshader" id="4_vorfh"]
+[ext_resource type="Texture2D" uid="uid://rgef4gciv80s" path="res://Levels/Jtad/Microgames/Breakout/break2.png" id="5_gvpv1"]
+[ext_resource type="Texture2D" uid="uid://c10j46ul742o0" path="res://Levels/Jtad/Microgames/Breakout/break3.png" id="6_vorfh"]
+[ext_resource type="Texture2D" uid="uid://beu7fu8kcmiv7" path="res://Levels/Jtad/Microgames/Breakout/break4.png" id="7_3dd2u"]
+[ext_resource type="PackedScene" uid="uid://bbifb0kl8liff" path="res://Levels/Jtad/Microgames/Breakout/shards.tscn" id="9_dm4pf"]
+[ext_resource type="AudioStream" uid="uid://bq0k0tuw2wgwn" path="res://Levels/Jtad/Microgames/Breakout/break.wav" id="12_3dd2u"]
+
+[sub_resource type="Gradient" id="Gradient_cvpe7"]
+colors = PackedColorArray(0.25098, 0.341176, 0.564706, 1, 0.270588, 0.247059, 0.537255, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fcgmr"]
+gradient = SubResource("Gradient_cvpe7")
+width = 1
+height = 192
+fill_from = Vector2(1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rjwul"]
+noise_type = 2
+frequency = 0.0089
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_46g4x"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_rjwul")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tj8s6"]
+resource_local_to_scene = true
+shader = ExtResource("2_1m2ib")
+shader_parameter/noise = SubResource("NoiseTexture2D_46g4x")
+shader_parameter/density = 0.0
+shader_parameter/color = Color(0.39679, 0.755256, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3dd2u"]
+frequency = 0.0017
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dm4pf"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_3dd2u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs0i6"]
+resource_local_to_scene = true
+shader = ExtResource("4_vorfh")
+shader_parameter/amount = 0.835
+shader_parameter/noise = SubResource("NoiseTexture2D_dm4pf")
+
+[node name="Microgame" instance=ExtResource("1_kab35")]
+preparation_text = "Break!"
+preparation_image = ExtResource("2_3dd2u")
+
+[node name="BG" type="TextureRect" parent="." index="1"]
+offset_right = 256.0
+offset_bottom = 192.0
+texture = SubResource("GradientTexture2D_fcgmr")
+
+[node name="Glow" type="ColorRect" parent="BG" index="0"]
+material = SubResource("ShaderMaterial_tj8s6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Break1" type="Sprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_rs0i6")
+position = Vector2(128, 96)
+texture = ExtResource("3_vq4n4")
+script = ExtResource("4_tj8s6")
+images = Array[CompressedTexture2D]([ExtResource("3_vq4n4"), ExtResource("5_gvpv1"), ExtResource("6_vorfh"), ExtResource("7_3dd2u"), ExtResource("3_1m2ib")])
+shards = ExtResource("9_dm4pf")
+
+[node name="Crack" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("12_3dd2u")
+volume_db = -3.981
+bus = &"Effects"

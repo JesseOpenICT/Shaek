@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=3 uid="uid://ca1jcyg6vcmsj"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_633pv"]
+[ext_resource type="Texture2D" uid="uid://ohikknioxw0x" path="res://Levels/Jtad/Microgames/Perfect Design/bg.png" id="2_1a8dg"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="2_at3l7"]
+[ext_resource type="Texture2D" uid="uid://ci1sgd26kefyb" path="res://Levels/Jtad/Microgames/Perfect Design/lumpfish.png" id="3_3umh8"]
+[ext_resource type="Shader" uid="uid://dpgcqqdq502h3" path="res://Levels/Jtad/Microgames/Perfect Design/frame.gdshader" id="4_3umh8"]
+[ext_resource type="Script" uid="uid://cdocnd3280dek" path="res://Levels/Jtad/Microgames/Perfect Design/lumpfish.gd" id="4_mbrjb"]
+[ext_resource type="Texture2D" uid="uid://c7j8ui03cplc2" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/sparkindicator1.png" id="7_0ayst"]
+[ext_resource type="Texture2D" uid="uid://bg0hp2wjltw8m" path="res://Levels/Jtad/Microgames/Pool Maker/Sprites/sparkindicator2.png" id="8_bjngh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mbrjb"]
+noise_type = 4
+frequency = 1.0
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_at3l7"]
+seamless = true
+seamless_blend_skirt = 1.0
+as_normal_map = true
+noise = SubResource("FastNoiseLite_mbrjb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_waq65"]
+resource_local_to_scene = true
+shader = ExtResource("4_3umh8")
+shader_parameter/fishshape = ExtResource("3_3umh8")
+shader_parameter/noise = SubResource("NoiseTexture2D_at3l7")
+shader_parameter/color = Color(1, 0.282353, 0.109804, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_da8vv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0ayst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bjngh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Perfect Design" instance=ExtResource("1_633pv")]
+preparation_text = "Stretch!"
+preparation_image = ExtResource("2_at3l7")
+beats = 12
+
+[node name="Bg" type="Sprite2D" parent="." index="1"]
+position = Vector2(128, 96)
+texture = ExtResource("2_1a8dg")
+
+[node name="Lumpfish" type="Sprite2D" parent="." index="2"]
+position = Vector2(128, 96)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_3umh8")
+script = ExtResource("4_mbrjb")
+
+[node name="Frame" type="Sprite2D" parent="." index="3"]
+material = SubResource("ShaderMaterial_waq65")
+position = Vector2(128, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_3umh8")
+
+[node name="Spark" type="AnimatedSprite2D" parent="." index="4"]
+z_index = 4
+position = Vector2(147.5, 114.5)
+sprite_frames = SubResource("SpriteFrames_da8vv")
+autoplay = "default"
