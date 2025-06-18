@@ -1,0 +1,128 @@
+[gd_scene load_steps=21 format=3 uid="uid://c6kmbnuegno10"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jokif"]
+[ext_resource type="Texture2D" uid="uid://b4t00ddehpaqt" path="res://Levels/Jtad/Microgames/Breakout/shard2.png" id="2_bp0yq"]
+[ext_resource type="Texture2D" uid="uid://o1ud5n6mesgw" path="res://Levels/Jtad/Microgames/Polymorph/bg.png" id="2_ohemy"]
+[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="2_vbduh"]
+[ext_resource type="Texture2D" uid="uid://d4bo26d5p3oln" path="res://Levels/Jtad/MainStuff/Fn1.png" id="3_bp0yq"]
+[ext_resource type="Script" uid="uid://m5vv4q377blk" path="res://Levels/Jtad/Microgames/Polymorph/beam_end.gd" id="3_pogek"]
+[ext_resource type="Material" uid="uid://cgp083hkw2ckk" path="res://Levels/Jtad/Microgames/Polymorph/beam.tres" id="3_wuwqh"]
+[ext_resource type="Script" uid="uid://1ddyeytciciq" path="res://Levels/Jtad/Microgames/Polymorph/beam.gd" id="5_pogek"]
+[ext_resource type="Texture2D" uid="uid://danhsxfdysj7u" path="res://Levels/Jtad/Microgames/Polymorph/star.png" id="6_u78bj"]
+[ext_resource type="Texture2D" uid="uid://ffqsru218rdv" path="res://Levels/Jtad/Microgames/Polymorph/cc.png" id="10_hnfqh"]
+[ext_resource type="Texture2D" uid="uid://bdnvqv4etltka" path="res://Levels/Jtad/Microgames/Polymorph/cf.png" id="11_2nruw"]
+[ext_resource type="Texture2D" uid="uid://d25b22bu7l2ox" path="res://Levels/Jtad/Microgames/Polymorph/fc.png" id="12_k7hfb"]
+[ext_resource type="Texture2D" uid="uid://cukgbcwxegcut" path="res://Levels/Jtad/Microgames/Polymorph/ff.png" id="13_u7wgs"]
+[ext_resource type="Script" uid="uid://c6k1pbnko8gqe" path="res://Levels/Jtad/Microgames/Polymorph/target.gd" id="14_2nruw"]
+[ext_resource type="AudioStream" uid="uid://c77xplbknxr3q" path="res://Levels/Jtad/Microgames/Polymorph/Transform.wav" id="15_k7hfb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j4lr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_hnfqh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2nruw")
+}],
+"loop": true,
+"name": &"Carrot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_k7hfb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_u7wgs")
+}],
+"loop": true,
+"name": &"Fruit",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_cdgbi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.14956, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8p14"]
+curve = SubResource("Curve_cdgbi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ecwyt"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 56.6
+initial_velocity_max = 56.6
+gravity = Vector3(0, 0, 0)
+damping_min = 64.421
+damping_max = 64.421
+scale_min = 0.1
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_p8p14")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ey2en"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 56.6
+initial_velocity_max = 56.6
+gravity = Vector3(0, 0, 0)
+damping_min = 5.539
+damping_max = 64.421
+scale_min = 0.1
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_p8p14")
+
+[node name="Microgame" instance=ExtResource("1_jokif")]
+preparation_text = "Transform!"
+preparation_image = ExtResource("2_vbduh")
+
+[node name="Bg" type="Sprite2D" parent="." index="1"]
+position = Vector2(128, 96)
+texture = ExtResource("2_ohemy")
+
+[node name="BeamStart" type="Sprite2D" parent="." index="2"]
+visible = false
+position = Vector2(71, 121)
+texture = ExtResource("2_bp0yq")
+
+[node name="Target" type="AnimatedSprite2D" parent="." index="3" node_paths=PackedStringArray("target")]
+position = Vector2(170, 44)
+sprite_frames = SubResource("SpriteFrames_j4lr5")
+animation = &"Fruit"
+script = ExtResource("14_2nruw")
+target = NodePath("../BeamEnd")
+
+[node name="BeamEnd" type="Node2D" parent="." index="4"]
+position = Vector2(71, 121)
+script = ExtResource("3_pogek")
+
+[node name="Sprite2D" type="Sprite2D" parent="BeamEnd" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_u78bj")
+
+[node name="Magic" type="GPUParticles2D" parent="BeamEnd" index="1"]
+amount = 12
+texture = ExtResource("6_u78bj")
+process_material = SubResource("ParticleProcessMaterial_ecwyt")
+
+[node name="Burst" type="GPUParticles2D" parent="BeamEnd" index="2"]
+emitting = false
+amount = 100
+texture = ExtResource("6_u78bj")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ey2en")
+
+[node name="Beam" type="Sprite2D" parent="." index="5" node_paths=PackedStringArray("startnode", "endnode")]
+material = ExtResource("3_wuwqh")
+position = Vector2(102.125, 118)
+scale = Vector2(1.90234, 1)
+texture = ExtResource("3_bp0yq")
+script = ExtResource("5_pogek")
+startnode = NodePath("../BeamStart")
+endnode = NodePath("../BeamEnd")
+
+[node name="Trans" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("15_k7hfb")
+volume_db = -2.495
+bus = &"Effects"
