@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://c6kmbnuegno10"]
+[gd_scene load_steps=20 format=3 uid="uid://c6kmbnuegno10"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jokif"]
 [ext_resource type="Texture2D" uid="uid://b4t00ddehpaqt" path="res://Levels/Jtad/Microgames/Breakout/shard2.png" id="2_bp0yq"]
 [ext_resource type="Texture2D" uid="uid://o1ud5n6mesgw" path="res://Levels/Jtad/Microgames/Polymorph/bg.png" id="2_ohemy"]
-[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="2_vbduh"]
 [ext_resource type="Texture2D" uid="uid://d4bo26d5p3oln" path="res://Levels/Jtad/MainStuff/Fn1.png" id="3_bp0yq"]
 [ext_resource type="Script" uid="uid://m5vv4q377blk" path="res://Levels/Jtad/Microgames/Polymorph/beam_end.gd" id="3_pogek"]
 [ext_resource type="Material" uid="uid://cgp083hkw2ckk" path="res://Levels/Jtad/Microgames/Polymorph/beam.tres" id="3_wuwqh"]
@@ -74,7 +73,7 @@ scale_curve = SubResource("CurveTexture_p8p14")
 
 [node name="Microgame" instance=ExtResource("1_jokif")]
 preparation_text = "Transform!"
-preparation_image = ExtResource("2_vbduh")
+preparation_image = 2
 
 [node name="Bg" type="Sprite2D" parent="." index="1"]
 position = Vector2(128, 96)

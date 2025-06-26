@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn2jt0ldeyb"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_fxpeu"]
+[ext_resource type="Script" uid="uid://u32p7rebctat" path="res://Levels/Jtad/Microgames/Unswirl/microgame.gd" id="2_k4u56"]
+[ext_resource type="Shader" uid="uid://bpkjju8dqty1w" path="res://Levels/Jtad/Microgames/swirlshader.tres" id="3_344ue"]
+[ext_resource type="Texture2D" uid="uid://btd0nd5c0xqna" path="res://Levels/Jtad/Stargazing_Down.png" id="4_3k6jv"]
+[ext_resource type="Texture2D" uid="uid://b27fqx607b5su" path="res://Levels/Jtad/Microgames/Unswirl/arrow.png" id="6_344ue"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcwod"]
+shader = ExtResource("3_344ue")
+shader_parameter/warp = 0.0
+
+[node name="Microgame" instance=ExtResource("1_fxpeu")]
+script = ExtResource("2_k4u56")
+preparation_text = "Unswirl!"
+
+[node name="StargazingDown" type="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_dcwod")
+position = Vector2(128, 96)
+texture = ExtResource("4_3k6jv")
+
+[node name="Arrow" type="Sprite2D" parent="StargazingDown" index="0"]
+texture = ExtResource("6_344ue")

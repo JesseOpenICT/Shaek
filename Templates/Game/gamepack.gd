@@ -99,6 +99,49 @@ var passed_beats : int
 
 var speed : float = 1
 
+
+
+@export_group("Ready Sprites")
+
+## Image shown when a microgame uses the [b]mouse movement and/or mouse buttons[/b]. Having these at all is optional but is reccomended if you don't use some other way to indicate the icon.
+## You can neglect these images if your gamepack doesn't use these controls.
+@export var mouse_image : CompressedTexture2D
+## Image shown when a microgame uses the [b]spacebar[/b]. Having these at all is optional but is reccomended if you don't use some other way to indicate the icon.
+## You can neglect these images if your gamepack doesn't use these controls.
+@export var spacebar_image : CompressedTexture2D
+## Image shown when a microgame uses the [b]arrow keys[/b]. Having these at all is optional but is reccomended if you don't use some other way to indicate the icon.
+## You can neglect these images if your gamepack doesn't use these controls.
+@export var arrows_image : CompressedTexture2D
+## Image shown when a microgame uses the [b]mouse and spacebar[/b]. Having these at all is optional but is reccomended if you don't use some other way to indicate the icon.
+## You can neglect these images if your gamepack doesn't use these controls.
+@export var mouse_space_image : CompressedTexture2D
+## Image shown when a microgame uses the [b]arrow keys and spacebar[/b]. Having these at all is optional but is reccomended if you don't use some other way to indicate the icon.
+## You can neglect these images if your gamepack doesn't use these controls.
+@export var arrows_space_image : CompressedTexture2D
+## Image shown when a microgame uses the [b]mouse and arrow keys[/b]. Having these at all is optional but is reccomended if you don't use some other way to indicate the icon.
+## You can neglect these images if your gamepack doesn't use these controls.
+@export var arrows_mouse_image : CompressedTexture2D
+
+## Enum values for the controls images shown before a microgame.
+enum Controls {
+	MOUSE, 
+	SPACEBAR, 
+	ARROWS,
+	MOUSE_SPACE,
+	ARROWS_SPACE,
+	ARROWS_MOUSE,
+}
+## Array containing controls images shown before a microgame. Corresponds to the Controls enum.
+@onready  var preparation_images : Array[CompressedTexture2D] = [
+	mouse_image,
+	spacebar_image,
+	arrows_image,
+	mouse_space_image,
+	arrows_space_image,
+	arrows_mouse_image,
+]
+
+
 ## Send a signal that if true, open a curtain. If false, close it.
 ## You should connect other nodes to this signal to unhide them. 
 ## This signal is sent just before and after a microgame.
@@ -110,7 +153,7 @@ signal set_score(value:int)
 ## Send a signal to shows a hint for the next microgame, such as "dodge!" or "jump!", and an image that
 ## shows what controls are used, specifically arrows, space, and/or mouse. Connect this signal to a label 
 ## and a sprite to show them.
-signal show_microgame_preparation_hint(preparation_text : String, preparation_image : CompressedTexture2D)
+signal show_microgame_preparation_hint(preparation_text : String, preparation_image : Controls)
 
 ## Sends another signal when a microgame ends that informs other nodes whether a microgame was won (true) or lost (false).
 signal microgame_end(won:bool)

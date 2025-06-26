@@ -32,7 +32,7 @@ GAMEPACK SCENE
 VITAL	-	open(bool) will happen when a microgame starts or ends. Connect this to a "curtain" that will
 			open when true to reveal the microgame, and close if false to hide the process of cleaning it up.
 		-	set_score(int) will update after each microgame. Use it to display the number of levels cleared.
-		-	show_microgame_preparation_hint(String, CompressedTexture2D) is a bit hard to explain. Before
+		-	show_microgame_preparation_hint(String, Controls) is a bit hard to explain. Before
 			each microgame, you will be given a hint like "jump!" or "catch!" something like that, as well
 			as an image to indicate the controls used to do so. Add a label and a texture that show these
 			and become visible when the signal is received. Logically it should be hidden again somehow when
@@ -73,7 +73,7 @@ MICROGAMES
 	-	Example: A game where you have to pick up all coins would be false, then once all coins are picked up becomes true.
 -	As for a microgames variables:
 	-	Preparation Text and Preparation Image are the String and Image shown before the microgame starts,
-		see show_microgame_preparation_hint(String, CompressedTexture2D)
+		see show_microgame_preparation_hint(String, Gamepack.Controls)
 	-	Music volume Db is added to the musics volume during the microgame. Set it to -80 to mute music.
 		-6 halves the volume, -12 quarters it, 0 keeps it normal.
 	-	Beats is the number of music beats the microgame lasts. If your bpm is 120, a microgame is 4

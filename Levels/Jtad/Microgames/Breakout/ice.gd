@@ -23,7 +23,7 @@ func shatter(amount:int = 10):
 var wriggle : Tween
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("space"):
+	if event.is_action_pressed("space"):
 		if not $"..".win:
 			shatter()
 			HP -= 1

@@ -1,8 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://hojgvx4qjdba"]
+[gd_scene load_steps=33 format=3 uid="uid://hojgvx4qjdba"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_fmw3n"]
 [ext_resource type="Script" uid="uid://rsau2jnm8cgn" path="res://Levels/Jtad/Microgames/Boss/boss.gd" id="2_am48h"]
-[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="2_cpubr"]
 [ext_resource type="Script" uid="uid://xwx6cje4ut70" path="res://Levels/Jtad/Microgames/Boss/player_fish.gd" id="3_k5hce"]
 [ext_resource type="Texture2D" uid="uid://bdjg0hsh8i8ek" path="res://Levels/Jtad/Microgames/Boss/Art/dip.png" id="4_am48h"]
 [ext_resource type="Texture2D" uid="uid://cqjp5bs5xapt2" path="res://Levels/Jtad/Microgames/Kiss Kiss/heart.png" id="4_crwap"]
@@ -149,7 +148,7 @@ animations = [{
 [node name="Boss" instance=ExtResource("1_fmw3n")]
 script = ExtResource("2_am48h")
 preparation_text = "Boss!"
-preparation_image = ExtResource("2_cpubr")
+preparation_image = 2
 beats = 16
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." index="1"]

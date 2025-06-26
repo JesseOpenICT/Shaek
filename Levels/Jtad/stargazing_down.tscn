@@ -1,15 +1,18 @@
-[gd_scene load_steps=30 format=3 uid="uid://gksxtvqe3pfc"]
+[gd_scene load_steps=35 format=3 uid="uid://gksxtvqe3pfc"]
 
 [ext_resource type="PackedScene" uid="uid://cucdlrepvhu3i" path="res://Levels/gamepack.tscn" id="1_raby0"]
 [ext_resource type="Texture2D" uid="uid://btd0nd5c0xqna" path="res://Levels/Jtad/Stargazing_Down.png" id="2_kx0ge"]
 [ext_resource type="Texture2D" uid="uid://cjmrd52k3frhs" path="res://Levels/Jtad/MainStuff/BG1.png" id="3_3s2t6"]
+[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_fifru"]
 [ext_resource type="Script" uid="uid://bcxmxueuyndnx" path="res://Levels/Jtad/MainStuff/gamepack_script.gd" id="3_uq4fa"]
 [ext_resource type="Shader" uid="uid://c42kf3rietry3" path="res://Levels/Jtad/MainStuff/FishCam.gdshader" id="3_xr55d"]
 [ext_resource type="Texture2D" uid="uid://b8mo2wqf3etbt" path="res://Levels/Jtad/MainStuff/BG2.png" id="4_faaeq"]
 [ext_resource type="AudioStream" uid="uid://biv741qetjqr6" path="res://Levels/Jtad/In Thy Arms v1.mp3" id="4_h47r4"]
 [ext_resource type="Texture2D" uid="uid://dteepsm4fxpuu" path="res://Levels/Jtad/MainStuff/waveblack.png" id="4_mcoo2"]
+[ext_resource type="Texture2D" uid="uid://btq8o40qlyg1d" path="res://Levels/Jtad/space.png" id="4_yqjyg"]
 [ext_resource type="Texture2D" uid="uid://n033rsgxu63k" path="res://Levels/Jtad/MainStuff/wave.png" id="5_2nvi1"]
 [ext_resource type="Texture2D" uid="uid://dtwdgv0t2tr7x" path="res://Levels/Jtad/MainStuff/Lose1.png" id="5_8rcvu"]
+[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="5_lx5dq"]
 [ext_resource type="Texture2D" uid="uid://cytwmtg6j806n" path="res://Levels/Jtad/MainStuff/Lose2.png" id="6_477qv"]
 [ext_resource type="Texture2D" uid="uid://cfbbr7pwfqsrw" path="res://Levels/Jtad/MainStuff/Normal1.png" id="7_by1ei"]
 [ext_resource type="Texture2D" uid="uid://4pugbryruod8" path="res://Levels/Jtad/MainStuff/Normal2.png" id="8_mhbqu"]
@@ -24,6 +27,10 @@
 [ext_resource type="Texture2D" uid="uid://bhbl3q1vsngx0" path="res://Levels/Jtad/MainStuff/Fw2.png" id="22_d5fdb"]
 [ext_resource type="Script" uid="uid://cwb58ct8gesaa" path="res://Levels/Jtad/MainStuff/life.gd" id="23_ioutj"]
 [ext_resource type="Texture2D" uid="uid://c2g6n05b25or0" path="res://Levels/Jtad/movement.png" id="24_tpaxy"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fifru"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yqjyg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_de70q"]
 viewport_path = NodePath("Subscript/FishViewport")
@@ -127,6 +134,12 @@ cover_art = ExtResource("2_kx0ge")
 microgames = Array[String](["uid://te6drjpcx5ae", "uid://81b65x5qbdek", "uid://2h4pqiis8e2v", "uid://bcoyqt1nqnn1f", "uid://dd6odhr4ffnqr", "uid://e0aiwr2exthk", "uid://dcm020386h6oy", "uid://dgh5fltanl0ji", "uid://dobqdwv8msml4", "uid://c1qns86feyh7e", "uid://cdcvxhcgkeq2q", "uid://bktp685a0tdm1", "uid://ca1jcyg6vcmsj", "uid://7ng2c2i4ru40", "uid://c6kmbnuegno10"])
 boss_microgame = "uid://hojgvx4qjdba"
 lives = [NodePath("Subscript/FishCam/Life1"), NodePath("Subscript/FishCam/Life2"), NodePath("Subscript/FishCam/Life3"), NodePath("Subscript/FishCam/Life4")]
+mouse_image = ExtResource("3_fifru")
+spacebar_image = ExtResource("4_yqjyg")
+arrows_image = ExtResource("5_lx5dq")
+mouse_space_image = SubResource("CompressedTexture2D_fifru")
+arrows_space_image = ExtResource("24_tpaxy")
+arrows_mouse_image = SubResource("CompressedTexture2D_yqjyg")
 
 [node name="Subscript" parent="." index="0" node_paths=PackedStringArray("guys_sprite", "score", "hint_image", "hint_text", "speedup_label")]
 script = ExtResource("3_uq4fa")

@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://7ng2c2i4ru40"]
+[gd_scene load_steps=20 format=3 uid="uid://7ng2c2i4ru40"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_kab35"]
 [ext_resource type="Shader" uid="uid://dx6aga3gtmhak" path="res://Levels/Jtad/Microgames/Breakout/shine.gdshader" id="2_1m2ib"]
-[ext_resource type="Texture2D" uid="uid://btq8o40qlyg1d" path="res://Levels/Jtad/space.png" id="2_3dd2u"]
 [ext_resource type="Texture2D" uid="uid://b1bwu778hh8vn" path="res://Levels/Jtad/Microgames/Breakout/free.png" id="3_1m2ib"]
 [ext_resource type="Texture2D" uid="uid://cxbntw6ip4iwh" path="res://Levels/Jtad/Microgames/Breakout/break1.png" id="3_vq4n4"]
 [ext_resource type="Script" uid="uid://cyvyd60iibmbw" path="res://Levels/Jtad/Microgames/Breakout/ice.gd" id="4_tj8s6"]
@@ -55,7 +54,7 @@ shader_parameter/noise = SubResource("NoiseTexture2D_dm4pf")
 
 [node name="Microgame" instance=ExtResource("1_kab35")]
 preparation_text = "Break!"
-preparation_image = ExtResource("2_3dd2u")
+preparation_image = 1
 
 [node name="BG" type="TextureRect" parent="." index="1"]
 offset_right = 256.0

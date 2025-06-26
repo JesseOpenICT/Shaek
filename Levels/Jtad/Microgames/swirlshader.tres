@@ -1,0 +1,35 @@
+[gd_resource type="Shader" format=3 uid="uid://bpkjju8dqty1w"]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float warp : hint_range(0.0, 2.0);
+
+vec2 circleUV(vec2 uv) {
+    vec2 muv = vec2((uv.x-.5),(uv.y-.5)); //Coords adjusted for the new center.
+    float theta = (atan(muv.x,muv.y) / (2.*PI));
+    return vec2(theta, -length(muv)*2.);
+}
+
+vec2 rotate(vec2 uv, vec2 pivot, float angle)
+{
+	mat2 rotation = mat2(vec2(sin(angle), -cos(angle)),
+						vec2(cos(angle), sin(angle)));
+	uv -= pivot;
+	uv = uv * rotation;
+	uv += pivot;
+	return uv;
+}
+
+
+void fragment() {
+	vec2 uv = UV;
+	vec2 circle = circleUV(uv);
+	
+	float centerdist = 1.-pow(1.0-circle.y, 2.);
+	//uv = rotate(uv, vec2(.5,.5), (sin(centerdist*2.)+1.+warp)*warp + PI/2. - .2*centerdist*warp);
+	uv = rotate(uv, vec2(.5,.5), centerdist*warp + PI/2.);
+	
+	COLOR = texture(TEXTURE, uv);
+}
+"

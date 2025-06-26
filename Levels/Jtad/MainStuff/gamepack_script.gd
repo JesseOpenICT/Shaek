@@ -49,8 +49,8 @@ func _on_gamepack_speed_up() -> void:
 	speedup_label.visible = false
 
 
-func _on_gamepack_show_microgame_preparation_hint(preparation_text: String, preparation_image: CompressedTexture2D) -> void:
-	hint_image.texture = preparation_image
+func _on_gamepack_show_microgame_preparation_hint(preparation_text: String, preparation_image: Gamepack.Controls) -> void:
+	hint_image.texture = get_parent().preparation_images[preparation_image]
 	hint_text.text = "[center][shake=5 rate=4] "+ preparation_text
 	var tween = create_tween()
 	tween.tween_property(hint_image.get_parent(), "scale", Vector2(1,1), 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcoyqt1nqnn1f"]
+[gd_scene load_steps=15 format=3 uid="uid://bcoyqt1nqnn1f"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_xmtrv"]
 [ext_resource type="Script" uid="uid://dj8wmjmyrgbvp" path="res://Levels/Jtad/Microgames/Star Search/starsearch.gd" id="2_cs5ik"]
 [ext_resource type="Texture2D" uid="uid://dss87f3aljxxg" path="res://Levels/Jtad/Microgames/Star Search/stars.png" id="3_8rc3y"]
-[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="3_88081"]
 [ext_resource type="Texture2D" uid="uid://c1cxbf75v3g7p" path="res://Levels/Jtad/Microgames/Star Search/lensfalse.png" id="5_ii5k7"]
 [ext_resource type="Texture2D" uid="uid://djr1extood8qv" path="res://Levels/Jtad/Microgames/Star Search/lenstrue.png" id="6_2th14"]
 [ext_resource type="Texture2D" uid="uid://drxc4mx5i5dh8" path="res://Levels/Jtad/Microgames/Star Search/find.png" id="7_ii5k7"]
@@ -44,7 +43,7 @@ radius = 42.35
 [node name="Star" instance=ExtResource("1_xmtrv")]
 script = ExtResource("2_cs5ik")
 preparation_text = "Find!"
-preparation_image = ExtResource("3_88081")
+preparation_image = 2
 beats = 12
 
 [node name="Backdrop" type="Sprite2D" parent="." index="1"]

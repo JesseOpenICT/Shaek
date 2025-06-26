@@ -1,8 +1,7 @@
-[gd_scene load_steps=34 format=4 uid="uid://dgh5fltanl0ji"]
+[gd_scene load_steps=33 format=4 uid="uid://dgh5fltanl0ji"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_d0dnd"]
 [ext_resource type="Script" uid="uid://c67j7y6yohr2u" path="res://Levels/Jtad/Microgames/Steal the Show/microgame.gd" id="2_nhtwn"]
-[ext_resource type="Texture2D" uid="uid://des8ac0dc5085" path="res://Levels/Jtad/arrows.png" id="3_b5301"]
 [ext_resource type="Script" uid="uid://dw54fim5jms4h" path="res://Levels/Jtad/Microgames/Steal the Show/note.gd" id="4_b17ak"]
 [ext_resource type="Shader" uid="uid://d0gp2qpr7aqc2" path="res://Levels/Jtad/Microgames/Steal the Show/red.gdshader" id="4_obn6l"]
 [ext_resource type="Texture2D" uid="uid://bi4h44dn58jlo" path="res://Levels/Jtad/Microgames/Steal the Show/assets/down.png" id="4_ohimm"]
@@ -234,7 +233,7 @@ notes = [NodePath("Note1"), NodePath("Note2"), NodePath("Note3"), NodePath("Note
 note_sets = Array[PackedStringArray]([PackedStringArray("down", "down", "up", "right"), PackedStringArray("right", "left", "down", "right"), PackedStringArray("left", "right", "down", "up"), PackedStringArray("down", "left", "left", "up"), PackedStringArray("up", "left", "down", "right")])
 tone_ladders = Array[PackedInt32Array]([PackedInt32Array(0, 0, 12, 7), PackedInt32Array(8, 5, 3, 8), PackedInt32Array(5, 7, 4, 11), PackedInt32Array(4, 7, 7, 9), PackedInt32Array(17, 7, 5, 12)])
 preparation_text = "Play!"
-preparation_image = ExtResource("3_b5301")
+preparation_image = 2
 music_volume_DB = -13.9
 
 [node name="BG" type="AnimatedSprite2D" parent="." index="0"]

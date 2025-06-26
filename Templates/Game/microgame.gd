@@ -7,7 +7,7 @@ class_name Microgame
 ## Something like "Jump!" "Avoid!" "Push!"
 @export var preparation_text : String 
 ## Image of mouse, arrow keys, spacebar, ideally nothing else
-@export var preparation_image : CompressedTexture2D
+@export var preparation_image : Gamepack.Controls
 
 ## The volume of the main music during this microgame. After it ends, it'll return to 0 (normal).
 ## Note that each step of -6 halves the volume.
