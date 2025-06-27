@@ -8,8 +8,10 @@ var wincon_positive : bool
 
 func _ready() -> void:
 	super()
+	print("e")
 	swirl = [swirl,0-swirl][randi_range(0,1)]
-	$StargazingDown.material.set("shader_parameter/warp", swirl)
+	$StargazingDown.material.set("shader_parameter/warp", .01*pow(swirl, 3))
+	$StargazingDown/Arrow.rotation = CENTRE.angle_to_point(get_local_mouse_position())
 	wincon_positive = swirl < 0
 	$StargazingDown/Arrow.scale.x = -1 if wincon_positive else 1
 

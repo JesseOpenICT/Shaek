@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b27fqx607b5su" path="res://Levels/Jtad/Microgames/Unswirl/arrow.png" id="6_344ue"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dcwod"]
+resource_local_to_scene = true
 shader = ExtResource("3_344ue")
 shader_parameter/warp = 7.5
 
