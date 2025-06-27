@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1qns86feyh7e"]
+[gd_scene load_steps=8 format=3 uid="uid://c1qns86feyh7e"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_iatf4"]
 [ext_resource type="Script" uid="uid://dycy50tp8qlnf" path="res://Levels/Jtad/Microgames/Focus/microgame.gd" id="1_svbqj"]
 [ext_resource type="Shader" uid="uid://c0kxvakj5y056" path="res://Levels/Jtad/Microgames/Focus/focus.gdshader" id="2_j3r3e"]
-[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_1tag1"]
 [ext_resource type="Texture2D" uid="uid://d0rc1ynco7g4y" path="res://Levels/Jtad/Microgames/Focus/1.png" id="3_iatf4"]
 [ext_resource type="AudioStream" uid="uid://gckbn7k2qroe" path="res://Levels/Jtad/Microgames/Focus/wav.wav" id="4_1tag1"]
 [ext_resource type="AudioStream" uid="uid://wwcbegvuebkx" path="res://Levels/Jtad/Microgames/Constellate/ping.wav" id="7_4dqbe"]
@@ -18,7 +17,6 @@ shader_parameter/depth = 1.0
 script = ExtResource("1_svbqj")
 zoom = 1.0
 preparation_text = "Focus!"
-preparation_image = ExtResource("3_1tag1")
 music_volume_DB = -12.0
 
 [node name="Wave" type="AudioStreamPlayer" parent="." index="0"]

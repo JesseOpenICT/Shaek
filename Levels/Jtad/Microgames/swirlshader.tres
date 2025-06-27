@@ -3,7 +3,7 @@
 [resource]
 code = "shader_type canvas_item;
 
-uniform float warp : hint_range(0.0, 2.0);
+uniform float warp : hint_range(0.0, 7.5);
 
 vec2 circleUV(vec2 uv) {
     vec2 muv = vec2((uv.x-.5),(uv.y-.5)); //Coords adjusted for the new center.
