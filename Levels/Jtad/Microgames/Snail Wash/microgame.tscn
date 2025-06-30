@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://bktp685a0tdm1"]
+[gd_scene load_steps=16 format=3 uid="uid://bktp685a0tdm1"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_y1yvp"]
-[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="2_0g8os"]
 [ext_resource type="Texture2D" uid="uid://cry3ijjf651u0" path="res://Levels/Jtad/Microgames/Snail Wash/backdrop.png" id="3_7sm66"]
 [ext_resource type="Script" uid="uid://dxruet56bki70" path="res://Levels/Jtad/Microgames/Snail Wash/stain.gd" id="3_kou50"]
 [ext_resource type="Texture2D" uid="uid://bftaqjiouauhu" path="res://Levels/Jtad/Microgames/Snail Wash/Shells/s1.png" id="3_wcap6"]
@@ -30,20 +29,6 @@ shader = ExtResource("4_jyohb")
 shader_parameter/amount = 0.0
 shader_parameter/noise = SubResource("NoiseTexture2D_07txt")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wcap6"]
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(0, 9, 0)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-spread = 180.0
-initial_velocity_min = 12.24
-initial_velocity_max = 28.57
-gravity = Vector3(0, 0, 0)
-turbulence_enabled = true
-turbulence_noise_strength = 0.35
-turbulence_noise_scale = 7.226
-turbulence_influence_min = 0.0
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_07txt"]
 animations = [{
 "frames": [{
@@ -58,9 +43,22 @@ animations = [{
 "speed": 4.5
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wcap6"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(0, 9, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 12.24
+initial_velocity_max = 28.57
+gravity = Vector3(0, 0, 0)
+turbulence_enabled = true
+turbulence_noise_strength = 0.35
+turbulence_noise_scale = 7.226
+turbulence_influence_min = 0.0
+
 [node name="Microgame" instance=ExtResource("1_y1yvp")]
 preparation_text = "Clean!"
-preparation_image = ExtResource("2_0g8os")
 
 [node name="BG" type="Sprite2D" parent="." index="1"]
 position = Vector2(128, 96)
@@ -76,7 +74,14 @@ position = Vector2(128, 96)
 texture = ExtResource("4_clpu4")
 script = ExtResource("3_kou50")
 
-[node name="Bar" type="Sprite2D" parent="." index="4"]
+[node name="Sparkles" type="AnimatedSprite2D" parent="." index="4"]
+visible = false
+position = Vector2(128, 96)
+sprite_frames = SubResource("SpriteFrames_07txt")
+autoplay = "default"
+frame_progress = 0.154168
+
+[node name="Bar" type="Sprite2D" parent="." index="5"]
 position = Vector2(132, 102)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_1c4ok")
@@ -88,10 +93,3 @@ amount = 50
 amount_ratio = 0.0
 texture = ExtResource("6_ggdrn")
 process_material = SubResource("ParticleProcessMaterial_wcap6")
-
-[node name="Sparkles" type="AnimatedSprite2D" parent="." index="5"]
-visible = false
-position = Vector2(128, 96)
-sprite_frames = SubResource("SpriteFrames_07txt")
-autoplay = "default"
-frame_progress = 0.154168
