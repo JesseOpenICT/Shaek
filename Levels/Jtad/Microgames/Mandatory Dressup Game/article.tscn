@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfp3pp803y5sy"]
+
+[ext_resource type="Texture2D" uid="uid://d23tb5rxqj2r4" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/PHF.png" id="1_cinoe"]
+[ext_resource type="Script" uid="uid://dav0df5qqyuui" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/article.gd" id="1_nn2yw"]
+[ext_resource type="AudioStream" uid="uid://dm7lse3k6dt7t" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/place.wav" id="2_eu3wk"]
+[ext_resource type="Texture2D" uid="uid://6or8hxdpl4jk" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/PHB.png" id="2_m23ld"]
+
+[node name="FrontArticle" type="Area2D"]
+script = ExtResource("1_nn2yw")
+
+[node name="Place" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_eu3wk")
+volume_db = -4.976
+bus = &"Effects"
+
+[node name="FrontArticle" type="Sprite2D" parent="."]
+texture = ExtResource("1_cinoe")
+
+[node name="BackArticle" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_m23ld")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

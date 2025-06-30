@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dm7lse3k6dt7t"
+path="res://.godot/imported/place.wav-6a7be4df8af5c943d16f1a0f2ca2bf80.sample"
+
+[deps]
+
+source_file="res://Levels/Jtad/Microgames/Mandatory Dressup Game/place.wav"
+dest_files=["res://.godot/imported/place.wav-6a7be4df8af5c943d16f1a0f2ca2bf80.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

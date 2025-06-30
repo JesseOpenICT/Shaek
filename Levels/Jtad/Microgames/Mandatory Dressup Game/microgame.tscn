@@ -1,0 +1,165 @@
+[gd_scene load_steps=29 format=3 uid="uid://daqqfxn0w1ayh"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_eu2vd"]
+[ext_resource type="Script" uid="uid://b1wklc3mwdq11" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/microgame.gd" id="2_txg7n"]
+[ext_resource type="Texture2D" uid="uid://b5g30o8f7a4g2" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/Char.png" id="2_uafof"]
+[ext_resource type="Texture2D" uid="uid://d23tb5rxqj2r4" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/PHF.png" id="3_0si3v"]
+[ext_resource type="PackedScene" uid="uid://cfp3pp803y5sy" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/article.tscn" id="3_51i7p"]
+[ext_resource type="Texture2D" uid="uid://230mlf8lrqpb" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/star.png" id="3_qdnql"]
+[ext_resource type="Texture2D" uid="uid://d11sa0s0c2mwp" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/PDF.png" id="4_kcdse"]
+[ext_resource type="Texture2D" uid="uid://cdmgh552dx0xk" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/PSF.png" id="5_bcplf"]
+[ext_resource type="Texture2D" uid="uid://br4xlbp0o4qja" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/RHF.png" id="5_q6byg"]
+[ext_resource type="Texture2D" uid="uid://c332ydwedk5xu" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/KHF.png" id="6_hc47p"]
+[ext_resource type="Texture2D" uid="uid://dv8p3u2sr6j1n" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/RHB.png" id="8_fks41"]
+[ext_resource type="Texture2D" uid="uid://dpjqxhpd6mvln" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/KHB.png" id="9_gplfl"]
+[ext_resource type="Texture2D" uid="uid://6or8hxdpl4jk" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/PHB.png" id="10_kr8f6"]
+[ext_resource type="Texture2D" uid="uid://cwgnvnvtc2isd" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/RDF.png" id="11_l8pa2"]
+[ext_resource type="Texture2D" uid="uid://bk4hi2u6brkcj" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/KDF.png" id="12_xfk6y"]
+[ext_resource type="Texture2D" uid="uid://q3xmsv1kmd1l" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/RDB.png" id="14_qdnql"]
+[ext_resource type="Texture2D" uid="uid://h5xcmdeov22c" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/KDB.png" id="15_dbbi7"]
+[ext_resource type="Texture2D" uid="uid://c1lhdqnf0riwj" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/RSF.png" id="16_cucj4"]
+[ext_resource type="Texture2D" uid="uid://ch3d8amgxcjg7" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/KSF.png" id="17_curna"]
+[ext_resource type="Texture2D" uid="uid://b7plp1oomuknb" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/RSB.png" id="18_g24ge"]
+[ext_resource type="Texture2D" uid="uid://cm4jpx6ey7nir" path="res://Levels/Jtad/Microgames/Mandatory Dressup Game/KSB.png" id="19_txwrg"]
+
+[sub_resource type="Gradient" id="Gradient_xfk6y"]
+colors = PackedColorArray(0.865299, 0.739173, 0.934435, 1, 0.654902, 0.556863, 0.803922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qdnql"]
+gradient = SubResource("Gradient_xfk6y")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Curve" id="Curve_dbbi7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjkdr"]
+size = Vector2(63, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vmnnl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc8su"]
+size = Vector2(90, 87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_846em"]
+size = Vector2(79, 45)
+
+[node name="Microgame" instance=ExtResource("1_eu2vd")]
+script = ExtResource("2_txg7n")
+preparation_text = "Dress!"
+beats = 12
+
+[node name="TextureRect" type="TextureRect" parent="." index="0"]
+z_index = -3
+offset_right = 256.0
+offset_bottom = 192.0
+texture = SubResource("GradientTexture2D_qdnql")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="TextureRect" index="0"]
+position = Vector2(135, 73)
+emitting = false
+amount = 32
+texture = ExtResource("3_qdnql")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 111.67
+initial_velocity_max = 111.67
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_dbbi7")
+
+[node name="Char" type="Sprite2D" parent="." index="2"]
+position = Vector2(128, 96)
+texture = ExtResource("2_uafof")
+
+[node name="Hat" parent="." index="3" node_paths=PackedStringArray("emitter") instance=ExtResource("3_51i7p")]
+position = Vector2(192, 84)
+sprites_front = Array[CompressedTexture2D]([ExtResource("5_q6byg"), ExtResource("6_hc47p"), ExtResource("3_0si3v")])
+sprites_back = Array[CompressedTexture2D]([ExtResource("8_fks41"), ExtResource("9_gplfl"), ExtResource("10_kr8f6")])
+emitter = NodePath("CPUParticles2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hat" index="2"]
+position = Vector2(7.5, -58)
+shape = SubResource("RectangleShape2D_gjkdr")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Hat" index="3"]
+position = Vector2(7, -58)
+emitting = false
+amount = 16
+texture = ExtResource("3_qdnql")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 111.67
+initial_velocity_max = 111.67
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+damping_min = 73.096
+damping_max = 73.096
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_dbbi7")
+
+[node name="Dress" parent="." index="4" node_paths=PackedStringArray("emitter") instance=ExtResource("3_51i7p")]
+position = Vector2(45, 99)
+sprites_front = Array[CompressedTexture2D]([ExtResource("11_l8pa2"), ExtResource("12_xfk6y"), ExtResource("4_kcdse")])
+sprites_back = Array[CompressedTexture2D]([ExtResource("14_qdnql"), ExtResource("15_dbbi7"), SubResource("CompressedTexture2D_vmnnl")])
+emitter = NodePath("CPUParticles2D2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dress" index="2"]
+position = Vector2(4, 8.5)
+shape = SubResource("RectangleShape2D_gc8su")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Dress" index="3"]
+position = Vector2(-6, -4)
+emitting = false
+amount = 16
+texture = ExtResource("3_qdnql")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 111.67
+initial_velocity_max = 111.67
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+damping_min = 73.096
+damping_max = 73.096
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_dbbi7")
+
+[node name="Shoe" parent="." index="5" node_paths=PackedStringArray("emitter") instance=ExtResource("3_51i7p")]
+position = Vector2(205, 111)
+sprites_front = Array[CompressedTexture2D]([ExtResource("16_cucj4"), ExtResource("17_curna"), ExtResource("5_bcplf")])
+sprites_back = Array[CompressedTexture2D]([ExtResource("18_g24ge"), ExtResource("19_txwrg"), SubResource("CompressedTexture2D_vmnnl")])
+emitter = NodePath("CPUParticles2D3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shoe" index="2"]
+position = Vector2(0.5, 46.5)
+shape = SubResource("RectangleShape2D_846em")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="Shoe" index="3"]
+position = Vector2(12, 46)
+emitting = false
+amount = 16
+texture = ExtResource("3_qdnql")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 111.67
+initial_velocity_max = 111.67
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+damping_min = 73.096
+damping_max = 73.096
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_dbbi7")
