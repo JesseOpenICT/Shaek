@@ -1,0 +1,83 @@
+[gd_scene load_steps=16 format=3 uid="uid://dcsq1r8q3m7lf"]
+
+[ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_m7wnl"]
+[ext_resource type="AudioStream" uid="uid://dwdmaj1acuslu" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/Yoink.wav" id="2_2e0uq"]
+[ext_resource type="Texture2D" uid="uid://dlxwdmkrn6bke" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/bg.png" id="2_norr7"]
+[ext_resource type="Texture2D" uid="uid://b8josbq1bbv8r" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/cake.png" id="3_2e0uq"]
+[ext_resource type="Texture2D" uid="uid://dyp646e7q17nb" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/handf.png" id="4_1mqbx"]
+[ext_resource type="Shader" uid="uid://bvq1246k8l0nk" path="res://Levels/Jtad/Microgames/Snail Wash/gloss.gdshader" id="4_uuv8t"]
+[ext_resource type="Script" uid="uid://c1f7dbfaxs81k" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/hands.gd" id="5_hcqqm"]
+[ext_resource type="Texture2D" uid="uid://b6uelm1df5rrk" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/handb.png" id="6_ti74l"]
+[ext_resource type="Texture2D" uid="uid://pohjmmweabor" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/oh noes.png" id="8_1mqbx"]
+[ext_resource type="Texture2D" uid="uid://dqpebwiwcbb1d" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/cloud1.png" id="9_ti74l"]
+[ext_resource type="Texture2D" uid="uid://cneyp40gtlb15" path="res://Levels/Jtad/Microgames/Leave that Cake Alone/cloud2.png" id="10_uuv8t"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_frgfc"]
+noise_type = 0
+frequency = 0.0032
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_di7ph"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_frgfc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbcmg"]
+shader = ExtResource("4_uuv8t")
+shader_parameter/amount = 0.26
+shader_parameter/noise = SubResource("NoiseTexture2D_di7ph")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frgfc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ti74l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uuv8t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Microgame" instance=ExtResource("1_m7wnl")]
+preparation_text = "Don't."
+music_volume_DB = -27.18
+beats = 16
+
+[node name="Yoink" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource("2_2e0uq")
+volume_db = -10.0
+bus = &"Effects"
+
+[node name="Bg" type="Sprite2D" parent="." index="2"]
+z_index = -2
+position = Vector2(128, 96)
+texture = ExtResource("2_norr7")
+
+[node name="Cake" type="Sprite2D" parent="." index="3"]
+material = SubResource("ShaderMaterial_pbcmg")
+position = Vector2(128, 96)
+texture = ExtResource("3_2e0uq")
+
+[node name="Hands" type="Sprite2D" parent="." index="4"]
+position = Vector2(-70, 96)
+texture = ExtResource("4_1mqbx")
+script = ExtResource("5_hcqqm")
+
+[node name="Hands2" type="Sprite2D" parent="Hands" index="0"]
+z_index = -1
+texture = ExtResource("6_ti74l")
+
+[node name="OhNoes" type="Sprite2D" parent="." index="5"]
+visible = false
+position = Vector2(128, 101)
+texture = ExtResource("8_1mqbx")
+
+[node name="hnrnrnn" type="AnimatedSprite2D" parent="OhNoes" index="0"]
+modulate = Color(1, 1, 1, 0.741176)
+position = Vector2(-4, -7)
+sprite_frames = SubResource("SpriteFrames_frgfc")
+autoplay = "default"
+frame_progress = 0.150368

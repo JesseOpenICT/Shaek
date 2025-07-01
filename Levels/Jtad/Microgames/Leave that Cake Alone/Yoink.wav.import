@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwdmaj1acuslu"
+path="res://.godot/imported/Yoink.wav-2726147b2b9b9b01c994ee68ad5dcb09.sample"
+
+[deps]
+
+source_file="res://Levels/Jtad/Microgames/Leave that Cake Alone/Yoink.wav"
+dest_files=["res://.godot/imported/Yoink.wav-2726147b2b9b9b01c994ee68ad5dcb09.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
