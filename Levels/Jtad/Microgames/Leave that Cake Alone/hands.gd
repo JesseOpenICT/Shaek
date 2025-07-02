@@ -29,5 +29,5 @@ func grapple():
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("left_mouse"):
+	if event.is_action_just_pressed("left_mouse"):
 		grapple()

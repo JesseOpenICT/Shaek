@@ -1,9 +1,8 @@
-[gd_scene load_steps=24 format=4 uid="uid://2h4pqiis8e2v"]
+[gd_scene load_steps=23 format=4 uid="uid://2h4pqiis8e2v"]
 
 [ext_resource type="PackedScene" uid="uid://by252r1um8onb" path="res://Levels/microgame.tscn" id="1_jp7ls"]
 [ext_resource type="Texture2D" uid="uid://7abhmv5c1qa6" path="res://Levels/Jtad/Microgames/Seahorse/board.png" id="2_pdse1"]
 [ext_resource type="Script" uid="uid://bin6fomw61lme" path="res://Levels/Jtad/Microgames/Seahorse/microgame.gd" id="2_rovut"]
-[ext_resource type="Texture2D" uid="uid://by2sbweskj5al" path="res://Levels/Jtad/mouse.png" id="3_0dp85"]
 [ext_resource type="Texture2D" uid="uid://yh5x0iw1lqfh" path="res://Levels/Jtad/Microgames/Seahorse/tiles.png" id="3_yu1my"]
 [ext_resource type="Script" uid="uid://cwol48xfxj8r" path="res://Levels/Jtad/Microgames/Seahorse/tilesetter.gd" id="6_84s45"]
 [ext_resource type="Texture2D" uid="uid://c3stvngpbo0sx" path="res://Levels/Jtad/Microgames/Seahorse/target_tile.png" id="6_gw464"]
@@ -54,7 +53,7 @@ colors = PackedColorArray(0.155503, 0, 0.858941, 1, 0.616453, 0.743841, 0.978364
 noise_type = 2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_np4ys"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tvd26"]
 seamless = true
 seamless_blend_skirt = 0.23
 color_ramp = SubResource("Gradient_r1pxy")
@@ -62,7 +61,7 @@ noise = SubResource("FastNoiseLite_4l0xh")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sktvq"]
 shader = ExtResource("11_wq0jr")
-shader_parameter/image = SubResource("NoiseTexture2D_np4ys")
+shader_parameter/image = SubResource("NoiseTexture2D_tvd26")
 shader_parameter/scale = 0.005
 
 [node name="Microgame" node_paths=PackedStringArray("horse_meeple", "king_meeple") instance=ExtResource("1_jp7ls")]
@@ -70,7 +69,6 @@ script = ExtResource("2_rovut")
 horse_meeple = NodePath("Horse")
 king_meeple = NodePath("King")
 preparation_text = "Capture!"
-preparation_image = ExtResource("3_0dp85")
 music_volume_DB = -6.0
 beats = 12
 
